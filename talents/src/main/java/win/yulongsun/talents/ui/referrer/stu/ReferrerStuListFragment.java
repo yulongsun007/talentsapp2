@@ -16,7 +16,7 @@ public class ReferrerStuListFragment extends BaseChildFragment{
     }
     @Override
     protected int getLayoutResId() {
-        return R.layout.fragment_referrer_stu;
+        return R.layout.fragment_referrer_stu_list;
     }
 
     @Override

@@ -12,6 +12,7 @@
     <color name="color_text_grey">#c9c9c9</color>
     <color name="color_text_black">#000</color>
     <color name="color_text_white">#fff</color>
+    <color name="color_text_red">#F44336</color>
 
 
     <!--背景色-->

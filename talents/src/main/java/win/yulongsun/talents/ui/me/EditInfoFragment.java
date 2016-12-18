@@ -5,10 +5,13 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.raizlabs.android.dbflow.sql.language.Select;
+
 import butterknife.Bind;
 import win.yulongsun.talents.base.BaseSwipeBackFragment;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.config.CacheConstant;
+import win.yulongsun.talents.entity.User;
 
 /**
  * Create By: yulongsun
@@ -67,6 +70,8 @@ public class EditInfoFragment extends BaseSwipeBackFragment {
     @Override
     protected void initView() {
         super.initView();
+        User user = new Select().from(User.class)
+                .querySingle();
         String userName = _Cache.getAsString(CacheConstant.userName);
         String companyName = _Cache.getAsString(CacheConstant.companyName);
         String userGender = _Cache.getAsString(CacheConstant.userGender);
@@ -77,7 +82,8 @@ public class EditInfoFragment extends BaseSwipeBackFragment {
         mTvInfoUserGender.setText(userGender);
         mTvInfoCompanyName.setText(companyName);
         mTvInfoCompanyAddr.setText(comapnyAddr);
-        mTvInfoUserRole.setText(userRole);
+        mTvInfoUserRole.setText(user.user_role_id+"");
+
     }
 
 }

@@ -141,16 +141,16 @@
                 style="@style/MineItemLinearLayout">
 
                 <ImageView
-                    style="@style/MineLeftIcon"
+                    style="@style/MineLeftIconImageView"
                     android:src="@mipmap/ic_card"/>
 
                 <TextView
-                    style="@style/MineIconLabel"
+                    style="@style/MineLabelTextView"
                     android:layout_marginLeft="10dp"
                     android:text="名片"/>
 
                 <ImageView
-                    style="@style/MineIconRightIcon"/>
+                    style="@style/CommonRightArrowImageView"/>
             </LinearLayout>
 
             <LinearLayout
@@ -158,16 +158,16 @@
                 style="@style/MineItemLinearLayout">
 
                 <ImageView
-                    style="@style/MineLeftIcon"
+                    style="@style/MineLeftIconImageView"
                     android:src="@mipmap/ic_wallet"/>
 
                 <TextView
-                    style="@style/MineIconLabel"
+                    style="@style/MineLabelTextView"
                     android:layout_marginLeft="10dp"
                     android:text="积分"/>
 
                 <ImageView
-                    style="@style/MineIconRightIcon"/>
+                    style="@style/CommonRightArrowImageView"/>
             </LinearLayout>
 
             <LinearLayout
@@ -175,16 +175,16 @@
                 style="@style/MineItemLinearLayout">
 
                 <ImageView
-                    style="@style/MineLeftIcon"
+                    style="@style/MineLeftIconImageView"
                     android:src="@mipmap/ic_wallet"/>
 
                 <TextView
-                    style="@style/MineIconLabel"
+                    style="@style/MineLabelTextView"
                     android:layout_marginLeft="10dp"
                     android:text="钱包"/>
 
                 <ImageView
-                    style="@style/MineIconRightIcon"/>
+                    style="@style/CommonRightArrowImageView"/>
             </LinearLayout>
 
             <LinearLayout
@@ -192,16 +192,16 @@
                 style="@style/MineItemLinearLayout">
 
                 <ImageView
-                    style="@style/MineLeftIcon"
+                    style="@style/MineLeftIconImageView"
                     android:src="@mipmap/ic_setting"/>
 
                 <TextView
-                    style="@style/MineIconLabel"
+                    style="@style/MineLabelTextView"
                     android:layout_marginLeft="10dp"
                     android:text="设置"/>
 
                 <ImageView
-                    style="@style/MineIconRightIcon"/>
+                    style="@style/CommonRightArrowImageView"/>
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

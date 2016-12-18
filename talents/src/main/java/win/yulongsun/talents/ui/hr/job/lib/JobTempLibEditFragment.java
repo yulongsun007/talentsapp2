@@ -80,7 +80,7 @@ public class JobTempLibEditFragment extends BaseChildFragment {
 
     @Override
     protected int getMenuResId() {
-        return R.menu.menu_job_temp_add;
+        return R.menu.menu_common_add;
     }
 
     @Override
@@ -156,7 +156,7 @@ public class JobTempLibEditFragment extends BaseChildFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int mItemId = item.getItemId();
-        if (mItemId == R.id.action_job_temp_add) {
+        if (mItemId == R.id.action_common_add) {
             Toast.makeText(_mActivity, "post", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);

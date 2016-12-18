@@ -55,13 +55,13 @@ public class JobTempFragment extends BaseSwipeBackFragment {
 
     @Override
     protected int getMenuResId() {
-        return R.menu.menu_job_temp_done;
+        return R.menu.menu_common_done;
     }
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_job_temp_done) {
+        if (item.getItemId() == R.id.action_common_done) {
             pop();
         }
         return super.onOptionsItemSelected(item);

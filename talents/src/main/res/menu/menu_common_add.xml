@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_job_temp_add"
+        android:id="@+id/action_common_add"
         android:title="添加"
         app:showAsAction="always"/>
 

@@ -1,7 +1,7 @@
 <resources>
 
 
-    <!--###################### 人才搜索 ######################-->
+    <!--人才搜索-->
     <style name="TalentSearchEditText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -16,7 +16,7 @@
     </style>
 
 
-    <!--###################### 人才详情 ######################-->
+    <!--人才详情-->
     <style name="TalentDetailLabel">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -26,7 +26,6 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/color_text_black</item>
     </style>
-
 
 
     <!--################ 发布职位 ###################-->
@@ -40,9 +39,7 @@
         <item name="android:layout_marginBottom">12dp</item>
     </style>
 
-    <style name="PostJobSubTitleLinearLayout">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="PostJobSubTitleLinearLayout" parent="LinearLayout">
         <item name="android:textSize">14sp</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:gravity">center_vertical</item>
@@ -131,7 +128,7 @@
         <item name="android:layout_gravity">center_vertical</item>
     </style>
 
-    <!--###################### 搜索招聘 ######################-->
+    <!--搜索招聘-->
     <style name="JobTempSearchEditText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -146,11 +143,8 @@
     </style>
 
 
-    <!--#################### 我的 ####################-->
-
-    <style name="MineItemLinearLayout">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+    <!--我的:Item-->
+    <style name="MineItemLinearLayout" parent="LinearLayout">
         <item name="android:textSize">14sp</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:gravity">center_vertical</item>
@@ -159,13 +153,15 @@
         <item name="android:background">@drawable/bg_ll</item>
     </style>
 
-    <style name="MineLeftIcon">
+    <!--我的：Icon-->
+    <style name="MineLeftIconImageView">
         <item name="android:layout_width">25dp</item>
         <item name="android:layout_height">25dp</item>
         <item name="android:layout_gravity">center_vertical</item>
     </style>
 
-    <style name="MineIconLabel">
+    <!--我的：Label-->
+    <style name="MineLabelTextView">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">wrap_content</item>
@@ -174,17 +170,9 @@
         <item name="android:layout_marginLeft">10dp</item>
     </style>
 
-    <style name="MineIconRightIcon">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:src">@drawable/ic_ll_arrow_right_grey</item>
-        <item name="android:layout_gravity">center_vertical</item>
-    </style>
 
-
-    <style name="InfoEditLinearLayout">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+    <!--个人信息编辑页：Item-->
+    <style name="InfoEditItemLinearLayout" parent="LinearLayout">
         <item name="android:textSize">14sp</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:gravity">center_vertical</item>
@@ -193,7 +181,8 @@
         <item name="android:background">@drawable/bg_ll</item>
     </style>
 
-    <style name="InfoEditLabel">
+    <!--个人信息编辑页：Lebel-->
+    <style name="InfoEditLabelTextView">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">wrap_content</item>
@@ -202,6 +191,7 @@
         <item name="android:layout_marginLeft">10dp</item>
     </style>
 
+    <!--个人信息编辑页-->
     <style name="InfoEditValue">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -210,15 +200,18 @@
     </style>
 
 
-    <style name="InfoEditRightIcon">
+
+
+    <!--登陆页-->
+    <style name="LoginLinearLayout">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:src">@drawable/ic_ll_arrow_right_grey</item>
-        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_margin">16dp</item>
     </style>
 
-    <!--###################### 注册页 ######################-->
-
+    <!--注册页 EditText-->
     <style name="RegisterValue">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -231,6 +224,14 @@
         <item name="android:singleLine">true</item>
         <item name="android:textSize">14sp</item>
     </style>
+
+
+    <!--设置页-->
+    <style name="SettingItemLinearLayout" parent="LinearLayout.CommonBackGround">
+        <item name="android:background">@drawable/bg_ll</item>
+    </style>
+
+    <!--###################### 以下为通用布局 ######################-->
 
 
     <!--侧滑返回主题设置-->
@@ -246,34 +247,41 @@
 
 
     <!--通用LinearLayout-->
-    <style name="linearlayout">
+    <style name="LinearLayout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <!--登陆页-->
-    <style name="linearlayout_login">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:layout_margin">16dp</item>
-    </style>
 
-    <!--通用LinearLayout背景-->
-    <style name="linearlayout.common" parent="linearlayout">
+    <!--通用：LinearLayout背景-->
+    <style name="LinearLayout.CommonBackGround" parent="LinearLayout">
         <item name="android:background">@android:color/white</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:padding">14dp</item>
     </style>
 
-    <!--通用LinearLayout手机号设置-->
-    <style name="linearlayout.mobile" parent="linearlayout">
+    <!--通用：LinearLayout手机号设置-->
+    <style name="LinearLayout.Mobile" parent="LinearLayout">
         <item name="android:background">@null</item>
         <item name="android:hint">"请输入手机号"</item>
         <item name="android:inputType">phone</item>
         <item name="android:maxLines">1</item>
         <item name="android:singleLine">true</item>
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <!--通用：分割线-->
+    <style name="CommonDividerView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/color_rv_divider</item>
+    </style>
+
+    <!--通用：右箭头-->
+    <style name="CommonRightArrowImageView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/ic_ll_arrow_right_grey</item>
+        <item name="android:layout_gravity">center_vertical</item>
     </style>
 </resources>

@@ -11,7 +11,7 @@ import win.yulongsun.talents.base.BaseChildFragment;
 public class PlanListFragment extends BaseChildFragment {
     @Override
     protected int getLayoutResId() {
-        return R.layout.fragment_plan;
+        return R.layout.fragment_plan_list;
     }
 
     @Override

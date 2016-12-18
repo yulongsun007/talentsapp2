@@ -1,9 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
 
     <include layout="@layout/common_toolbar"/>
+
+    <LinearLayout
+        style="@style/SettingItemLinearLayout"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="新消息通知"/>
+
+        <ImageView
+            style="@style/CommonRightArrowImageView"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        style="@style/SettingItemLinearLayout"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="账号安全"/>
+
+        <ImageView
+            style="@style/CommonRightArrowImageView"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        style="@style/SettingItemLinearLayout"
+        android:background="@drawable/bg_ll"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="清理缓存"/>
+
+        <ImageView
+            style="@style/CommonRightArrowImageView"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        style="@style/SettingItemLinearLayout"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="用户协议"/>
+
+        <ImageView
+            style="@style/CommonRightArrowImageView"/>
+    </LinearLayout>
+
 </LinearLayout>

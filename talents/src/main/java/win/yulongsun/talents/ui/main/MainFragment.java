@@ -1,25 +1,35 @@
 package win.yulongsun.talents.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.raizlabs.android.dbflow.sql.language.Select;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportFragment;
+import win.yulongsun.framework.util.android.widget.ToastUtils;
 import win.yulongsun.framework.widget.Bottom.BottomBar;
 import win.yulongsun.framework.widget.Bottom.BottomBarTab;
+import win.yulongsun.talents.R;
+import win.yulongsun.talents.entity.User;
 import win.yulongsun.talents.event.StartBrotherEvent;
 import win.yulongsun.talents.event.TabSelectedEvent;
-import win.yulongsun.talents.R;
-import win.yulongsun.talents.ui.hr.IndexFragment;
+import win.yulongsun.talents.ui.hr.HRIndexFragment;
+import win.yulongsun.talents.ui.login.LoginActivity;
 import win.yulongsun.talents.ui.me.MeFragment;
 import win.yulongsun.talents.ui.msg.MsgFragment;
+import win.yulongsun.talents.ui.referrer.ReferrerIndexFragment;
+import win.yulongsun.talents.ui.stu.StuIndexFragment;
 
 /**
  * Create By: yulongsun
@@ -47,8 +57,30 @@ public class MainFragment extends SupportFragment {
         ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
 
+        //判断登录者身份
+        List<User> userList = new Select()
+                .from(User.class)
+                .queryList();
+        if (null == userList.get(0)) {
+            ToastUtils.toastL(_mActivity, "登录信息过期，请重新登录");
+            Intent intent = new Intent(_mActivity, LoginActivity.class);
+            startActivity(intent);
+            _mActivity.finish();
+        }
+        int role = userList.get(0).user_role_id;
+
         if (savedInstanceState == null) {
-            mFragments[FIRST] = IndexFragment.newInstance();
+            switch (role) {
+                case 1://hr
+                    mFragments[FIRST] = HRIndexFragment.newInstance();
+                    break;
+                case 2://referrer
+                    mFragments[FIRST] = ReferrerIndexFragment.newInstance();
+                    break;
+                case 3://stu
+                    mFragments[FIRST] = StuIndexFragment.newInstance();
+                    break;
+            }
             mFragments[SECOND] = MsgFragment.newInstance();
             mFragments[THIRD] = MeFragment.newInstance();
 
@@ -60,7 +92,17 @@ public class MainFragment extends SupportFragment {
             // 这里库已经做了Fragment恢复,所有不需要额外的处理了, 不会出现重叠问题
 
             // 这里我们需要拿到mFragments的引用,也可以通过getSupportFragmentManager.getFragments()自行进行判断查找(效率更高些),用下面的方法查找更方便些
-            mFragments[FIRST] = findFragment(IndexFragment.class);
+            switch (role) {
+                case 1://hr
+                    mFragments[FIRST] = findFragment(HRIndexFragment.class);
+                    break;
+                case 2://referrer
+                    mFragments[FIRST] = findFragment(ReferrerIndexFragment.class);
+                    break;
+                case 3://stu
+                    mFragments[FIRST] = findFragment(StuIndexFragment.class);
+                    break;
+            }
             mFragments[SECOND] = findFragment(MsgFragment.class);
             mFragments[THIRD] = findFragment(MeFragment.class);
         }
@@ -88,7 +130,7 @@ public class MainFragment extends SupportFragment {
             @Override
             public void onTabReselected(int position) {
                 SupportFragment currentFragment = mFragments[position];
-                int             count           = currentFragment.getChildFragmentManager().getBackStackEntryCount();
+                int count = currentFragment.getChildFragmentManager().getBackStackEntryCount();
 
                 // 这里推荐使用EventBus来实现 -> 解耦
                 if (count == 1) {

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@color/color_bg_grey"
               android:orientation="vertical">
 
     <include layout="@layout/common_toolbar"/>
@@ -9,7 +10,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@color/color_bg_grey">
 
         <LinearLayout
@@ -180,9 +182,44 @@
 
             </LinearLayout>
 
+
         </LinearLayout>
 
     </ScrollView>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_primary"
+        android:text="推荐"
+        android:textColor="@color/color_text_white"
+        android:visibility="gone"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_bg_grey"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/color_bg_grey"
+            android:text="拒绝"
+            android:textColor="@color/color_text_black"/>
+
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/color_primary"
+            android:text="通过"
+            android:textColor="@color/color_text_white"/>
+
+
+    </LinearLayout>
 
 </LinearLayout>

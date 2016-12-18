@@ -5,6 +5,7 @@ import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ModelContainer;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import win.yulongsun.talents.config.DBConfig;
 
@@ -13,7 +14,7 @@ import win.yulongsun.talents.config.DBConfig;
  */
 @ModelContainer
 @Table(database = DBConfig.class)
-public class User {
+public class User extends BaseModel {
     @PrimaryKey
     public Integer user_id;         //用户编号
     @Column
@@ -31,7 +32,7 @@ public class User {
     @Column
     public Integer user_company_id; //用户公司Id
     @Column
-    public String  user_role;        //用户角色
+    public Integer user_role_id;        //用户角色
     @Column
     public String  company_name;     //公司名
     @Column

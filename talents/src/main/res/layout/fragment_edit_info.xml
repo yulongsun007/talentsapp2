@@ -6,10 +6,10 @@
 
     <include layout="@layout/common_toolbar"/>
 
-    <LinearLayout style="@style/InfoEditLinearLayout">
+    <LinearLayout style="@style/InfoEditItemLinearLayout">
 
         <TextView
-            style="@style/InfoEditLabel"
+            style="@style/InfoEditLabelTextView"
             android:text="头像"/>
 
         <ImageView
@@ -19,13 +19,13 @@
             android:src="@mipmap/logo"/>
 
         <ImageView
-            style="@style/InfoEditRightIcon"/>
+            style="@style/CommonRightArrowImageView"/>
     </LinearLayout>
 
-    <LinearLayout style="@style/InfoEditLinearLayout">
+    <LinearLayout style="@style/InfoEditItemLinearLayout">
 
         <TextView
-            style="@style/InfoEditLabel"
+            style="@style/InfoEditLabelTextView"
             android:text="姓名"/>
 
         <TextView
@@ -35,15 +35,15 @@
             />
 
         <ImageView
-            style="@style/InfoEditRightIcon"
+            style="@style/CommonRightArrowImageView"
             android:src="@null"/>
     </LinearLayout>
 
 
-    <LinearLayout style="@style/InfoEditLinearLayout">
+    <LinearLayout style="@style/InfoEditItemLinearLayout">
 
         <TextView
-            style="@style/InfoEditLabel"
+            style="@style/InfoEditLabelTextView"
             android:text="性别"/>
 
         <TextView
@@ -53,13 +53,13 @@
             />
 
         <ImageView
-            style="@style/InfoEditRightIcon"/>
+            style="@style/CommonRightArrowImageView"/>
     </LinearLayout>
 
-    <LinearLayout style="@style/InfoEditLinearLayout">
+    <LinearLayout style="@style/InfoEditItemLinearLayout">
 
         <TextView
-            style="@style/InfoEditLabel"
+            style="@style/InfoEditLabelTextView"
             android:text="公司"/>
 
         <TextView
@@ -69,12 +69,12 @@
             />
 
         <ImageView
-            style="@style/InfoEditRightIcon"/>
+            style="@style/CommonRightArrowImageView"/>
     </LinearLayout>
-    <LinearLayout style="@style/InfoEditLinearLayout">
+    <LinearLayout style="@style/InfoEditItemLinearLayout">
 
         <TextView
-            style="@style/InfoEditLabel"
+            style="@style/InfoEditLabelTextView"
             android:text="公司地址"/>
 
         <TextView
@@ -84,13 +84,13 @@
             />
 
         <ImageView
-            style="@style/InfoEditRightIcon"/>
+            style="@style/CommonRightArrowImageView"/>
     </LinearLayout>
 
-    <LinearLayout style="@style/InfoEditLinearLayout">
+    <LinearLayout style="@style/InfoEditItemLinearLayout">
 
         <TextView
-            style="@style/InfoEditLabel"
+            style="@style/InfoEditLabelTextView"
             android:text="职位"/>
 
         <TextView
@@ -100,13 +100,13 @@
             />
 
         <ImageView
-            style="@style/InfoEditRightIcon"/>
+            style="@style/CommonRightArrowImageView"/>
     </LinearLayout>
 
-    <LinearLayout style="@style/InfoEditLinearLayout">
+    <LinearLayout style="@style/InfoEditItemLinearLayout">
 
         <TextView
-            style="@style/InfoEditLabel"
+            style="@style/InfoEditLabelTextView"
             android:text="邮箱"/>
 
         <TextView
@@ -115,6 +115,6 @@
             />
 
         <ImageView
-            style="@style/InfoEditRightIcon"/>
+            style="@style/CommonRightArrowImageView"/>
     </LinearLayout>
 </LinearLayout>

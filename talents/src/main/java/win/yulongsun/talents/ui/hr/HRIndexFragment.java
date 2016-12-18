@@ -9,36 +9,44 @@ import android.view.MenuItem;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
+
 import butterknife.Bind;
 import me.yokeyword.fragmentation.SupportFragment;
+import win.yulongsun.talents.R;
+import win.yulongsun.talents.adapter.CommonIndexFragmentAdapter;
 import win.yulongsun.talents.base.BaseRootFragment;
 import win.yulongsun.talents.event.StartBrotherEvent;
-import win.yulongsun.talents.R;
-import win.yulongsun.talents.adapter.IndexFragmentAdapter;
 import win.yulongsun.talents.ui.hr.job.JobTempAddFragment;
+import win.yulongsun.talents.ui.hr.job.JobTempListFragment;
 import win.yulongsun.talents.ui.hr.job.JobTempSearchFragment;
 import win.yulongsun.talents.ui.hr.job.lib.JobTempLibListFragment;
 import win.yulongsun.talents.ui.hr.referrer.ReferrerAddFragment;
+import win.yulongsun.talents.ui.hr.referrer.ReferrerListFragment;
 import win.yulongsun.talents.ui.hr.referrer.ReferrerSearchFragment;
+import win.yulongsun.talents.ui.hr.score.ScoreFragment;
+import win.yulongsun.talents.ui.hr.talent.TalentListFragment;
 import win.yulongsun.talents.ui.hr.talent.TalentSearchFragment;
 
 /**
  * Created by yulongsun
  * Date at 2016-8-16
- * Desc  主页
+ * Desc  HR主页
  */
 public class HRIndexFragment extends BaseRootFragment {
-    private static final int POSITION_TALENT    = 0;
-    private static final int POSITION_JOB       = 1;
-    private static final int POSITION_REFERRER  = 2;
-    private static final int POSITION_SCORE     = 3;
+    private static final int POSITION_TALENT   = 0;
+    private static final int POSITION_JOB      = 1;
+    private static final int POSITION_REFERRER = 2;
+    private static final int POSITION_SCORE    = 3;
     @Bind(R.id.tab)
     TabLayout mTab;
     @Bind(R.id.viewPager)
     ViewPager mViewPager;
     @Bind(R.id.tl_index)
     Toolbar   mTlIndex;
-    private int mPosition =0;
+    private int mPosition = 0;
+    private ArrayList<SupportFragment> mFragmentList;
+    private String[]                   mTitle;
 
     public static HRIndexFragment newInstance() {
 
@@ -57,7 +65,7 @@ public class HRIndexFragment extends BaseRootFragment {
 
     @Override
     protected int getMenuResId() {
-        return R.menu.menu_index;
+        return R.menu.menu_hr_index;
     }
 
     @Override
@@ -76,8 +84,17 @@ public class HRIndexFragment extends BaseRootFragment {
         super.initView();
         mTab.addTab(mTab.newTab());
         mTab.addTab(mTab.newTab());
+        //Title
+        mTitle = new String[]{"人才库", "招聘", "推荐人", "积分排名"};
+        //Fragment
+        mFragmentList = new ArrayList<SupportFragment>();
+        mFragmentList.add(TalentListFragment.newInstance());
+        mFragmentList.add(JobTempListFragment.newInstance());
+        mFragmentList.add(ReferrerListFragment.newInstance());
+        mFragmentList.add(ScoreFragment.newInstance());
 
-        mViewPager.setAdapter(new IndexFragmentAdapter(getChildFragmentManager()));
+
+        mViewPager.setAdapter(new CommonIndexFragmentAdapter(mTitle, mFragmentList, getChildFragmentManager()));
         mTab.setupWithViewPager(mViewPager);
 
         //menu
@@ -109,7 +126,7 @@ public class HRIndexFragment extends BaseRootFragment {
             @Override
             public void onPageSelected(int position) {
                 Menu mMenu = getToolbar().getMenu();
-                if(mMenu==null){
+                if (mMenu == null) {
                     return;
                 }
                 mPosition = position;
@@ -126,9 +143,9 @@ public class HRIndexFragment extends BaseRootFragment {
                 } else {
                     mActionSearch.setVisible(true);
                 }
-                if(POSITION_JOB ==position){
+                if (POSITION_JOB == position) {
                     mActionJobTempLib.setVisible(true);
-                }else {
+                } else {
                     mActionJobTempLib.setVisible(false);
                 }
             }
@@ -144,7 +161,7 @@ public class HRIndexFragment extends BaseRootFragment {
     //搜索
     private void toSearch() {
         SupportFragment targetFragment = null;
-        switch (mPosition){
+        switch (mPosition) {
             case POSITION_TALENT:
                 targetFragment = TalentSearchFragment.newInstance();
                 break;
@@ -165,7 +182,7 @@ public class HRIndexFragment extends BaseRootFragment {
     //添加
     private void toAdd() {
         SupportFragment targetFragment = null;
-        switch (mPosition){
+        switch (mPosition) {
             case POSITION_TALENT:
                 targetFragment = TalentSearchFragment.newInstance();
                 break;

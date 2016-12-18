@@ -4,9 +4,103 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recy_clazz"
+
+    <include layout="@layout/common_toolbar"/>
+
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                style="@style/JobTempSubTitle"
+                android:text="课程信息"/>
+
+
+            <LinearLayout
+                style="@style/JobTempSubTitleLinearLayout">
+
+                <TextView
+                    style="@style/JobTempLabel"
+                    android:text="优先级"/>
+
+                <EditText
+                    android:id="@+id/et_job_temp_job"
+                    style="@style/JobTempLabelEditValue"
+                    android:hint="必填"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_job_temp_job_name"
+                style="@style/JobTempSubTitleLinearLayout">
+
+                <TextView
+                    style="@style/JobTempLabel"
+                    android:text="课程名"/>
+
+                <EditText
+                    android:id="@+id/et_job_temp_job_name"
+                    style="@style/JobTempLabelEditValue"
+                    android:hint="必填"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_job_temp_skill_req"
+                style="@style/JobTempSubTitleLinearLayout">
+
+                <TextView
+                    style="@style/JobTempLabel"
+                    android:text="课时"/>
+
+                <EditText
+                    android:id="@+id/et_job_temp_job_req"
+                    style="@style/JobTempLabelEditValue"
+                    android:hint="必填"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                style="@style/JobTempSubTitleLinearLayout">
+
+                <TextView
+                    style="@style/JobTempLabel"
+                    android:text="学分"/>
+
+                <EditText
+                    android:id="@+id/et_job_temp_job_addr"
+                    style="@style/JobTempLabelEditValue"
+                    android:hint="必填"
+                    />
+
+            </LinearLayout>
+
+
+            <TextView
+                style="@style/JobTempSubTitle"
+                android:text="推荐数据(必填)"/>
+
+
+            <EditText
+                android:id="@+id/et_job_temp_job_desc"
+                style="@style/JobTempSubTitleLinearLayout"
+                android:gravity="top"
+                android:hint="例如：《Android开发从入门到精通》等"
+                android:lines="5"
+                android:textSize="14sp"
+                />
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

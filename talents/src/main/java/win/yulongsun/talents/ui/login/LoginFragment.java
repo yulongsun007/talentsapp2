@@ -119,6 +119,7 @@ public class LoginFragment extends BaseRootFragment {
                         UserResponse resp = (UserResponse) JsonUtil.fromJson(response, UserResponse.class);
                         if (resp.code == Constant.CODE.SUCCESS) {
                             User user = resp.data.get(0);
+                            user.save();
                             ACache mCache = ACache.get(_mActivity);
                             mCache.put(CacheConstant.userId, user.user_id.intValue());
                             mCache.put(CacheConstant.userName, user.user_name);
@@ -130,7 +131,7 @@ public class LoginFragment extends BaseRootFragment {
                             mCache.put(CacheConstant.userImg, user.user_img);
                             mCache.put(CacheConstant.companyName, user.company_name);
                             mCache.put(CacheConstant.userScore, user.user_score.intValue());
-                            mCache.put(CacheConstant.userRole, user.user_role);
+                            mCache.put(CacheConstant.userRole, user.user_role_id);
                             mCache.put(CacheConstant.comapnyAddr, user.company_addr);
                             mCache.put(CacheConstant.companyContact, user.company_contact);
                             mCache.put(CacheConstant.isLogin,"1");

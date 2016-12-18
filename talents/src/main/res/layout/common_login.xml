@@ -8,7 +8,7 @@
 
 
     <LinearLayout
-        style="@style/linearlayout.common"
+        style="@style/LinearLayout.CommonBackGround"
         android:layout_marginTop="20dp">
 
         <TextView
@@ -20,7 +20,7 @@
 
         <win.yulongsun.framework.widget.EditText.ClearButtonEditText
             android:id="@+id/et_mobile"
-            style="@style/linearlayout.mobile"
+            style="@style/LinearLayout.Mobile"
             android:layout_marginLeft="16dp"
             />
 
@@ -28,7 +28,7 @@
     </LinearLayout>
 
     <LinearLayout
-        style="@style/linearlayout.common"
+        style="@style/LinearLayout.CommonBackGround"
         android:layout_marginTop="1dp">
 
         <TextView
@@ -131,7 +131,7 @@
         android:orientation="horizontal">
 
 
-        <LinearLayout style="@style/linearlayout_login">
+        <LinearLayout style="@style/LoginLinearLayout">
 
             <ImageView
                 android:id="@+id/iv_login_weibo"
@@ -146,7 +146,7 @@
                 android:text="微博登录"/>
         </LinearLayout>
 
-        <LinearLayout style="@style/linearlayout_login">
+        <LinearLayout style="@style/LoginLinearLayout">
 
             <ImageView
                 android:id="@+id/iv_login_qq"
@@ -161,7 +161,7 @@
                 android:text="qq登录"/>
         </LinearLayout>
 
-        <LinearLayout style="@style/linearlayout_login">
+        <LinearLayout style="@style/LoginLinearLayout">
 
             <ImageView
                 android:id="@+id/iv_login_wechat"

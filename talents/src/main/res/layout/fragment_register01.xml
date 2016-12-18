@@ -12,7 +12,7 @@
         <include layout="@layout/common_toolbar"/>
 
         <LinearLayout
-            style="@style/linearlayout.common"
+            style="@style/LinearLayout.CommonBackGround"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp">
@@ -26,13 +26,13 @@
 
             <win.yulongsun.framework.widget.EditText.ClearButtonEditText
                 android:id="@+id/et_mobile"
-                style="@style/linearlayout.mobile"
+                style="@style/LinearLayout.Mobile"
                 android:layout_marginLeft="16dp"/>
 
         </LinearLayout>
 
         <LinearLayout
-            style="@style/linearlayout.common"
+            style="@style/LinearLayout.CommonBackGround"
             android:layout_marginTop="1dp">
 
             <TextView
@@ -67,7 +67,7 @@
         </LinearLayout>
 
         <LinearLayout
-            style="@style/linearlayout.common"
+            style="@style/LinearLayout.CommonBackGround"
             android:layout_marginTop="1dp">
 
             <TextView
@@ -85,11 +85,56 @@
                 />
         </LinearLayout>
 
+
         <LinearLayout
-            style="@style/linearlayout.common"
-            android:layout_marginTop="1dp">
+            style="@style/LinearLayout.CommonBackGround"
+            android:layout_marginTop="1dp"
+            android:gravity="center_vertical">
 
             <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="角色"
+                android:textColor="@color/color_text_black"/>
+
+            <RadioGroup
+                android:id="@+id/rg_register_role"
+                style="@style/RegisterValue"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_register_stu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="学生"/>
+
+                <RadioButton
+                    android:id="@+id/rb_register_referrer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="师兄"/>
+
+                <RadioButton
+                    android:id="@+id/rb_register_hr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="HR"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_register01_company"
+            style="@style/LinearLayout.CommonBackGround"
+            android:layout_marginTop="1dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_company_title"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="公司ID"
@@ -99,19 +144,17 @@
                 android:id="@+id/et_company_id"
                 style="@style/RegisterValue"
                 android:hint="新注册公司不用填写"
-                android:inputType="number"
-                android:maxLength="6"
                 />
         </LinearLayout>
 
     </LinearLayout>
 
     <include
-        android:visibility="gone"
         layout="@layout/common_register_progress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        android:visibility="gone"/>
 
 </RelativeLayout>
