@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+
+    <include layout="@layout/common_toolbar"/>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                style="@style/JobTempSubTitle"
+                android:text="职位信息"/>
+
+            <LinearLayout
+                android:id="@+id/ll_job_temp_job_direct"
+                style="@style/JobTempSubTitleLinearLayout">
+
+                <TextView
+                    style="@style/JobTempLabel"
+                    android:text="行业/方向"/>
+
+                <TextView
+                    style="@style/JobTempLabelValue"
+                    android:text="必选"/>
+
+                <ImageView
+                    style="@style/JobTempLabelIcon"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_job_temp_job_name"
+                style="@style/JobTempSubTitleLinearLayout">
+
+                <TextView
+                    style="@style/JobTempLabel"
+                    android:text="招聘职位"/>
+
+                <TextView
+                    android:id="@+id/tv_job_temp_job_name"
+                    style="@style/JobTempLabelValue"
+                    android:text="必选"/>
+
+                <ImageView
+                    style="@style/JobTempLabelIcon"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_job_temp_skill_req"
+                style="@style/JobTempSubTitleLinearLayout">
+
+                <TextView
+                    style="@style/JobTempLabel"
+                    android:text="技能要求"/>
+
+                <TextView
+                    style="@style/JobTempLabelValue"
+                    android:text="必选"/>
+
+                <ImageView
+                    style="@style/JobTempLabelIcon"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_job_temp_edu_req"
+                style="@style/JobTempSubTitleLinearLayout">
+
+                <TextView
+                    style="@style/JobTempLabel"
+                    android:text="学历要求"/>
+
+                <TextView
+                    android:id="@+id/tv_job_temp_edu_req"
+                    style="@style/JobTempLabelValue"
+                    android:text="必选"/>
+
+                <ImageView
+                    style="@style/JobTempLabelIcon"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_job_temp_job_exp"
+                style="@style/JobTempSubTitleLinearLayout">
+
+                <TextView
+                    style="@style/JobTempLabel"
+                    android:text="工作经验"/>
+
+                <TextView
+                    android:id="@+id/tv_job_temp_job_exp"
+                    style="@style/JobTempLabelValue"
+                    android:text="必选"/>
+
+                <ImageView
+                    style="@style/JobTempLabelIcon"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_job_temp_job_salary"
+                style="@style/JobTempSubTitleLinearLayout">
+
+                <TextView
+                    style="@style/JobTempLabel"
+                    android:text="薪酬范围"/>
+
+                <TextView
+                    android:id="@+id/tv_job_temp_job_salary"
+                    style="@style/JobTempLabelValue"
+                    android:text="必选"/>
+
+                <ImageView
+                    style="@style/JobTempLabelIcon"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_job_temp_job_addr"
+                style="@style/JobTempSubTitleLinearLayout">
+
+                <TextView
+                    style="@style/JobTempLabel"
+                    android:text="工作地点"/>
+
+                <TextView
+                    style="@style/JobTempLabelValue"
+                    android:text="必选"/>
+
+                <ImageView
+                    style="@style/JobTempLabelIcon"/>
+            </LinearLayout>
+
+            <!--########################################-->
+
+            <TextView
+                style="@style/JobTempSubTitle"
+                android:text="职位描述(必填)"/>
+
+
+            <EditText
+                android:id="@+id/et_job_temp_job_desc"
+                style="@style/JobTempSubTitleLinearLayout"
+                android:gravity="top"
+                android:hint="例如：股票期权、年底双薪、绩效奖金、带薪年假、五险一金等"
+                android:lines="5"
+                android:textSize="12sp"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

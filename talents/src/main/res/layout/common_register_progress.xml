@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_vertical"
+              android:orientation="horizontal"
+              android:paddingBottom="10dp"
+              android:paddingLeft="20dp"
+              android:paddingRight="20dp"
+              android:paddingTop="10dp">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/color_primary"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <win.yulongsun.framework.widget.ImageView.CharacterView
+                android:id="@+id/cv_register_pg_1"
+                android:layout_width="@dimen/icon_register_size"
+                android:layout_height="@dimen/icon_register_size"
+                android:layout_weight="1"
+                app:cv_background_color="@color/color_primary"
+                app:cv_title_size="12sp"
+                app:cv_title_text="1"/>
+
+
+            <win.yulongsun.framework.widget.ImageView.CharacterView
+                android:id="@+id/cv_register_pg_2"
+                android:layout_width="@dimen/icon_register_size"
+                android:layout_height="@dimen/icon_register_size"
+                android:layout_weight="1"
+                app:cv_background_color="@color/color_common_white"
+                app:cv_title_color="@color/color_primary"
+                app:cv_title_size="12sp"
+                app:cv_title_text="2"/>
+
+            <win.yulongsun.framework.widget.ImageView.CharacterView
+                android:id="@+id/cv_register_pg_3"
+                android:layout_width="@dimen/icon_register_size"
+                android:layout_height="@dimen/icon_register_size"
+                android:layout_weight="1"
+                app:cv_background_color="@color/color_common_white"
+                app:cv_title_color="@color/color_primary"
+                app:cv_title_size="12sp"
+                app:cv_title_text="3"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

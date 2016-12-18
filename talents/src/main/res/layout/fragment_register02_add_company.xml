@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/common_toolbar"/>
+
+
+    <LinearLayout
+        style="@style/linearlayout.common"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="公司名称"
+            android:textColor="@android:color/black"/>
+
+
+        <win.yulongsun.framework.widget.EditText.ClearButtonEditText
+            android:id="@+id/et_company_name"
+            style="@style/RegisterValue"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/linearlayout.common"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        >
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="公司地址"
+            android:textColor="@android:color/black"/>
+
+
+        <win.yulongsun.framework.widget.EditText.ClearButtonEditText
+            android:id="@+id/et_company_addr"
+            style="@style/RegisterValue"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/linearlayout.common"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        >
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="公司规模"
+            android:textColor="@android:color/black"/>
+
+
+        <win.yulongsun.framework.widget.EditText.ClearButtonEditText
+            android:id="@+id/et_company_size"
+            style="@style/RegisterValue"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/linearlayout.common"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        >
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="联系人"
+            android:textColor="@android:color/black"/>
+
+
+        <win.yulongsun.framework.widget.EditText.ClearButtonEditText
+            android:id="@+id/et_company_contact"
+            style="@style/RegisterValue"
+            />
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <include layout="@layout/common_toolbar"/>
+
+        <LinearLayout
+            style="@style/linearlayout.common"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="手机号"
+                android:textColor="@android:color/black"/>
+
+
+            <win.yulongsun.framework.widget.EditText.ClearButtonEditText
+                android:id="@+id/et_mobile"
+                style="@style/linearlayout.mobile"
+                android:layout_marginLeft="16dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearlayout.common"
+            android:layout_marginTop="1dp">
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="验证码"
+                android:textColor="@color/color_text_black"/>
+
+            <win.yulongsun.framework.widget.EditText.ClearButtonEditText
+                android:id="@+id/et_verify_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="请输入验证码"
+                android:inputType="number"
+                android:maxLength="6"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textSize="14sp"/>
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:background="@color/color_primary"
+                android:text="获取验证码"
+                android:textColor="@color/color_text_white"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearlayout.common"
+            android:layout_marginTop="1dp">
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="密码"
+                android:textColor="@color/color_text_black"/>
+
+            <win.yulongsun.framework.widget.EditText.ClearButtonEditText
+                android:id="@+id/et_password"
+                style="@style/RegisterValue"
+                android:hint="请输入密码"
+                android:inputType="number"
+                android:maxLength="6"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearlayout.common"
+            android:layout_marginTop="1dp">
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="公司ID"
+                android:textColor="@color/color_text_black"/>
+
+            <win.yulongsun.framework.widget.EditText.ClearButtonEditText
+                android:id="@+id/et_company_id"
+                style="@style/RegisterValue"
+                android:hint="新注册公司不用填写"
+                android:inputType="number"
+                android:maxLength="6"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <include
+        android:visibility="gone"
+        layout="@layout/common_register_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"/>
+
+</RelativeLayout>

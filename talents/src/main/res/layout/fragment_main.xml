@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@android:color/transparent"
+             android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/fl_tabs_container"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/bottombar_height"
+        android:layout_height="match_parent"/>
+
+    <win.yulongsun.framework.widget.Bottom.BottomBar
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottombar_height"
+        android:layout_gravity="bottom"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:background="@mipmap/bg_shadow_up"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/bottombar_height"
+        android:layout_height="wrap_content"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_main"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_marginRight="25dp"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="70dp"
+        android:src="@drawable/ic_fab_add"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"/>
+</FrameLayout>

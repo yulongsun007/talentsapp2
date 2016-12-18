@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--主题色-->
+    <color name="color_primary">#F44336</color>
+    <color name="color_primary_dark">#D32F2F</color>
+    <color name="color_accent">#607D8B</color>
+
+    <!--字体色-->
+    <color name="color_text_primary">#212121</color>
+    <color name="color_text_primary_light">#FFF9C4</color>
+    <color name="color_text_secondary">#727272</color>
+    <color name="color_text_grey">#c9c9c9</color>
+    <color name="color_text_black">#000</color>
+    <color name="color_text_white">#fff</color>
+
+
+    <!--背景色-->
+    <color name="color_icons">#212121</color>
+    <color name="color_rv_divider">#B6B6B6</color>
+    <color name="color_rv_white">#F1F1F1</color>
+    <color name="color_bg_grey">#f0f1f5</color>
+    <color name="color_bg_white">#fff</color>
+
+    <!--单色调汇总-->
+    <color name="color_common_white">#ffffff</color>
+
+
+    <!--#################### 自定义控件颜色 begin ####################-->
+    <!--日历-->
+    <color name="color_calendar_week">#cdcdcd</color>
+    <!--Bottom-->
+    <color name="color_tab_unselect">#c9c9c9</color>
+    <!--水波纹-->
+    <color name="color_reveal">#1b000000</color>
+    <!--#################### 自定义控件颜色 end   ####################-->
+</resources>

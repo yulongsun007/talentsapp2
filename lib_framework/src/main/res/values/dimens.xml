@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="common_vertical_margin">10dp</dimen>
+    <dimen name="common_left_margin">16dp</dimen>
+</resources>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/common_toolbar"/>
+
+    <LinearLayout style="@style/InfoEditLinearLayout">
+
+        <TextView
+            style="@style/InfoEditLabel"
+            android:text="头像"/>
+
+        <ImageView
+            android:id="@+id/iv_info_user_img"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/logo"/>
+
+        <ImageView
+            style="@style/InfoEditRightIcon"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/InfoEditLinearLayout">
+
+        <TextView
+            style="@style/InfoEditLabel"
+            android:text="姓名"/>
+
+        <TextView
+            android:id="@+id/tv_info_user_name"
+            style="@style/InfoEditValue"
+            android:text="孙宇龙"
+            />
+
+        <ImageView
+            style="@style/InfoEditRightIcon"
+            android:src="@null"/>
+    </LinearLayout>
+
+
+    <LinearLayout style="@style/InfoEditLinearLayout">
+
+        <TextView
+            style="@style/InfoEditLabel"
+            android:text="性别"/>
+
+        <TextView
+            android:id="@+id/tv_info_user_gender"
+            style="@style/InfoEditValue"
+            android:text="男"
+            />
+
+        <ImageView
+            style="@style/InfoEditRightIcon"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/InfoEditLinearLayout">
+
+        <TextView
+            style="@style/InfoEditLabel"
+            android:text="公司"/>
+
+        <TextView
+            android:id="@+id/tv_info_company_name"
+            style="@style/InfoEditValue"
+            android:text="上海卓冀有限公司"
+            />
+
+        <ImageView
+            style="@style/InfoEditRightIcon"/>
+    </LinearLayout>
+    <LinearLayout style="@style/InfoEditLinearLayout">
+
+        <TextView
+            style="@style/InfoEditLabel"
+            android:text="公司地址"/>
+
+        <TextView
+            android:id="@+id/tv_info_company_addr"
+            style="@style/InfoEditValue"
+            android:text="上海"
+            />
+
+        <ImageView
+            style="@style/InfoEditRightIcon"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/InfoEditLinearLayout">
+
+        <TextView
+            style="@style/InfoEditLabel"
+            android:text="职位"/>
+
+        <TextView
+            android:id="@+id/tv_info_user_role"
+            style="@style/InfoEditValue"
+            android:text="HR"
+            />
+
+        <ImageView
+            style="@style/InfoEditRightIcon"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/InfoEditLinearLayout">
+
+        <TextView
+            style="@style/InfoEditLabel"
+            android:text="邮箱"/>
+
+        <TextView
+            style="@style/InfoEditValue"
+            android:text="yulongsun0425@gmail.com"
+            />
+
+        <ImageView
+            style="@style/InfoEditRightIcon"/>
+    </LinearLayout>
+</LinearLayout>

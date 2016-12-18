@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/common_toolbar"/>
+
+
+    <LinearLayout style="@style/PostJobSubTitleLinearLayout">
+
+        <TextView
+            style="@style/PostJobLabel"
+            android:text="模板"/>
+
+        <TextView
+            android:id="@+id/tv_job_temp_add_job_name"
+            style="@style/PostJobLabelValue"
+            android:text="Android工程师"/>
+
+        <ImageView style="@style/PostJobRightIcon"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/PostJobSubTitleLinearLayout">
+
+        <TextView
+
+            style="@style/PostJobLabel"
+            android:text="开始时间"/>
+
+        <TextView
+            android:id="@+id/tv_job_temp_add_start"
+            style="@style/PostJobLabelValue"
+            android:text="2016-5-1"/>
+
+        <ImageView style="@style/PostJobRightIcon"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/PostJobSubTitleLinearLayout">
+
+        <TextView
+            style="@style/PostJobLabel"
+            android:text="结束时间"/>
+
+        <TextView
+            android:id="@+id/tv_job_temp_add_end"
+            style="@style/PostJobLabelValue"
+            android:text="2016-6-1"/>
+
+        <ImageView style="@style/PostJobRightIcon"/>
+    </LinearLayout>
+
+
+    <LinearLayout style="@style/PostJobSubTitleLinearLayout">
+
+        <TextView
+            style="@style/PostJobLabel"
+            android:text="是否立即推送"/>
+
+        <TextView
+            android:id="@+id/tv_job_temp_is_push"
+            style="@style/PostJobLabelValue"
+            android:text="是"/>
+
+        <ImageView style="@style/PostJobRightIcon"/>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_job_temp_add_deploy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="14dp"
+        android:background="@color/color_primary"
+        android:text="发布"
+        android:textColor="@android:color/white"/>
+</LinearLayout>
