@@ -24,7 +24,7 @@ import win.yulongsun.talents.ui.hr.job.lib.JobTempLibListFragment;
 import win.yulongsun.talents.ui.hr.referrer.ReferrerAddFragment;
 import win.yulongsun.talents.ui.hr.referrer.ReferrerListFragment;
 import win.yulongsun.talents.ui.hr.referrer.ReferrerSearchFragment;
-import win.yulongsun.talents.ui.hr.score.ScoreFragment;
+import win.yulongsun.talents.ui.hr.score.ScoreListFragment;
 import win.yulongsun.talents.ui.hr.talent.TalentListFragment;
 import win.yulongsun.talents.ui.hr.talent.TalentSearchFragment;
 
@@ -91,7 +91,7 @@ public class HRIndexFragment extends BaseRootFragment {
         mFragmentList.add(TalentListFragment.newInstance());
         mFragmentList.add(JobTempListFragment.newInstance());
         mFragmentList.add(ReferrerListFragment.newInstance());
-        mFragmentList.add(ScoreFragment.newInstance());
+        mFragmentList.add(ScoreListFragment.newInstance());
 
 
         mViewPager.setAdapter(new CommonIndexFragmentAdapter(mTitle, mFragmentList, getChildFragmentManager()));
