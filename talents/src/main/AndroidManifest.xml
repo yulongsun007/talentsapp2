@@ -5,11 +5,11 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:name="win.yulongsun.talents.app.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name="win.yulongsun.talents.app.App"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name="win.yulongsun.talents.ui.main.MainActivity"
@@ -23,7 +23,7 @@
 
         <activity
             android:name="win.yulongsun.talents.ui.splash.SplashActivity"
-           >
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -31,6 +31,16 @@
             </intent-filter>
         </activity>
         <activity android:name="win.yulongsun.talents.ui.login.LoginActivity"/>
+
+        <service android:name=".service.DemoIntentService"/>
+
+        <service
+            android:name=".service.DemoPushService"
+            android:exported="true"
+            android:label="PushService"
+            android:process=":pushservice">
+        </service>
+
     </application>
 
 </manifest>

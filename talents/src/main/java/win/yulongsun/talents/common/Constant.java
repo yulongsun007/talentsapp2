@@ -7,7 +7,7 @@ package win.yulongsun.talents.common;
  */
 public interface Constant {
 
-    String URL = "http://192.168.1.105:8081/talents/";
+    String URL = "http://192.168.0.106:8081/talents/";
 
     //闪屏时间
     Integer SPLASH_TIME = 2000;

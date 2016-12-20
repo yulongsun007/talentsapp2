@@ -7,6 +7,7 @@ import org.byteam.superadapter.SuperViewHolder;
 
 import java.util.List;
 
+import win.yulongsun.talents.R;
 import win.yulongsun.talents.entity.Talent;
 
 /**

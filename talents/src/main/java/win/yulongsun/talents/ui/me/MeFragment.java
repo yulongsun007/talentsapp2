@@ -123,18 +123,20 @@ public class MeFragment extends BaseRootFragment {
         super.initView();
         User user = new Select().from(User.class)
                 .querySingle();
+        if(null!=user){
+            String userName = _Cache.getAsString(CacheConstant.userName);
+            String companyName = _Cache.getAsString(CacheConstant.companyName);
+            String comapnyAddr = _Cache.getAsString(CacheConstant.comapnyAddr);
+            String userMobile = _Cache.getAsString(CacheConstant.userMobile);
+            userCompanyId = _Cache.getAsString(CacheConstant.userCompanyId);
 
-        String userName = _Cache.getAsString(CacheConstant.userName);
-        String companyName = _Cache.getAsString(CacheConstant.companyName);
-        String comapnyAddr = _Cache.getAsString(CacheConstant.comapnyAddr);
-        String userMobile = _Cache.getAsString(CacheConstant.userMobile);
-        userCompanyId = _Cache.getAsString(CacheConstant.userCompanyId);
+            String userImg = _Cache.getAsString(CacheConstant.userImg);
+            mTvMeUserName.setText(userName);
+            mTvMeCompanyName.setText(companyName);
+            mTvMeUserMobile.setText(userMobile);
+            mTvMeCompanyAddr.setText(comapnyAddr);
+            mTvMeCompanyId.setText("公司编号：" + user.user_company_id);
+        }
 
-        String userImg = _Cache.getAsString(CacheConstant.userImg);
-        mTvMeUserName.setText(userName);
-        mTvMeCompanyName.setText(companyName);
-        mTvMeUserMobile.setText(userMobile);
-        mTvMeCompanyAddr.setText(comapnyAddr);
-        mTvMeCompanyId.setText("公司编号：" + user.user_company_id);
     }
 }

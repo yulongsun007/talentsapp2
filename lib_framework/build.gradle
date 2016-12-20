@@ -55,4 +55,6 @@ dependencies {
     compile 'com.google.zxing:javase:3.2.0'
     // android-core
     compile 'com.google.zxing:android-core:3.2.0'
+    //
+    compile 'com.bigkoo:convenientbanner:2.0.5'
 }

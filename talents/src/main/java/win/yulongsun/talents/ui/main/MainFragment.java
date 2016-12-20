@@ -12,8 +12,6 @@ import com.raizlabs.android.dbflow.sql.language.Select;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportFragment;
@@ -58,17 +56,17 @@ public class MainFragment extends SupportFragment {
         EventBus.getDefault().register(this);
 
         //判断登录者身份
-        List<User> userList = new Select()
+        User user = new Select()
                 .from(User.class)
-                .queryList();
-        if (null == userList.get(0)) {
+                .querySingle();
+        if (null == user) {
             ToastUtils.toastL(_mActivity, "登录信息过期，请重新登录");
             Intent intent = new Intent(_mActivity, LoginActivity.class);
             startActivity(intent);
             _mActivity.finish();
+            return view;
         }
-        int role = userList.get(0).user_role_id;
-
+        int role = user.user_role_id;
         if (savedInstanceState == null) {
             switch (role) {
                 case 1://hr

@@ -8,6 +8,9 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import org.byteam.superadapter.OnItemClickListener;
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -15,6 +18,7 @@ import win.yulongsun.talents.base.BaseRootFragment;
 import win.yulongsun.talents.entity.Msg;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.adapter.MsgAdapter;
+import win.yulongsun.talents.event.StartBrotherEvent;
 
 /**
  * Create By : yulongsun
@@ -53,14 +57,14 @@ public class MsgFragment extends BaseRootFragment {
     protected void initView() {
         super.initView();
 
-        MsgAdapter msgAdapter = new MsgAdapter(_mActivity);
 
         mRecyMsg.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(_mActivity);
         ArrayList<Msg>      msgs                = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 2; i++) {
             msgs.add(new Msg());
         }
+        MsgAdapter msgAdapter = new MsgAdapter(_mActivity,msgs,R.layout.item_msg);
         mRecyMsg.setLayoutManager(linearLayoutManager);
         final int space = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0.5f, getResources().getDisplayMetrics());
 
@@ -71,7 +75,13 @@ public class MsgFragment extends BaseRootFragment {
             }
         });
         mRecyMsg.setAdapter(msgAdapter);
-        msgAdapter.setDatas(msgs);
+
+        msgAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View itemView, int viewType, int position) {
+                EventBus.getDefault().post(new StartBrotherEvent(MsgDetailFragment.newInstance()));
+            }
+        });
 
     }
 }

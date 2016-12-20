@@ -20,12 +20,12 @@ import win.yulongsun.framework.util.android.app.DialogUtil;
 import win.yulongsun.framework.util.android.widget.ToastUtils;
 import win.yulongsun.framework.util.java.lang.StringUtils;
 import win.yulongsun.framework.widget.EditText.ClearButtonEditText;
+import win.yulongsun.talents.R;
 import win.yulongsun.talents.base.BaseRootFragment;
 import win.yulongsun.talents.common.Constant;
+import win.yulongsun.talents.config.CacheConstant;
 import win.yulongsun.talents.entity.User;
 import win.yulongsun.talents.http.resp.biz.UserResponse;
-import win.yulongsun.talents.R;
-import win.yulongsun.talents.config.CacheConstant;
 import win.yulongsun.talents.ui.main.MainActivity;
 
 /**
@@ -77,6 +77,8 @@ public class LoginFragment extends BaseRootFragment {
         switch (view.getId()) {
             case R.id.btn_login://登录
                 toLogin();
+//                _mActivity.startActivity(new Intent(_mActivity, MainActivity.class));
+//                _mActivity.finish();
                 break;
             case R.id.tv_register://注册
                 start(Register01Fragment.newInstance());
@@ -135,6 +137,8 @@ public class LoginFragment extends BaseRootFragment {
                             mCache.put(CacheConstant.comapnyAddr, user.company_addr);
                             mCache.put(CacheConstant.companyContact, user.company_contact);
                             mCache.put(CacheConstant.isLogin,"1");
+                            //绑定别名
+
                             _mActivity.startActivity(new Intent(_mActivity, MainActivity.class));
                             _mActivity.finish();
                         } else {

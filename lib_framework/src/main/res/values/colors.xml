@@ -13,6 +13,7 @@
     <color name="color_text_black">#000</color>
     <color name="color_text_white">#fff</color>
     <color name="color_text_red">#F44336</color>
+    <color name="color_text_orange">#fe9800</color>
 
 
     <!--背景色-->
@@ -21,6 +22,7 @@
     <color name="color_rv_white">#F1F1F1</color>
     <color name="color_bg_grey">#f0f1f5</color>
     <color name="color_bg_white">#fff</color>
+    <color name="color_bg_black">#212121</color>
 
     <!--单色调汇总-->
     <color name="color_common_white">#ffffff</color>
