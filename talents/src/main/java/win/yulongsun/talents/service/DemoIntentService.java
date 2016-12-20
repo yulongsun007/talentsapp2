@@ -1,11 +1,17 @@
 package win.yulongsun.talents.service;
 
 import android.content.Context;
-import android.util.Log;
 
+import com.gexin.fastjson.JSON;
 import com.igexin.sdk.GTIntentService;
 import com.igexin.sdk.message.GTCmdMessage;
 import com.igexin.sdk.message.GTTransmitMessage;
+import com.orhanobut.logger.Logger;
+
+import org.greenrobot.eventbus.EventBus;
+
+import win.yulongsun.talents.entity.Msg;
+import win.yulongsun.talents.event.MsgEvent;
 
 /**
  * 继承 GTIntentService 接收来自个推的消息, 所有消息在线程中回调, 如果注册了该服务, 则务必要在 AndroidManifest中声明, 否则无法接受消息<br>
@@ -26,12 +32,15 @@ public class DemoIntentService extends GTIntentService {
 
     @Override
     public void onReceiveMessageData(Context context, GTTransmitMessage msg) {
-        Log.e(TAG, "onReceiveMessageData -> " + "msg = " + msg.getMessageId() + "，getPayloadId" + msg.getPayloadId());
+        Logger.d("onReceiveMessageData -> " + "msg = " + new String(msg.getPayload()));
+        String msgJson = new String(msg.getPayload());
+        Msg msgEntity = JSON.parseObject(msgJson, Msg.class);
+        EventBus.getDefault().post(new MsgEvent(msgEntity));
     }
 
     @Override
     public void onReceiveClientId(Context context, String clientid) {
-        Log.e(TAG, "onReceiveClientId -> " + "clientid = " + clientid);
+        Logger.d( "onReceiveClientId -> " + "clientid = " + clientid);
     }
 
     @Override

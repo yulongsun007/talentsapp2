@@ -7,6 +7,7 @@ import org.byteam.superadapter.SuperViewHolder;
 
 import java.util.List;
 
+import win.yulongsun.talents.R;
 import win.yulongsun.talents.entity.Msg;
 
 
@@ -18,6 +19,8 @@ public class MsgAdapter extends SuperAdapter<Msg> {
 
     @Override
     public void onBind(SuperViewHolder holder, int viewType, int layoutPosition, Msg item) {
-
+        holder.setText(R.id.tv_msg_title, item.msg_title);
+        holder.setText(R.id.tv_msg_title, item.msg_title);
+//        holder.setText(R.id.tv_msg_create_at, item.create_at.getHours() + ":" + item.create_at.getMinutes());
     }
 }

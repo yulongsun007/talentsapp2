@@ -10,7 +10,6 @@ import com.igexin.sdk.PushManager;
 import win.yulongsun.framework.cache.ACache;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.common.Constant;
-import win.yulongsun.talents.config.CacheConstant;
 import win.yulongsun.talents.service.DemoIntentService;
 import win.yulongsun.talents.service.DemoPushService;
 import win.yulongsun.talents.ui.login.LoginActivity;
@@ -22,7 +21,7 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        final String isLogin = ACache.get(SplashActivity.this).getAsString(CacheConstant.isLogin);
+        final String isLogin = ACache.get(SplashActivity.this).getAsString(Constant.isLogin);
         //初始化个推
         PushManager.getInstance().initialize(SplashActivity.this, DemoPushService.class);
         //

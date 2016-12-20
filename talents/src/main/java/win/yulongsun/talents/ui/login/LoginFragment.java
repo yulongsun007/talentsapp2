@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.igexin.sdk.PushManager;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -23,7 +24,6 @@ import win.yulongsun.framework.widget.EditText.ClearButtonEditText;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.base.BaseRootFragment;
 import win.yulongsun.talents.common.Constant;
-import win.yulongsun.talents.config.CacheConstant;
 import win.yulongsun.talents.entity.User;
 import win.yulongsun.talents.http.resp.biz.UserResponse;
 import win.yulongsun.talents.ui.main.MainActivity;
@@ -77,8 +77,6 @@ public class LoginFragment extends BaseRootFragment {
         switch (view.getId()) {
             case R.id.btn_login://登录
                 toLogin();
-//                _mActivity.startActivity(new Intent(_mActivity, MainActivity.class));
-//                _mActivity.finish();
                 break;
             case R.id.tv_register://注册
                 start(Register01Fragment.newInstance());
@@ -121,26 +119,19 @@ public class LoginFragment extends BaseRootFragment {
                         UserResponse resp = (UserResponse) JsonUtil.fromJson(response, UserResponse.class);
                         if (resp.code == Constant.CODE.SUCCESS) {
                             User user = resp.data.get(0);
-                            user.save();
-                            ACache mCache = ACache.get(_mActivity);
-                            mCache.put(CacheConstant.userId, user.user_id.intValue());
-                            mCache.put(CacheConstant.userName, user.user_name);
-                            mCache.put(CacheConstant.userMobile, user.user_mobile);
-                            mCache.put(CacheConstant.userToken, user.user_token);
-                            mCache.put(CacheConstant.userGender, user.user_gender);
-                            mCache.put(CacheConstant.userEmail, user.user_email);
-                            mCache.put(CacheConstant.userCompanyId, user.user_company_id.intValue());
-                            mCache.put(CacheConstant.userImg, user.user_img);
-                            mCache.put(CacheConstant.companyName, user.company_name);
-                            mCache.put(CacheConstant.userScore, user.user_score.intValue());
-                            mCache.put(CacheConstant.userRole, user.user_role_id);
-                            mCache.put(CacheConstant.comapnyAddr, user.company_addr);
-                            mCache.put(CacheConstant.companyContact, user.company_contact);
-                            mCache.put(CacheConstant.isLogin,"1");
-                            //绑定别名
+                            if (user != null) {
+                                user.save();
+                                ACache mCache = ACache.get(_mActivity);
+                                mCache.put(Constant.isLogin, "1");
+                                //绑定别名
+                                PushManager.getInstance().bindAlias(_mActivity, String.valueOf(user.user_id));
+                                //toMain
+                                _mActivity.startActivity(new Intent(_mActivity, MainActivity.class));
+                                _mActivity.finish();
+                            } else {
+                                ToastUtils.toastL(_mActivity, "没有获取到用户数据");
+                            }
 
-                            _mActivity.startActivity(new Intent(_mActivity, MainActivity.class));
-                            _mActivity.finish();
                         } else {
                             ToastUtils.toastL(_mActivity, resp.msg);
                         }

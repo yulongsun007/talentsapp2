@@ -25,7 +25,7 @@ import win.yulongsun.talents.event.TabSelectedEvent;
 import win.yulongsun.talents.ui.hr.HRIndexFragment;
 import win.yulongsun.talents.ui.login.LoginActivity;
 import win.yulongsun.talents.ui.me.MeFragment;
-import win.yulongsun.talents.ui.msg.MsgFragment;
+import win.yulongsun.talents.ui.msg.MsgListFragment;
 import win.yulongsun.talents.ui.referrer.ReferrerIndexFragment;
 import win.yulongsun.talents.ui.stu.StuIndexFragment;
 
@@ -79,7 +79,7 @@ public class MainFragment extends SupportFragment {
                     mFragments[FIRST] = StuIndexFragment.newInstance();
                     break;
             }
-            mFragments[SECOND] = MsgFragment.newInstance();
+            mFragments[SECOND] = MsgListFragment.newInstance();
             mFragments[THIRD] = MeFragment.newInstance();
 
             loadMultipleRootFragment(R.id.fl_tabs_container, FIRST,
@@ -101,7 +101,7 @@ public class MainFragment extends SupportFragment {
                     mFragments[FIRST] = findFragment(StuIndexFragment.class);
                     break;
             }
-            mFragments[SECOND] = findFragment(MsgFragment.class);
+            mFragments[SECOND] = findFragment(MsgListFragment.class);
             mFragments[THIRD] = findFragment(MeFragment.class);
         }
 

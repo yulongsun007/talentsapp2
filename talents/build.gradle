@@ -36,4 +36,8 @@ dependencies {
     compile project(':lib_framework')
     //getui
     compile 'com.getui:sdk:2.9.5.0'
+    compile files('src/lib/gexin-rp-sdk-base-4.0.0.12.jar')
+    compile files('src/lib/gexin-rp-sdk-http-4.0.1.7.jar')
+    compile files('src/lib/gexin-rp-sdk-template-4.0.0.6.jar')
+    compile files('src/lib/protobuf-java-2.5.0.jar')
 }

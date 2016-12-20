@@ -8,9 +8,8 @@ import android.widget.TextView;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
 import butterknife.Bind;
-import win.yulongsun.talents.base.BaseSwipeBackFragment;
 import win.yulongsun.talents.R;
-import win.yulongsun.talents.config.CacheConstant;
+import win.yulongsun.talents.base.BaseSwipeBackFragment;
 import win.yulongsun.talents.entity.User;
 
 /**
@@ -72,17 +71,14 @@ public class EditInfoFragment extends BaseSwipeBackFragment {
         super.initView();
         User user = new Select().from(User.class)
                 .querySingle();
-        String userName = _Cache.getAsString(CacheConstant.userName);
-        String companyName = _Cache.getAsString(CacheConstant.companyName);
-        String userGender = _Cache.getAsString(CacheConstant.userGender);
-        String comapnyAddr = _Cache.getAsString(CacheConstant.comapnyAddr);
-        String userImg = _Cache.getAsString(CacheConstant.userImg);
-        String userRole = _Cache.getAsString(CacheConstant.userRole);
-        mTvInfoUserName.setText(userName);
-        mTvInfoUserGender.setText(userGender);
-        mTvInfoCompanyName.setText(companyName);
-        mTvInfoCompanyAddr.setText(comapnyAddr);
-        mTvInfoUserRole.setText(user.user_role_id+"");
+        if (user == null) {
+            return;
+        }
+        mTvInfoUserName.setText(user.user_name);
+        mTvInfoUserGender.setText(user.user_gender);
+        mTvInfoCompanyName.setText(user.company_name);
+        mTvInfoCompanyAddr.setText(user.company_addr);
+        mTvInfoUserRole.setText(user.user_role_id + "");
 
     }
 

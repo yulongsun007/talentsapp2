@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.zxing.WriterException;
+import com.igexin.sdk.PushManager;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
 import org.greenrobot.eventbus.EventBus;
@@ -21,7 +22,6 @@ import win.yulongsun.framework.util.android.app.DialogUtil;
 import win.yulongsun.framework.util.android.app.QrCodeUtils;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.base.BaseRootFragment;
-import win.yulongsun.talents.config.CacheConstant;
 import win.yulongsun.talents.entity.User;
 import win.yulongsun.talents.event.StartBrotherEvent;
 import win.yulongsun.talents.ui.login.LoginActivity;
@@ -46,7 +46,8 @@ public class MeFragment extends BaseRootFragment {
     TextView mTvMeCompanyId;
     @Bind(R.id.tv_me_company_addr)
     TextView mTvMeCompanyAddr;
-    String userCompanyId;
+
+    Integer userCompanyId;
 
     public static MeFragment newInstance() {
         return new MeFragment();
@@ -107,7 +108,10 @@ public class MeFragment extends BaseRootFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     User user = new Select().from(User.class).querySingle();
-                    user.delete();
+                    if (user != null) {
+                        PushManager.getInstance().unBindAlias(_mActivity, String.valueOf(user.user_id), false);
+                        user.delete();
+                    }
                     Intent intent = new Intent(_mActivity, LoginActivity.class);
                     startActivity(intent);
                     _mActivity.finish();
@@ -123,19 +127,14 @@ public class MeFragment extends BaseRootFragment {
         super.initView();
         User user = new Select().from(User.class)
                 .querySingle();
-        if(null!=user){
-            String userName = _Cache.getAsString(CacheConstant.userName);
-            String companyName = _Cache.getAsString(CacheConstant.companyName);
-            String comapnyAddr = _Cache.getAsString(CacheConstant.comapnyAddr);
-            String userMobile = _Cache.getAsString(CacheConstant.userMobile);
-            userCompanyId = _Cache.getAsString(CacheConstant.userCompanyId);
+        if (null != user) {
+            userCompanyId = user.user_company_id;
 
-            String userImg = _Cache.getAsString(CacheConstant.userImg);
-            mTvMeUserName.setText(userName);
-            mTvMeCompanyName.setText(companyName);
-            mTvMeUserMobile.setText(userMobile);
-            mTvMeCompanyAddr.setText(comapnyAddr);
-            mTvMeCompanyId.setText("公司编号：" + user.user_company_id);
+            mTvMeUserName.setText(user.user_name);
+            mTvMeCompanyName.setText(user.company_name);
+            mTvMeUserMobile.setText(user.user_mobile);
+            mTvMeCompanyAddr.setText(user.company_addr);
+            mTvMeCompanyId.setText("公司编号：" + userCompanyId);
         }
 
     }
