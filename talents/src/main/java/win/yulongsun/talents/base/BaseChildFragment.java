@@ -9,9 +9,12 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.raizlabs.android.dbflow.sql.language.Select;
+
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportFragment;
 import win.yulongsun.talents.R;
+import win.yulongsun.talents.entity.User;
 
 /**
  * @author sunyulong on 2016/12/3.
@@ -19,6 +22,7 @@ import win.yulongsun.talents.R;
  */
 public abstract class BaseChildFragment extends SupportFragment {
     private Toolbar _Toolbar;
+    protected User _User;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,8 +37,10 @@ public abstract class BaseChildFragment extends SupportFragment {
         View view = inflater.inflate(getLayoutResId(), container, false);
         ButterKnife.bind(this, view);
 
+        _User = new Select().from(User.class).querySingle();
         initView();
         initData();
+        loadDataFromServer();
         return view;
     }
 
@@ -73,6 +79,10 @@ public abstract class BaseChildFragment extends SupportFragment {
     protected void initData() {
     }
 
+    /** 从服务器加载数据*/
+    protected void loadDataFromServer(){
+
+    }
     /** 创建上下文菜单 */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

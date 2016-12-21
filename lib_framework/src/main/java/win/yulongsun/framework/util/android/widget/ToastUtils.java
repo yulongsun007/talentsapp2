@@ -25,6 +25,9 @@ import android.widget.Toast;
  * Toast工具箱
  */
 public class ToastUtils {
+
+	public static final String CONNECT_SERVER_EXCEPTION="连接服务器异常";
+
 	/**
 	 * 吐出指定的视图，使其显示较长的时间
 	 * @param context

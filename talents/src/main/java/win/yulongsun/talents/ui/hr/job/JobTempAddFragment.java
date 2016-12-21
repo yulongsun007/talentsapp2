@@ -13,15 +13,15 @@ import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import win.yulongsun.talents.base.BaseSwipeBackFragment;
 import win.yulongsun.talents.R;
+import win.yulongsun.talents.base.BaseChildFragment;
 
 /**
  * Create By : yulongsun
  * Date At : 16/8/30
  * Desc : 发布职位
  */
-public class JobTempAddFragment extends BaseSwipeBackFragment {
+public class JobTempAddFragment extends BaseChildFragment {
 
     @Bind(R.id.toolbar)
     Toolbar mToolbar;

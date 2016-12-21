@@ -28,6 +28,7 @@ import win.yulongsun.talents.http.resp.biz.UserResponse;
  */
 public class ScoreListFragment extends BaseRootFragment implements SwipeRefreshLayout.OnRefreshListener {
 
+    private static final String TAG = ScoreListFragment.class.getSimpleName();
     @Bind(R.id.recy_score)
     RecyclerView       mRecyclerView;
     @Bind(R.id.srf_score_list)
@@ -67,12 +68,13 @@ public class ScoreListFragment extends BaseRootFragment implements SwipeRefreshL
         OkHttpUtils.post()
                 .url(Constant.URL + "user/listScore")
                 .addParams("user_company_id", String.valueOf(_User.user_company_id))
+                .tag(TAG)
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         mSrfScoreList.setRefreshing(false);
-                        ToastUtils.toastL(_mActivity, "连接服务器失败");
+                        ToastUtils.toastL(_mActivity, ToastUtils.CONNECT_SERVER_EXCEPTION);
                     }
 
                     @Override
@@ -91,5 +93,11 @@ public class ScoreListFragment extends BaseRootFragment implements SwipeRefreshL
     @Override
     public void onRefresh() {
         loadDataFromServer();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        OkHttpUtils.getInstance().cancelTag(TAG);
     }
 }
