@@ -6,6 +6,7 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import win.yulongsun.talents.config.DBConfig;
@@ -17,7 +18,7 @@ import win.yulongsun.talents.config.DBConfig;
  */
 @ModelContainer
 @Table(database = DBConfig.class)
-public class JobTemplate extends BaseModel {
+public class JobTemplate extends BaseModel implements Serializable{
     @PrimaryKey
     public Integer tmp_id;
     @Column

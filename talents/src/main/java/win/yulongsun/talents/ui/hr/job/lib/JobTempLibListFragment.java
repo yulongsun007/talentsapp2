@@ -1,7 +1,9 @@
 package win.yulongsun.talents.ui.hr.job.lib;
 
 import android.view.MenuItem;
+import android.view.View;
 
+import org.byteam.superadapter.OnItemClickListener;
 import org.byteam.superadapter.SuperAdapter;
 
 import java.util.List;
@@ -42,7 +44,7 @@ public class JobTempLibListFragment extends CommonListFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (R.id.action_common_add == item.getItemId()) {
-            start(JobTempLibEditFragment.newInstance(Constant.MODE_VALUE.ADD));
+            start(JobTempLibEditFragment.newInstance(Constant.MODE_VALUE.ADD,null));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -56,6 +58,13 @@ public class JobTempLibListFragment extends CommonListFragment {
         JobTemplate jobTemplate = new JobTemplate();
         jobTemplate.create_by = _mUser.user_id;
         loadDataFromServer("job_temp/list", jobTemplate, JobTemplate.class, JobTemplateResponse.class);
+        //3.点击编辑
+        _mAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View itemView, int viewType, int position) {
+                start(JobTempLibEditFragment.newInstance(Constant.MODE_VALUE.EDIT,(JobTemplate)_mDatas.get(position)));
+            }
+        });
     }
 
 }

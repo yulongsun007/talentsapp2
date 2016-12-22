@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.builder.PostFormBuilder;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.Bind;
@@ -22,6 +23,7 @@ import win.yulongsun.framework.util.java.lang.StringUtils;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.base.BaseChildFragment;
 import win.yulongsun.talents.common.Constant;
+import win.yulongsun.talents.entity.JobTemplate;
 import win.yulongsun.talents.http.resp.biz.JobTemplateResponse;
 
 /**
@@ -65,16 +67,32 @@ public class JobTempLibEditFragment extends BaseChildFragment {
     LinearLayout mLlJobTempJobNum;
     /*编辑模式*/
     private int mMode = Constant.MODE_VALUE.EDIT;
+    private String job_biz_direct;
+    private String job_name;
+    private String job_depart;
+    private String job_num;
+    private String job_edu_require;
+    private String job_exper_year;
+    private String job_salary;
+    private String job_addr;
+    private String job_skill_require;
+    private String job_desc;
+
+    public static final String  JOB_TEMPLATE_KEY = "job_key";
+    private             Integer tmpId            = 0;
 
     public static JobTempLibEditFragment newInstance() {
         return new JobTempLibEditFragment();
     }
 
 
-    public static JobTempLibEditFragment newInstance(int mode) {
+    public static JobTempLibEditFragment newInstance(int mode, JobTemplate jobTemplate) {
         JobTempLibEditFragment mFragment = new JobTempLibEditFragment();
         Bundle args = new Bundle();
         args.putInt(Constant.MODE_NAME, mode);
+        if (mode == Constant.MODE_VALUE.EDIT) {
+            args.putSerializable(JOB_TEMPLATE_KEY, jobTemplate);
+        }
         mFragment.setArguments(args);
         return mFragment;
     }
@@ -91,7 +109,17 @@ public class JobTempLibEditFragment extends BaseChildFragment {
 
     @Override
     protected int getMenuResId() {
-        return R.menu.menu_common_add;
+        int menuResId = 0;
+        switch (mMode) {
+            case Constant.MODE_VALUE.ADD:
+                menuResId = R.menu.menu_common_add;
+                break;
+            case Constant.MODE_VALUE.EDIT:
+                menuResId = R.menu.menu_common_save;
+                break;
+        }
+        return menuResId;
+
     }
 
     @Override
@@ -112,11 +140,28 @@ public class JobTempLibEditFragment extends BaseChildFragment {
 
     @Override
     protected void initView() {
-        mMode = (int) getArguments().get(Constant.MODE_NAME);
+        Bundle bundle = getArguments();
+        mMode = (int) bundle.get(Constant.MODE_NAME);
         super.initView();
 
         //设置返回键Logo
         getToolbar().setNavigationIcon(R.drawable.ic_menu_cancel);
+
+        //如果是编辑模式，则初始化View
+        JobTemplate job = (JobTemplate) bundle.getSerializable(JOB_TEMPLATE_KEY);
+        if (mMode == Constant.MODE_VALUE.EDIT && job != null) {
+            tmpId = job.tmp_id;
+            mTvJobTempJobDirect.setText(job.tmp_job_biz_direct);
+            mEtJobTempJobName.setText(job.tmp_job_name);
+            mEtJobTempJobDepart.setText(job.tmp_job_depart);
+            mEtJobTempJobNum.setText(String.valueOf(job.tmp_job_num));
+            mTvJobTempEduReq.setText(job.tmp_job_edu_require);
+            mTvJobTempExperYear.setText(job.tmp_job_exper_year);
+            mTvJobTempJobSalary.setText(job.tmp_job_salary);
+            mEtJobTempJobAddr.setText(job.tmp_job_addr);
+            mEtJobTempJobDesc.setText(job.tmp_job_desc);
+            mEtJobTempJobSkillReq.setText(job.tmp_job_skill_require);
+        }
 
     }
 
@@ -130,8 +175,9 @@ public class JobTempLibEditFragment extends BaseChildFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mTvJobTempJobDirect.setText(jobDirect[which]);
+                        dialog.dismiss();
                     }
-                }).show();
+                });
                 break;
             case R.id.ll_job_temp_edu_req:
                 final String[] eduReq = {"不限", "本科及以上", "硕士及以上"};
@@ -139,8 +185,9 @@ public class JobTempLibEditFragment extends BaseChildFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mTvJobTempEduReq.setText(eduReq[which]);
+                        dialog.dismiss();
                     }
-                }).show();
+                });
                 break;
             case R.id.ll_job_temp_exper_year:
                 final String[] jobReq = {"一年以下", "1-3年", "3-5年", "5-10年"};
@@ -148,8 +195,9 @@ public class JobTempLibEditFragment extends BaseChildFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mTvJobTempExperYear.setText(jobReq[which]);
+                        dialog.dismiss();
                     }
-                }).show();
+                });
                 break;
             case R.id.ll_job_temp_job_salary:
                 final String[] jobSalary = {"3000及以下/月", "3000-7000/月", "7000-150000/月", "15000以上/月"};
@@ -157,10 +205,12 @@ public class JobTempLibEditFragment extends BaseChildFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mTvJobTempJobSalary.setText(jobSalary[which]);
+                        dialog.dismiss();
                     }
-                }).show();
+                });
                 break;
         }
+        mBuilder.show();
     }
 
 
@@ -168,10 +218,14 @@ public class JobTempLibEditFragment extends BaseChildFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int mItemId = item.getItemId();
         if (mItemId == R.id.action_common_add) {
-            toAddJobTemp();
+            toEditJobTemp("job_temp/add");
+        }
+        if (mItemId == R.id.action_common_save) {
+            toEditJobTemp("job_temp/update");
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public boolean onBackPressedSupport() {
@@ -189,62 +243,18 @@ public class JobTempLibEditFragment extends BaseChildFragment {
         return true;
     }
 
-    //添加一个招聘模板
-    private void toAddJobTemp() {
-        String job_biz_direct = mTvJobTempJobDirect.getText().toString();
-        if (StringUtils.isEmpty(job_biz_direct)) {
-            ToastUtils.toastL(_mActivity, "行业方向不能为空");
-            return;
-        }
-        String job_name = mEtJobTempJobName.getText().toString();
-        if (StringUtils.isEmpty(job_name)) {
-            ToastUtils.toastL(_mActivity, "招聘职位不能为空");
-            return;
-        }
-        String job_depart = mEtJobTempJobDepart.getText().toString();
-        if (StringUtils.isEmpty(job_depart)) {
-            ToastUtils.toastL(_mActivity, "招聘部门不能为空");
-            return;
-        }
-        String job_num = mEtJobTempJobNum.getText().toString();
-        if (StringUtils.isEmpty(job_num)) {
-            ToastUtils.toastL(_mActivity, "招聘人数不能为空");
-            return;
-        }
 
-        String job_edu_require = mTvJobTempEduReq.getText().toString();
-        if (StringUtils.isEmpty(job_edu_require)) {
-            ToastUtils.toastL(_mActivity, "学历要求不能为空");
+    //添加or编辑一个招聘模板
+    private void toEditJobTemp(String url) {
+        boolean pass = checkData();
+        if (!pass) {
             return;
         }
-        String job_exper_year = mTvJobTempExperYear.getText().toString();
-        if (StringUtils.isEmpty(job_exper_year)) {
-            ToastUtils.toastL(_mActivity, "工作经验不能为空");
-            return;
+        PostFormBuilder builder = OkHttpUtils.post().url(Constant.URL + url);
+        if (tmpId != null && tmpId != 0) {
+            builder.addParams("tmp_id", String.valueOf(tmpId));
         }
-        String job_salary = mTvJobTempJobSalary.getText().toString();
-        if (StringUtils.isEmpty(job_salary)) {
-            ToastUtils.toastL(_mActivity, "薪资范围不能为空");
-            return;
-        }
-        String job_addr = mEtJobTempJobAddr.getText().toString();
-        if (StringUtils.isEmpty(job_addr)) {
-            ToastUtils.toastL(_mActivity, "工作地点不能为空");
-            return;
-        }
-        String job_skill_require = mEtJobTempJobSkillReq.getText().toString();
-        if (StringUtils.isEmpty(job_skill_require)) {
-            ToastUtils.toastL(_mActivity, "技能要求不能为空");
-            return;
-        }
-        String job_desc = mEtJobTempJobDesc.getText().toString();
-        if (StringUtils.isEmpty(job_desc)) {
-            ToastUtils.toastL(_mActivity, "职位描述不能为空");
-            return;
-        }
-        OkHttpUtils.post()
-                .url(Constant.URL + "job_temp/add")
-                .addParams("tmp_job_biz_direct", job_biz_direct)
+        builder.addParams("tmp_job_biz_direct", job_biz_direct)
                 .addParams("tmp_job_name", job_name)
                 .addParams("tmp_job_depart", job_depart)
                 .addParams("tmp_job_num", job_num)
@@ -272,5 +282,60 @@ public class JobTempLibEditFragment extends BaseChildFragment {
                     }
                 });
 
+    }
+
+    //检查数据的合法性
+    private boolean checkData() {
+        job_biz_direct = mTvJobTempJobDirect.getText().toString();
+        if (StringUtils.isEmpty(job_biz_direct)) {
+            ToastUtils.toastL(_mActivity, "行业方向不能为空");
+            return false;
+        }
+        job_name = mEtJobTempJobName.getText().toString();
+        if (StringUtils.isEmpty(job_name)) {
+            ToastUtils.toastL(_mActivity, "招聘职位不能为空");
+            return false;
+        }
+        job_depart = mEtJobTempJobDepart.getText().toString();
+        if (StringUtils.isEmpty(job_depart)) {
+            ToastUtils.toastL(_mActivity, "招聘部门不能为空");
+            return false;
+        }
+        job_num = mEtJobTempJobNum.getText().toString();
+        if (StringUtils.isEmpty(job_num)) {
+            ToastUtils.toastL(_mActivity, "招聘人数不能为空");
+            return false;
+        }
+        job_edu_require = mTvJobTempEduReq.getText().toString();
+        if (StringUtils.isEmpty(job_edu_require)) {
+            ToastUtils.toastL(_mActivity, "学历要求不能为空");
+            return false;
+        }
+        job_exper_year = mTvJobTempExperYear.getText().toString();
+        if (StringUtils.isEmpty(job_exper_year)) {
+            ToastUtils.toastL(_mActivity, "工作经验不能为空");
+            return false;
+        }
+        job_salary = mTvJobTempJobSalary.getText().toString();
+        if (StringUtils.isEmpty(job_salary)) {
+            ToastUtils.toastL(_mActivity, "薪资范围不能为空");
+            return false;
+        }
+        job_addr = mEtJobTempJobAddr.getText().toString();
+        if (StringUtils.isEmpty(job_addr)) {
+            ToastUtils.toastL(_mActivity, "工作地点不能为空");
+            return false;
+        }
+        job_skill_require = mEtJobTempJobSkillReq.getText().toString();
+        if (StringUtils.isEmpty(job_skill_require)) {
+            ToastUtils.toastL(_mActivity, "技能要求不能为空");
+            return false;
+        }
+        job_desc = mEtJobTempJobDesc.getText().toString();
+        if (StringUtils.isEmpty(job_desc)) {
+            ToastUtils.toastL(_mActivity, "职位描述不能为空");
+            return false;
+        }
+        return true;
     }
 }
