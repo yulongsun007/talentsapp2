@@ -11,11 +11,19 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.raizlabs.android.dbflow.sql.language.Select;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.builder.PostFormBuilder;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.lang.reflect.Field;
 
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportFragment;
+import okhttp3.Call;
 import win.yulongsun.framework.cache.ACache;
+import win.yulongsun.framework.util.android.widget.ToastUtils;
 import win.yulongsun.talents.R;
+import win.yulongsun.talents.common.Constant;
 import win.yulongsun.talents.entity.User;
 
 /**
@@ -29,11 +37,12 @@ import win.yulongsun.talents.entity.User;
 public abstract class BaseRootFragment extends SupportFragment {
 
     // 再点一次退出程序时间设置
-    private static final long WAIT_TIME  = 2000L;
-    private              long TOUCH_TIME = 0;
-    private Toolbar _Toolbar;
-    public ACache _Cache;
-    public User   _User;
+    private static final long   WAIT_TIME  = 2000L;
+    private static final String TAG        = BaseRootFragment.class.getSimpleName();
+    private              long   TOUCH_TIME = 0;
+    protected Toolbar _Toolbar;
+    protected ACache  _Cache;
+    protected User    _User;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,9 +98,38 @@ public abstract class BaseRootFragment extends SupportFragment {
     protected void initData() {
     }
 
-    /** 从服务器加载数据*/
     protected void loadDataFromServer(){
 
+    };
+
+    /** 从服务器数据 */
+    protected void loadDataFromServer(String url, Object object, Class clazz) {
+        PostFormBuilder builder = OkHttpUtils.post().tag(TAG).url(Constant.URL + url);
+        //添加参数
+        Field[] fields = clazz.getFields();
+        for (int i = 0; i < fields.length; i++) {
+            try {
+                builder.addParams(fields[i].getName(), String.valueOf(fields[i].get(object)));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        builder.build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        ToastUtils.toastL(_mActivity, ToastUtils.CONNECT_SERVER_EXCEPTION);
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        loadDataResult(response);
+                    }
+                });
+    }
+
+    /** 返回数据*/
+    public void loadDataResult(String response) {
     }
 
     /** 创建上下文菜单 */
@@ -106,6 +144,7 @@ public abstract class BaseRootFragment extends SupportFragment {
 
     @Override
     public void onDestroyView() {
+        OkHttpUtils.getInstance().cancelTag(TAG);
         super.onDestroyView();
         ButterKnife.unbind(this);
     }

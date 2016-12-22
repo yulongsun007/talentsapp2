@@ -62,10 +62,10 @@ public class StuIndexFragment extends BaseRootFragment {
         mDatas.add(new ItemIndex(R.mipmap.ic_index_plan, "培养计划"));
         mDatas.add(new ItemIndex(R.mipmap.ic_index_internship, "实习"));
         mDatas.add(new ItemIndex(R.mipmap.ic_index_feedback, "投递反馈"));
-//        mDatas.add(new ItemIndex(R.mipmap.ic_index_hr, "HR邀约"));
-//        mDatas.add(new ItemIndex(R.mipmap.ic_index_career_talk, "宣讲会邀约"));
-//        mDatas.add(new ItemIndex(R.mipmap.ic_index_talent_pool, "人才库邀约"));
-//        mDatas.add(new ItemIndex(R.mipmap.ic_index_faq, "校招邀约"));
+//        _mDatas.add(new ItemIndex(R.mipmap.ic_index_hr, "HR邀约"));
+//        _mDatas.add(new ItemIndex(R.mipmap.ic_index_career_talk, "宣讲会邀约"));
+//        _mDatas.add(new ItemIndex(R.mipmap.ic_index_talent_pool, "人才库邀约"));
+//        _mDatas.add(new ItemIndex(R.mipmap.ic_index_faq, "校招邀约"));
         mDatas.add(new ItemIndex(R.mipmap.ic_index_other, "其他"));
 
         StuIndexRVAdapter mAdapter = new StuIndexRVAdapter(_mActivity, mDatas, R.layout.item_stu_index);

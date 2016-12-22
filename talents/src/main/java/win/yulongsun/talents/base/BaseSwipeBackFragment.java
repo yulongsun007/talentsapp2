@@ -9,10 +9,13 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.raizlabs.android.dbflow.sql.language.Select;
+
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 import win.yulongsun.framework.cache.ACache;
 import win.yulongsun.talents.R;
+import win.yulongsun.talents.entity.User;
 
 /**
  * Create By: yulongsun
@@ -24,8 +27,9 @@ import win.yulongsun.talents.R;
 public abstract class BaseSwipeBackFragment extends SwipeBackFragment {
 
 
-    private Toolbar _Toolbar;
-    public ACache _Cache;
+    protected Toolbar _Toolbar;
+    protected ACache _Cache;
+    protected User _User;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,8 +79,10 @@ public abstract class BaseSwipeBackFragment extends SwipeBackFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         _Cache=ACache.get(_mActivity);
+        _User = new Select().from(User.class).querySingle();
         initView();
         initData();
+        loadDataFromServer();
     }
 
     /** 初始化控件 */
@@ -85,6 +91,11 @@ public abstract class BaseSwipeBackFragment extends SwipeBackFragment {
 
     /** 初始化数据 */
     protected void initData() {
+    }
+
+    /** 从服务器加载数据*/
+    protected void loadDataFromServer(){
+
     }
 
     /** 创建上下文菜单 */

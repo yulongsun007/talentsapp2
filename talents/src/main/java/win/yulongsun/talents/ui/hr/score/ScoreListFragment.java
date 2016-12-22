@@ -29,14 +29,14 @@ import win.yulongsun.talents.http.resp.biz.UserResponse;
 public class ScoreListFragment extends BaseRootFragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = ScoreListFragment.class.getSimpleName();
-    @Bind(R.id.recy_score)
+    @Bind(R.id.recy_score_list)
     RecyclerView       mRecyclerView;
     @Bind(R.id.srf_score_list)
     SwipeRefreshLayout mSrfScoreList;
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.fragment_score;
+        return R.layout.fragment_score_list;
     }
 
     @Override

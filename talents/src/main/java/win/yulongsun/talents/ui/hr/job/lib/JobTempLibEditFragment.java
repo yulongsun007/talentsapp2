@@ -13,9 +13,9 @@ import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import win.yulongsun.talents.R;
 import win.yulongsun.talents.base.BaseChildFragment;
 import win.yulongsun.talents.common.Constant;
-import win.yulongsun.talents.R;
 
 /**
  * @author sunyulong on 2016/12/2.
@@ -53,7 +53,7 @@ public class JobTempLibEditFragment extends BaseChildFragment {
     @Bind(R.id.tv_job_temp_job_direct)
     TextView     mTvJobTempJobDirect;
     /*编辑模式*/
-    private int mMode = 0;
+    private int mMode = Constant.MODE_VALUE.EDIT;
 
     public static JobTempLibEditFragment newInstance() {
         return new JobTempLibEditFragment();
@@ -101,8 +101,8 @@ public class JobTempLibEditFragment extends BaseChildFragment {
 
     @Override
     protected void initView() {
-        super.initView();
         mMode = (int) getArguments().get(Constant.MODE_NAME);
+        super.initView();
 
         //设置返回键Logo
         getToolbar().setNavigationIcon(R.drawable.ic_menu_cancel);

@@ -4,8 +4,8 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <include layout="@layout/common_toolbar"/>
 
+    <include layout="@layout/common_toolbar"/>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -14,16 +14,16 @@
         <include layout="@layout/common_no_data"/>
 
         <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/srf_job_temp_lib_list"
+            android:id="@+id/srf_common_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/recy_job_temp_lib"
+                android:id="@+id/recy_common_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                />
         </android.support.v4.widget.SwipeRefreshLayout>
     </FrameLayout>
-
 
 </LinearLayout>
