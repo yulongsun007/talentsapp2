@@ -8,14 +8,16 @@ import android.view.View;
 import org.byteam.superadapter.OnItemClickListener;
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
-import win.yulongsun.talents.base.BaseRootFragment;
-import win.yulongsun.talents.entity.JobTemplate;
+import win.yulongsun.framework.util.JsonUtil;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.adapter.JobTempLibListRVAdapter;
+import win.yulongsun.talents.base.BaseRootFragment;
+import win.yulongsun.talents.entity.JobTemplate;
 import win.yulongsun.talents.event.StartBrotherEvent;
+import win.yulongsun.talents.http.resp.biz.JobTemplateResponse;
 import win.yulongsun.talents.ui.referrer.job.JobTempDetailFragment;
 
 /**
@@ -28,7 +30,7 @@ public class JobTempListFragment extends BaseRootFragment {
     RecyclerView mRecyJobTempList;
     private JobTempLibListRVAdapter mAdapter;
 
-    public static final JobTempListFragment INSTANCE= new JobTempListFragment();
+    public static final JobTempListFragment INSTANCE = new JobTempListFragment();
 
     public static JobTempListFragment newInstance() {
         return INSTANCE;
@@ -53,24 +55,24 @@ public class JobTempListFragment extends BaseRootFragment {
     @Override
     protected void initView() {
         super.initView();
-        //rv
-        ArrayList<JobTemplate> mJobTemplates = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            mJobTemplates.add(new JobTemplate());
-        }
-        mAdapter = new JobTempLibListRVAdapter(_mActivity, mJobTemplates,R.layout.item_job_temp_lib);
-        mRecyJobTempList.setLayoutManager( new LinearLayoutManager(_mActivity));
-        mRecyJobTempList.setAdapter(mAdapter);
+        JobTemplate template = new JobTemplate();
+        template.create_by = _User.user_id;
+        loadDataFromServer("job_temp/listDeploy", template, JobTemplate.class);
+    }
 
+    @Override
+    public void loadDataResult(String response) {
+        super.loadDataResult(response);
+        JobTemplateResponse resp = (JobTemplateResponse) JsonUtil.fromJson(response, JobTemplateResponse.class);
+        List<JobTemplate> mDatas = resp.data;
+        mAdapter = new JobTempLibListRVAdapter(_mActivity, mDatas, R.layout.item_job_temp_lib);
+        mRecyJobTempList.setLayoutManager(new LinearLayoutManager(_mActivity));
+        mRecyJobTempList.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View itemView, int viewType, int position) {
                 EventBus.getDefault().post(new StartBrotherEvent(JobTempDetailFragment.newInstance()));
             }
         });
-
-
     }
-
-
 }
