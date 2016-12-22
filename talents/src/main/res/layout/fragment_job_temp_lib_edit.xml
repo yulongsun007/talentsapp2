@@ -54,18 +54,32 @@
                     android:hint="必填"/>
 
             </LinearLayout>
-
             <LinearLayout
-                android:id="@+id/ll_job_temp_skill_req"
+                android:id="@+id/ll_job_temp_job_depart"
                 style="@style/JobTempSubTitleLinearLayout">
 
                 <TextView
                     style="@style/JobTempLabel"
-                    android:text="技能要求"/>
+                    android:text="招聘部门"/>
 
                 <EditText
-                    android:id="@+id/et_job_temp_job_req"
+                    android:id="@+id/et_job_temp_job_depart"
                     style="@style/JobTempLabelEditValue"
+                    android:hint="必填"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_job_temp_job_num"
+                style="@style/JobTempSubTitleLinearLayout">
+
+                <TextView
+                    style="@style/JobTempLabel"
+                    android:text="招聘人数"/>
+
+                <EditText
+                    android:id="@+id/et_job_temp_job_num"
+                    style="@style/JobTempLabelEditValue"
+                    android:inputType="number"
                     android:hint="必填"/>
 
             </LinearLayout>
@@ -88,7 +102,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_job_temp_job_exp"
+                android:id="@+id/ll_job_temp_exper_year"
                 style="@style/JobTempSubTitleLinearLayout">
 
                 <TextView
@@ -96,7 +110,7 @@
                     android:text="工作经验"/>
 
                 <TextView
-                    android:id="@+id/tv_job_temp_job_exp"
+                    android:id="@+id/tv_job_temp_exper_year"
                     style="@style/JobTempLabelValue"
                     android:hint="必选"/>
 
@@ -136,6 +150,19 @@
 
             </LinearLayout>
 
+            <TextView
+                style="@style/JobTempSubTitle"
+                android:text="技能要求(必填)"/>
+
+
+            <EditText
+                android:id="@+id/et_job_temp_job_skill_req"
+                style="@style/JobTempSubTitleLinearLayout"
+                android:gravity="top"
+                android:hint="例如：\n1.掌握Java基础\n2.熟悉数据结构"
+                android:lines="5"
+                android:textSize="14sp"
+                />
 
             <TextView
                 style="@style/JobTempSubTitle"

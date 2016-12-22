@@ -41,8 +41,8 @@ import win.yulongsun.talents.http.resp.ResponseList;
  * @author sunyulong on 2016/12/3.
  *         通用的带RecyclerView的布局
  */
-public abstract class CommonListFragment extends SupportFragment implements SwipeRefreshLayout.OnRefreshListener {
-    private static final String TAG = CommonListFragment.class.getSimpleName();
+public abstract class CommonRootListFragment extends SupportFragment implements SwipeRefreshLayout.OnRefreshListener {
+    private static final String TAG = CommonRootListFragment.class.getSimpleName();
     protected User _mUser;
     protected List _mDatas = new ArrayList<>();
     protected SuperAdapter       _mAdapter;
@@ -94,13 +94,6 @@ public abstract class CommonListFragment extends SupportFragment implements Swip
         if (_mToolbar != null) {
             _mActivity.setSupportActionBar(_mToolbar);
             _mToolbar.setTitle(getToolbarTitle());
-            _mToolbar.setNavigationIcon(R.mipmap.ic_toolbar_arrow_left_white);
-            _mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    _mActivity.onBackPressed();
-                }
-            });
         }
         //srf
         _mSrfCommonList.setOnRefreshListener(this);

@@ -11,7 +11,7 @@ import butterknife.Bind;
 import butterknife.OnClick;
 import me.yokeyword.fragmentation.SupportFragment;
 import win.yulongsun.talents.R;
-import win.yulongsun.talents.base.BaseSwipeBackFragment;
+import win.yulongsun.talents.base.BaseChildFragment;
 import win.yulongsun.talents.entity.Msg;
 import win.yulongsun.talents.util.GTMsgUtils;
 
@@ -19,7 +19,7 @@ import win.yulongsun.talents.util.GTMsgUtils;
  * @author sunyulong on 2016/12/18.
  *         消息详情
  */
-public class MsgDetailFragment extends BaseSwipeBackFragment {
+public class MsgDetailFragment extends BaseChildFragment {
     @Bind(R.id.toolbar)
     Toolbar  mToolbar;
     @Bind(R.id.tv_msg_title)

@@ -28,7 +28,7 @@ public class JobTempFragment extends BaseSwipeBackFragment {
     TextView mTVJobTempEduReq;
     @Bind(R.id.toolbar)
     Toolbar  mToolbar;
-    @Bind(R.id.tv_job_temp_job_exp)
+    @Bind(R.id.tv_job_temp_exper_year)
     TextView mTvJobTempJobExp;
     @Bind(R.id.tv_job_temp_job_salary)
     TextView mTvJobTempJobSalary;
@@ -96,7 +96,7 @@ public class JobTempFragment extends BaseSwipeBackFragment {
 
     }
 
-    @OnClick({R.id.ll_job_temp_edu_req, R.id.ll_job_temp_job_direct, R.id.ll_job_temp_job_name, R.id.ll_job_temp_skill_req, R.id.ll_job_temp_job_exp, R.id.ll_job_temp_job_salary, R.id.ll_job_temp_job_addr, R.id.et_job_temp_job_desc})
+    @OnClick({R.id.ll_job_temp_edu_req, R.id.ll_job_temp_job_direct, R.id.ll_job_temp_job_name, R.id.ll_job_temp_skill_req, R.id.ll_job_temp_exper_year, R.id.ll_job_temp_job_salary, R.id.ll_job_temp_job_addr, R.id.et_job_temp_job_desc})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_job_temp_job_direct://
@@ -149,7 +149,7 @@ public class JobTempFragment extends BaseSwipeBackFragment {
                     }
                 }).setPositiveButton("确定", null).show();
                 break;
-            case R.id.ll_job_temp_job_exp://工作经验
+            case R.id.ll_job_temp_exper_year://工作经验
                 final String[] jobExpArray = new String[]{"不限", "1-3年", "3-5年", "7年以上"};
                 String jobExpReqStr = mTvJobTempJobExp.getText().toString();
                 int jobExpCheckItem = 0;

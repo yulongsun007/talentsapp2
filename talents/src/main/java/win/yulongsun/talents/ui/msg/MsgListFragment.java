@@ -64,7 +64,7 @@ public class MsgListFragment extends BaseRootFragment {
         super.initView();
         mRecyMsg.setHasFixedSize(true);
         List<Msg> msgs = new Select().from(Msg.class).queryList();
-        msgAdapter = new MsgAdapter(_mActivity, msgs, R.layout.item_msg);
+        msgAdapter = new MsgAdapter(_mActivity, msgs, R.layout.item_msg_list);
         mRecyMsg.setLayoutManager(new LinearLayoutManager(_mActivity));
         final int space = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0.5f, getResources().getDisplayMetrics());
 

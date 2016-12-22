@@ -58,5 +58,4 @@ public class JobTempLibListFragment extends CommonListFragment {
         loadDataFromServer("job_temp/list", jobTemplate, JobTemplate.class, JobTemplateResponse.class);
     }
 
-
 }
