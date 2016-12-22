@@ -7,7 +7,5 @@ package win.yulongsun.talents.http.resp;
  * @Description
  */
 public class ResponseObject<T> extends BaseResponse{
-    public T result;
-
-
+    public T data;
 }

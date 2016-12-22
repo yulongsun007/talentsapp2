@@ -7,7 +7,9 @@
     <include layout="@layout/common_toolbar"/>
 
 
-    <LinearLayout style="@style/PostJobSubTitleLinearLayout">
+    <LinearLayout
+        android:id="@+id/ll_job_temp_add_job_name"
+        style="@style/PostJobSubTitleLinearLayout">
 
         <TextView
             style="@style/PostJobLabel"
@@ -16,12 +18,14 @@
         <TextView
             android:id="@+id/tv_job_temp_add_job_name"
             style="@style/PostJobLabelValue"
-            android:text="Android工程师"/>
+            />
 
         <ImageView style="@style/PostJobRightIcon"/>
     </LinearLayout>
 
-    <LinearLayout style="@style/PostJobSubTitleLinearLayout">
+    <LinearLayout
+        android:id="@+id/ll_job_temp_add_start"
+        style="@style/PostJobSubTitleLinearLayout">
 
         <TextView
 
@@ -31,12 +35,14 @@
         <TextView
             android:id="@+id/tv_job_temp_add_start"
             style="@style/PostJobLabelValue"
-            android:text="2016-5-1"/>
+            />
 
         <ImageView style="@style/PostJobRightIcon"/>
     </LinearLayout>
 
-    <LinearLayout style="@style/PostJobSubTitleLinearLayout">
+    <LinearLayout
+        android:id="@+id/ll_job_temp_add_end"
+        style="@style/PostJobSubTitleLinearLayout">
 
         <TextView
             style="@style/PostJobLabel"
@@ -45,13 +51,15 @@
         <TextView
             android:id="@+id/tv_job_temp_add_end"
             style="@style/PostJobLabelValue"
-            android:text="2016-6-1"/>
+            />
 
         <ImageView style="@style/PostJobRightIcon"/>
     </LinearLayout>
 
 
-    <LinearLayout style="@style/PostJobSubTitleLinearLayout">
+    <LinearLayout
+        android:visibility="gone"
+        style="@style/PostJobSubTitleLinearLayout">
 
         <TextView
             style="@style/PostJobLabel"

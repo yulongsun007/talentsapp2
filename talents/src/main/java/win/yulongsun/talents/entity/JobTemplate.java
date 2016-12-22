@@ -18,7 +18,7 @@ import win.yulongsun.talents.config.DBConfig;
  */
 @ModelContainer
 @Table(database = DBConfig.class)
-public class JobTemplate extends BaseModel implements Serializable{
+public class JobTemplate extends BaseModel implements Serializable {
     @PrimaryKey
     public Integer tmp_id;
     @Column
@@ -43,10 +43,16 @@ public class JobTemplate extends BaseModel implements Serializable{
     public String  tmp_job_desc;                //职位描述
     @Column
     public Integer create_by;                   //创建者
+
+    /////////////////////////////////////////////////////////
+    @Column
+    public Integer _id;                         //发布ID
     @Column
     public Date    start_at;                    //开始时间
     @Column
     public Date    end_at;                      //结束时间
     @Column
     public String  create_at;                   //创建时间
+    @Column
+    public String  deploy_at;                   //发布时间
 }

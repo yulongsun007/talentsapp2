@@ -36,9 +36,9 @@ import static com.raizlabs.android.dbflow.config.FlowLog.TAG;
  *         用于子View继承
  */
 public abstract class BaseChildFragment extends SupportFragment {
-    private Toolbar _Toolbar;
-    protected User _User;
-    protected List<? extends BaseModel> mDatas = new ArrayList<>();
+    protected Toolbar _mToolbar;
+    protected User    _mUser;
+    protected List<? extends BaseModel> _mDatas = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public abstract class BaseChildFragment extends SupportFragment {
         View view = inflater.inflate(getLayoutResId(), container, false);
         ButterKnife.bind(this, view);
 
-        _User = new Select().from(User.class).querySingle();
+        _mUser = new Select().from(User.class).querySingle();
         initView();
         initData();
         loadDataFromLocal();
@@ -78,12 +78,12 @@ public abstract class BaseChildFragment extends SupportFragment {
     /** 初始化控件 */
     protected void initView() {
         //Toolbar
-        _Toolbar = getToolbar();
-        if (_Toolbar != null) {
-            _mActivity.setSupportActionBar(_Toolbar);
-            _Toolbar.setTitle(getToolbarTitle());
-            _Toolbar.setNavigationIcon(R.mipmap.ic_toolbar_arrow_left_white);
-            _Toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        _mToolbar = getToolbar();
+        if (_mToolbar != null) {
+            _mActivity.setSupportActionBar(_mToolbar);
+            _mToolbar.setTitle(getToolbarTitle());
+            _mToolbar.setNavigationIcon(R.mipmap.ic_toolbar_arrow_left_white);
+            _mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     _mActivity.onBackPressed();
@@ -118,7 +118,7 @@ public abstract class BaseChildFragment extends SupportFragment {
 
     /** 从数据库获取数据 */
     protected void loadDataFromLocal(BaseModel model) {
-        mDatas = new Select().from(model.getClass()).queryList();
+        _mDatas = new Select().from(model.getClass()).queryList();
     }
 
     /** 从服务器数据 */
@@ -155,7 +155,7 @@ public abstract class BaseChildFragment extends SupportFragment {
     /** 返回数据 */
     public void loadServerDataResult(String response, Class respClazz) {
         ResponseList resp = (ResponseList) JsonUtil.fromJson(response, respClazz);
-        mDatas = resp.data;
+        _mDatas = resp.data;
     }
 
 }

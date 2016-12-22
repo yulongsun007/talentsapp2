@@ -264,7 +264,7 @@ public class JobTempLibEditFragment extends BaseChildFragment {
                 .addParams("tmp_job_addr", job_addr)
                 .addParams("tmp_job_salary", job_salary)
                 .addParams("tmp_job_desc", job_desc)
-                .addParams("create_by", String.valueOf(_User.user_id))
+                .addParams("create_by", String.valueOf(_mUser.user_id))
                 .build()
                 .execute(new StringCallback() {
                     @Override
