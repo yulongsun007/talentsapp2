@@ -43,20 +43,6 @@ public abstract class BaseSwipeBackFragment extends SwipeBackFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutResId(), container, false);
         ButterKnife.bind(this, view);
-        //Toolbar
-        _Toolbar = getToolbar();
-        if (_Toolbar != null) {
-            _mActivity.setSupportActionBar(_Toolbar);
-            _Toolbar.setTitle(getToolbarTitle());
-            _Toolbar.setNavigationIcon(R.mipmap.ic_toolbar_arrow_left_white);
-            _Toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    _mActivity.onBackPressed();
-                }
-            });
-        }
-
         return attachToSwipeBack(view);
     }
 
@@ -87,6 +73,19 @@ public abstract class BaseSwipeBackFragment extends SwipeBackFragment {
 
     /** 初始化控件 */
     protected void initView() {
+        //Toolbar
+        _Toolbar = getToolbar();
+        if (_Toolbar != null) {
+            _mActivity.setSupportActionBar(_Toolbar);
+            _Toolbar.setTitle(getToolbarTitle());
+            _Toolbar.setNavigationIcon(R.mipmap.ic_toolbar_arrow_left_white);
+            _Toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    _mActivity.onBackPressed();
+                }
+            });
+        }
     }
 
     /** 初始化数据 */

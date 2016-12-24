@@ -54,6 +54,6 @@ public class PlanListFragment extends CommonListFragment {
     @Override
     public void onItemClick(View itemView, int viewType, int position) {
         super.onItemClick(itemView, viewType, position);
-        EventBus.getDefault().post(new StartBrotherEvent(PlanEditFragment.newInstance(Constant.MODE_VALUE.EDIT, (Plan) _mDatas.get(position))));
+        EventBus.getDefault().post(new StartBrotherEvent(PlanEditFragment.newInstance(Constant.MODE_VALUE.EDIT, (Plan) _mDatas.get(position),null)));
     }
 }

@@ -105,7 +105,7 @@ public class JobTempDetailFragment extends BaseSwipeBackFragment {
 
     @OnClick(R.id.btn_job_temp_add_plan)
     public void onClick() {
-        EventBus.getDefault().post(new StartBrotherEvent(PlanEditFragment.newInstance(Constant.MODE_VALUE.ADD, null)));
+        EventBus.getDefault().post(new StartBrotherEvent(PlanEditFragment.newInstance(Constant.MODE_VALUE.ADD, null,jobTemplate)));
     }
 
 }

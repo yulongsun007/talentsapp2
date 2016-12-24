@@ -32,6 +32,7 @@ import win.yulongsun.talents.adapter.PlanClazzRVAdapter;
 import win.yulongsun.talents.base.BaseSwipeBackFragment;
 import win.yulongsun.talents.common.Constant;
 import win.yulongsun.talents.entity.Clazz;
+import win.yulongsun.talents.entity.JobTemplate;
 import win.yulongsun.talents.entity.Plan;
 import win.yulongsun.talents.http.resp.biz.ClazzResponse;
 import win.yulongsun.talents.http.resp.biz.PlanResponse;
@@ -59,7 +60,8 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
     private int mMode = Constant.MODE_VALUE.EDIT;
     private Plan               mPlan;
     private PlanClazzRVAdapter mAdapter;
-    private List<Clazz>        mDatas= new ArrayList<>();
+    private List<Clazz> mDatas = new ArrayList<>();
+    private JobTemplate mJobTemplate;
 
     @Override
     protected int getLayoutResId() {
@@ -85,12 +87,15 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
         return type + "培养计划";
     }
 
-    public static PlanEditFragment newInstance(int mode, Plan plan) {
+    public static PlanEditFragment newInstance(int mode, Plan plan, JobTemplate jobTemplate) {
         PlanEditFragment fragment = new PlanEditFragment();
         Bundle args = new Bundle();
         args.putInt(Constant.MODE_NAME, mode);
         if (mode == Constant.MODE_VALUE.EDIT) {
             args.putSerializable(PLAN_LIST_EDIT_KEY, plan);
+        }
+        if (mode == Constant.MODE_VALUE.ADD) {
+            args.putSerializable(PLAN_LIST_EDIT_KEY, jobTemplate);
         }
         fragment.setArguments(args);
         return fragment;
@@ -114,7 +119,12 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
         Bundle bundle = getArguments();
         mMode = bundle.getInt(Constant.MODE_NAME);
         super.initView();
-        mPlan = (Plan) getArguments().getSerializable(PLAN_LIST_EDIT_KEY);
+        if (mMode == Constant.MODE_VALUE.EDIT) {
+            mPlan = (Plan) bundle.getSerializable(PLAN_LIST_EDIT_KEY);
+        } else {
+            //add
+            mJobTemplate = (JobTemplate) bundle.getSerializable(PLAN_LIST_EDIT_KEY);
+        }
 
         if (mPlan != null && mMode == Constant.MODE_VALUE.EDIT) {
             mEtPlanEditName.setText(mPlan.plan_name);
@@ -125,15 +135,14 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
         //adapter
         mAdapter = new PlanClazzRVAdapter(_mActivity, mDatas, R.layout.item_plan_clazz_list);
         mRecyPlanEditClazz.setLayoutManager(new LinearLayoutManager(_mActivity));
-        mRecyPlanEditClazz.addItemDecoration(new DividerItemDecoration(_mActivity,VERTICAL_LIST));
+        mRecyPlanEditClazz.addItemDecoration(new DividerItemDecoration(_mActivity, VERTICAL_LIST));
         mRecyPlanEditClazz.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
+        //hide button
+        if (mMode == Constant.MODE_VALUE.ADD) {
+            mBtnPlanEditAddClazz.setVisibility(View.GONE);
+        }
 
-    }
-
-    @Override
-    protected void initData() {
-        super.initData();
     }
 
 
@@ -233,28 +242,58 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
             return;
         }
 
-        OkHttpUtils.post()
-                .url(Constant.URL + "plan/update")
-                .addParams("plan_id", String.valueOf(mPlan.plan_id))
-                .addParams("plan_name", plan_name)
-                .addParams("plan_desc", plan_desc)
-                .addParams("plan_content", plan_content)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
+        if (mMode == Constant.MODE_VALUE.EDIT) {
+            OkHttpUtils.post()
+                    .url(Constant.URL + "plan/update")
+                    .addParams("plan_id", String.valueOf(mPlan.plan_id))
+                    .addParams("plan_name", plan_name)
+                    .addParams("plan_desc", plan_desc)
+                    .addParams("plan_content", plan_content)
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
 
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        PlanResponse resp = (PlanResponse) JsonUtil.fromJson(response, PlanResponse.class);
-                        ToastUtils.toastL(_mActivity, resp.msg);
-                        if (resp.code == Constant.CODE.SUCCESS) {
-                            pop();
                         }
-                    }
-                });
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            PlanResponse resp = (PlanResponse) JsonUtil.fromJson(response, PlanResponse.class);
+                            ToastUtils.toastL(_mActivity, resp.msg);
+                            if (resp.code == Constant.CODE.SUCCESS) {
+                                pop();
+                            }
+                        }
+                    });
+        } else {
+            //add
+            OkHttpUtils.post()
+                    .url(Constant.URL + "plan/add")
+                    .addParams("plan_name", plan_name)
+                    .addParams("plan_desc", plan_desc)
+                    .addParams("plan_content", plan_content)
+                    .addParams("job_template_id", String.valueOf(mJobTemplate.tmp_id))
+                    .addParams("create_by", String.valueOf(_User.user_id))
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            PlanResponse resp = (PlanResponse) JsonUtil.fromJson(response, PlanResponse.class);
+                            ToastUtils.toastL(_mActivity, resp.msg);
+                            if (resp.code == Constant.CODE.SUCCESS) {
+                                //更新mPlan
+                                mPlan = resp.data.get(0);
+                                mBtnPlanEditAddClazz.setVisibility(View.VISIBLE);
+                                mMode = Constant.MODE_VALUE.EDIT;
+                            }
+                        }
+                    });
+        }
 
 
     }
