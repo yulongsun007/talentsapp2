@@ -16,11 +16,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.raizlabs.android.dbflow.sql.language.Select;
-import com.raizlabs.android.dbflow.structure.BaseModel;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.PostFormBuilder;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import org.byteam.superadapter.OnItemClickListener;
 import org.byteam.superadapter.SuperAdapter;
 
 import java.lang.reflect.Field;
@@ -41,8 +41,7 @@ import win.yulongsun.talents.http.resp.ResponseList;
  * @author sunyulong on 2016/12/3.
  *         通用的带RecyclerView的布局
  */
-public abstract class CommonListFragment extends SupportFragment implements SwipeRefreshLayout.OnRefreshListener {
-    private static final String TAG = CommonListFragment.class.getSimpleName();
+public abstract class CommonListFragment extends SupportFragment implements SwipeRefreshLayout.OnRefreshListener, OnItemClickListener {
     protected User _mUser;
     protected List _mDatas = new ArrayList<>();
     protected SuperAdapter       _mAdapter;
@@ -86,7 +85,11 @@ public abstract class CommonListFragment extends SupportFragment implements Swip
     /** 获取Toolbar标题 */
     protected abstract String getToolbarTitle();
 
+    /** 获取子类适配器 */
     protected abstract SuperAdapter getAdapter();
+
+    /*获取子类的TAG,用于网络请求*/
+    protected abstract String getSubTag();
 
     /** 初始化控件 */
     protected void initView() {
@@ -105,8 +108,12 @@ public abstract class CommonListFragment extends SupportFragment implements Swip
         //srf
         _mSrfCommonList.setOnRefreshListener(this);
         _mAdapter = getAdapter();
-        _mRecyCommonList.setLayoutManager(new LinearLayoutManager(_mActivity));
-        _mRecyCommonList.setAdapter(_mAdapter);
+        if (_mAdapter != null) {
+            _mRecyCommonList.setLayoutManager(new LinearLayoutManager(_mActivity));
+            _mRecyCommonList.setAdapter(_mAdapter);
+            _mAdapter.setOnItemClickListener(this);
+        }
+
     }
 
     /** 创建上下文菜单 */
@@ -120,7 +127,7 @@ public abstract class CommonListFragment extends SupportFragment implements Swip
 
     @Override
     public void onDestroyView() {
-        OkHttpUtils.getInstance().cancelTag(this);
+        OkHttpUtils.getInstance().cancelTag(getSubTag());
         ButterKnife.unbind(this);
         super.onDestroyView();
     }
@@ -132,33 +139,22 @@ public abstract class CommonListFragment extends SupportFragment implements Swip
         _mUser = new Select().from(User.class).querySingle();
     }
 
-    /** 从数据库获取数据 提供用于加载本地数据 */
-    protected void loadDataFromLocal(Class<? extends BaseModel> clazz) {
-        _mDatas = new Select().from(clazz).queryList();
-//        if (_mDatas.isEmpty()) {
-//            _mLlCommonNoData.setVisibility(View.VISIBLE);
-//        } else {
-//            _mLlCommonNoData.setVisibility(View.GONE);
-//        }
-    }
-
 
     /**
      * 从服务器数据
      *
-     * @param url                请求地址
-     * @param requestEntity      封装了请求数据
-     * @param requestEntityClazz 封装了请求数据的Class
-     * @param respClazz          返回数据
+     * @param url           请求地址
+     * @param requestEntity 封装了请求数据
+     * @param respClazz     返回数据
      */
-    protected void loadDataFromServer(String url, Object requestEntity, Class requestEntityClazz, final Class<? extends ResponseList> respClazz) {
+    protected void loadDataFromServer(String url, Object requestEntity, final Class<? extends ResponseList> respClazz) {
         _mSrfCommonList.setRefreshing(true);
-        PostFormBuilder builder = OkHttpUtils.post().tag(this).url(Constant.URL + url);
+        PostFormBuilder builder = OkHttpUtils.post().tag(getSubTag()).url(Constant.URL + url);
         //添加参数
-        Field[] fields = requestEntityClazz.getFields();
-        for (int i = 0; i < fields.length; i++) {
+        Field[] fields = requestEntity.getClass().getFields();
+        for (Field field : fields) {
             try {
-                builder.addParams(fields[i].getName(), String.valueOf(fields[i].get(requestEntity)));
+                builder.addParams(field.getName(), String.valueOf(field.get(requestEntity)));
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
@@ -196,4 +192,8 @@ public abstract class CommonListFragment extends SupportFragment implements Swip
         initData();
     }
 
+    @Override
+    public void onItemClick(View itemView, int viewType, int position) {
+
+    }
 }

@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -88,6 +89,9 @@ public abstract class CommonSearchFragment extends SwipeBackFragment implements 
     /** 返回搜索框的默认提示语 */
     public abstract String getSearchKeyHint();
 
+    /** 搜索 */
+    protected abstract void toSearch();
+
     /** 初始化控件 */
     protected void initView() {
         //Toolbar
@@ -112,8 +116,20 @@ public abstract class CommonSearchFragment extends SwipeBackFragment implements 
         if (getSearchKeyHint() != null) {
             _mEtCommonSearchKey.setHint(getSearchKeyHint());
         }
+
         _mEtCommonSearchKey.setOnEditorActionListener(this);
     }
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            toSearch();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     @Override
     public void onDestroyView() {
@@ -178,11 +194,7 @@ public abstract class CommonSearchFragment extends SwipeBackFragment implements 
 
     @Override
     public void onRefresh() {
+        toSearch();
     }
 
-
-    @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        return false;
-    }
 }

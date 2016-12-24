@@ -13,7 +13,6 @@ import java.util.List;
 import butterknife.Bind;
 import okhttp3.Call;
 import win.yulongsun.framework.util.JsonUtil;
-import win.yulongsun.framework.util.android.widget.ToastUtils;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.adapter.ScoreListRVAdapter;
 import win.yulongsun.talents.base.BaseRootFragment;
@@ -73,8 +72,8 @@ public class ScoreListFragment extends BaseRootFragment implements SwipeRefreshL
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        mSrfScoreList.setRefreshing(false);
-                        ToastUtils.toastL(_mActivity, ToastUtils.CONNECT_SERVER_EXCEPTION);
+//                        mSrfScoreList.setRefreshing(false);
+//                        ToastUtils.toastL(_mActivity, ToastUtils.CONNECT_SERVER_EXCEPTION);
                     }
 
                     @Override

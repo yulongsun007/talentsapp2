@@ -100,16 +100,16 @@ public abstract class BaseRootFragment extends SupportFragment {
 
     protected void loadDataFromServer(){
 
-    };
+    }
 
     /** 从服务器数据 */
     protected void loadDataFromServer(String url, Object object, Class clazz) {
         PostFormBuilder builder = OkHttpUtils.post().tag(TAG).url(Constant.URL + url);
         //添加参数
         Field[] fields = clazz.getFields();
-        for (int i = 0; i < fields.length; i++) {
+        for (Field field : fields) {
             try {
-                builder.addParams(fields[i].getName(), String.valueOf(fields[i].get(object)));
+                builder.addParams(field.getName(), String.valueOf(field.get(object)));
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
