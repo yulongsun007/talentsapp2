@@ -17,6 +17,7 @@ import win.yulongsun.talents.R;
 import win.yulongsun.talents.adapter.CommonIndexFragmentAdapter;
 import win.yulongsun.talents.base.BaseRootFragment;
 import win.yulongsun.talents.event.StartBrotherEvent;
+import win.yulongsun.talents.ui.hr.job.JobTempListFragment;
 import win.yulongsun.talents.ui.hr.job.lib.JobTempLibListFragment;
 import win.yulongsun.talents.ui.referrer.clazz.ClazzAddFragment;
 import win.yulongsun.talents.ui.referrer.stu.ReferrerStuListFragment;
@@ -27,9 +28,10 @@ import win.yulongsun.talents.ui.stu.plan.StuPlanListFragment;
  *         推荐人主页
  */
 public class ReferrerIndexFragment extends BaseRootFragment {
-    private static final int POSITION_STU   = 0;
-    private static final int POSITION_PLAN  = 1;
-    private static final int POSITION_CLAZZ = 2;
+    private static final int POSITION_JOB   = 0;
+    private static final int POSITION_STU   = 1;
+    private static final int POSITION_PLAN  = 2;
+    private static final int POSITION_CLAZZ = 3;
     @Bind(R.id.tab)
     TabLayout mTab;
     @Bind(R.id.viewPager)
@@ -77,9 +79,10 @@ public class ReferrerIndexFragment extends BaseRootFragment {
         mTab.addTab(mTab.newTab());
         mTab.addTab(mTab.newTab());
         //Title
-        mTitle = new String[]{"学生", "培养计划", "课程"};
+        mTitle = new String[]{"招聘", "学生", "培养计划", "课程"};
         //Fragment
         mFragmentList = new ArrayList<SupportFragment>();
+        mFragmentList.add(JobTempListFragment.newInstance());
         mFragmentList.add(ReferrerStuListFragment.newInstance());
         mFragmentList.add(StuPlanListFragment.newInstance());
         mFragmentList.add(ClazzAddFragment.newInstance());

@@ -78,8 +78,8 @@ public class JobTempLibEditFragment extends BaseChildFragment {
     private String job_skill_require;
     private String job_desc;
 
-    public static final String  JOB_TEMPLATE_KEY = "job_key";
-    private             Integer tmpId            = 0;
+    public static final String  JOB_TEMP_LIB_EDIT_KEY = "job_temp_lib_edit_key";
+    private             Integer tmpId                 = 0;
 
     public static JobTempLibEditFragment newInstance() {
         return new JobTempLibEditFragment();
@@ -91,7 +91,7 @@ public class JobTempLibEditFragment extends BaseChildFragment {
         Bundle args = new Bundle();
         args.putInt(Constant.MODE_NAME, mode);
         if (mode == Constant.MODE_VALUE.EDIT) {
-            args.putSerializable(JOB_TEMPLATE_KEY, jobTemplate);
+            args.putSerializable(JOB_TEMP_LIB_EDIT_KEY, jobTemplate);
         }
         mFragment.setArguments(args);
         return mFragment;
@@ -148,7 +148,7 @@ public class JobTempLibEditFragment extends BaseChildFragment {
         getToolbar().setNavigationIcon(R.drawable.ic_menu_cancel);
 
         //如果是编辑模式，则初始化View
-        JobTemplate job = (JobTemplate) bundle.getSerializable(JOB_TEMPLATE_KEY);
+        JobTemplate job = (JobTemplate) bundle.getSerializable(JOB_TEMP_LIB_EDIT_KEY);
         if (mMode == Constant.MODE_VALUE.EDIT && job != null) {
             tmpId = job.tmp_id;
             mTvJobTempJobDirect.setText(job.tmp_job_biz_direct);

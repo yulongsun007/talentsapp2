@@ -9,9 +9,9 @@ import win.yulongsun.talents.R;
 import win.yulongsun.talents.adapter.JobTempLibListRVAdapter;
 import win.yulongsun.talents.base.CommonListFragment;
 import win.yulongsun.talents.entity.JobTemplate;
+import win.yulongsun.talents.entity.User;
 import win.yulongsun.talents.event.StartBrotherEvent;
 import win.yulongsun.talents.http.resp.biz.JobTemplateResponse;
-import win.yulongsun.talents.ui.referrer.job.JobTempDetailFragment;
 
 /**
  * Create By: yulongsun
@@ -45,14 +45,14 @@ public class JobTempListFragment extends CommonListFragment {
     protected void initData() {
         super.initData();
         _mToolbar.setVisibility(View.GONE);
-        JobTemplate template = new JobTemplate();
-        template.create_by = _mUser.user_id;
-        loadDataFromServer("job_temp/listDeploy", template, JobTemplateResponse.class);
+        User user = new User();
+        user.user_company_id = _mUser.user_company_id;
+        loadDataFromServer("job_temp/listDeploy", user, JobTemplateResponse.class);
     }
 
     @Override
     public void onItemClick(View itemView, int viewType, int position) {
         super.onItemClick(itemView, viewType, position);
-        EventBus.getDefault().post(new StartBrotherEvent(JobTempDetailFragment.newInstance()));
+        EventBus.getDefault().post(new StartBrotherEvent(JobTempDetailFragment.newInstance((JobTemplate) _mDatas.get(position))));
     }
 }
