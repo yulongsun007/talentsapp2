@@ -1,30 +1,24 @@
 package win.yulongsun.talents.ui.me;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.zxing.WriterException;
-import com.igexin.sdk.PushManager;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import win.yulongsun.framework.util.android.app.DialogUtil;
 import win.yulongsun.framework.util.android.app.QrCodeUtils;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.base.BaseRootFragment;
 import win.yulongsun.talents.entity.User;
 import win.yulongsun.talents.event.StartBrotherEvent;
-import win.yulongsun.talents.ui.login.LoginActivity;
 
 /**
  * Create By: yulongsun
@@ -96,31 +90,6 @@ public class MeFragment extends BaseRootFragment {
         return "我的";
     }
 
-    @Override
-    protected int getMenuResId() {
-        return R.menu.menu_common_logout;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_common_logout) {
-            DialogUtil.showAlert(_mActivity, "退出", "您确定退出当前账户吗", "确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    User user = new Select().from(User.class).querySingle();
-                    if (user != null) {
-                        PushManager.getInstance().unBindAlias(_mActivity, String.valueOf(user.user_id), false);
-                        user.delete();
-                    }
-                    Intent intent = new Intent(_mActivity, LoginActivity.class);
-                    startActivity(intent);
-                    _mActivity.finish();
-                }
-            }, "取消", null);
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     protected void initView() {

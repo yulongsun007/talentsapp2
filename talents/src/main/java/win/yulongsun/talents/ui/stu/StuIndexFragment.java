@@ -54,9 +54,9 @@ public class StuIndexFragment extends BaseRootFragment {
         super.initView();
 
         ArrayList<ItemIndex> mDatas = new ArrayList<>();
-        mDatas.add(new ItemIndex(R.mipmap.ic_index_class, "课程"));
+        mDatas.add(new ItemIndex(R.mipmap.ic_index_class, "招聘信息"));
         mDatas.add(new ItemIndex(R.mipmap.ic_index_plan, "培养计划"));
-        mDatas.add(new ItemIndex(R.mipmap.ic_index_internship, "实习"));
+        mDatas.add(new ItemIndex(R.mipmap.ic_index_internship, "我的计划"));
         mDatas.add(new ItemIndex(R.mipmap.ic_index_feedback, "投递反馈"));
 //        _mDatas.add(new ItemIndex(R.mipmap.ic_index_hr, "HR邀约"));
 //        _mDatas.add(new ItemIndex(R.mipmap.ic_index_career_talk, "宣讲会邀约"));

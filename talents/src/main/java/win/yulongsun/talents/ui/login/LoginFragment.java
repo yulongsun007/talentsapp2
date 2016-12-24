@@ -102,6 +102,7 @@ public class LoginFragment extends BaseRootFragment {
             return;
         }
         DialogUtil.showLoading(_mActivity, DialogUtil.MSG_LOGINING);
+
         OkHttpUtils.post()
                 .url(Constant.URL + "user/login")
                 .addParams("user_mobile", mobile)

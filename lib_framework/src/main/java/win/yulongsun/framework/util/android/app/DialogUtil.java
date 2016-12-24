@@ -20,8 +20,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
+import win.yulongsun.framework.R;
 import win.yulongsun.framework.util.java.reflect.ReflectUtils;
 
 
@@ -150,10 +154,13 @@ public class DialogUtil {
      * @param message 提示的消息
      */
     public static void showLoading(Context context, String message) {
-        if (mDialog == null) {
-            mDialog = showAlert(context, null, message, null, null, null, null, null, null, null, true, null, null);
-        }
-        mDialog.show();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.dialog_loading, null);
+        TextView tvDialogTip = (TextView) view.findViewById(R.id.tv_dialog_tip);
+        tvDialogTip.setText(message);
+        mDialog = new AlertDialog.Builder(context)
+                .setView(view)
+                .show();
     }
 
     /**
