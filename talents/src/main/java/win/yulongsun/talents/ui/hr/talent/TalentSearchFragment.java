@@ -1,37 +1,36 @@
 package win.yulongsun.talents.ui.hr.talent;
 
-import android.support.v7.widget.Toolbar;
+import org.byteam.superadapter.SuperAdapter;
 
-import butterknife.Bind;
-import win.yulongsun.talents.base.BaseSwipeBackFragment;
-import win.yulongsun.talents.R;
+import win.yulongsun.talents.base.CommonSearchFragment;
 
 /**
  * @author sunyulong on 2016/11/28.
- *
- * 人才搜索
+ *         <p>
+ *         人才搜索
  */
-public class TalentSearchFragment extends BaseSwipeBackFragment {
-    public static TalentSearchFragment newInstance(){
+public class TalentSearchFragment extends CommonSearchFragment {
+    public static TalentSearchFragment newInstance() {
         return new TalentSearchFragment();
     }
 
-    @Bind(R.id.toolbar)
-    Toolbar mToolbar;
-
     @Override
-    protected int getLayoutResId() {
-        return R.layout.fragment_talent_search;
+    protected SuperAdapter getAdapter() {
+        return null;
     }
 
     @Override
-    protected Toolbar getToolbar() {
-        return mToolbar;
+    protected String getSubTag() {
+        return TalentSearchFragment.class.getSimpleName();
     }
 
     @Override
-    protected String getToolbarTitle() {
-        return "人才搜索";
+    public String getSearchKeyHint() {
+        return "人才名";
     }
 
+    @Override
+    protected void toSearch() {
+
+    }
 }

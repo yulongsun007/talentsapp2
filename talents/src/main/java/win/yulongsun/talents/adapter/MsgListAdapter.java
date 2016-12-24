@@ -11,9 +11,9 @@ import win.yulongsun.talents.R;
 import win.yulongsun.talents.entity.Msg;
 
 
-public class MsgAdapter extends SuperAdapter<Msg> {
+public class MsgListAdapter extends SuperAdapter<Msg> {
 
-    public MsgAdapter(Context context, List<Msg> items, int layoutResId) {
+    public MsgListAdapter(Context context, List<Msg> items, int layoutResId) {
         super(context, items, layoutResId);
     }
 
