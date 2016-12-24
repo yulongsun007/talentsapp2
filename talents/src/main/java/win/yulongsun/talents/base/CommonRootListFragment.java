@@ -21,8 +21,6 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.PostFormBuilder;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import org.byteam.superadapter.SuperAdapter;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +29,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportFragment;
 import okhttp3.Call;
+import win.yulongsun.framework.adapter.SuperAdapter;
 import win.yulongsun.framework.util.JsonUtil;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.common.Constant;

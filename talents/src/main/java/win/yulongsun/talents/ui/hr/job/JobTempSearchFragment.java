@@ -1,7 +1,7 @@
 package win.yulongsun.talents.ui.hr.job;
 
-import org.byteam.superadapter.SuperAdapter;
 
+import win.yulongsun.framework.adapter.SuperAdapter;
 import win.yulongsun.framework.util.java.lang.NumberUtils;
 import win.yulongsun.framework.util.java.lang.StringUtils;
 import win.yulongsun.talents.R;

@@ -13,13 +13,14 @@ import butterknife.Bind;
 import butterknife.OnClick;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.base.BaseSwipeBackFragment;
+import win.yulongsun.talents.common.Constant;
 import win.yulongsun.talents.entity.JobTemplate;
 import win.yulongsun.talents.event.StartBrotherEvent;
-import win.yulongsun.talents.ui.referrer.plan.PlanAddFragment;
+import win.yulongsun.talents.ui.referrer.plan.PlanEditFragment;
 
 /**
  * @author sunyulong on 2016/12/16.
- * 招聘详情
+ *         招聘详情
  */
 public class JobTempDetailFragment extends BaseSwipeBackFragment {
     @Bind(R.id.toolbar)
@@ -82,7 +83,7 @@ public class JobTempDetailFragment extends BaseSwipeBackFragment {
         if (_User.user_role_id == 1) {
             mBtnJobTempAddPlan.setVisibility(View.GONE);
         }
-        if(jobTemplate == null){
+        if (jobTemplate == null) {
             return;
         }
         //init
@@ -104,7 +105,7 @@ public class JobTempDetailFragment extends BaseSwipeBackFragment {
 
     @OnClick(R.id.btn_job_temp_add_plan)
     public void onClick() {
-        EventBus.getDefault().post(new StartBrotherEvent(PlanAddFragment.newInstance()));
+        EventBus.getDefault().post(new StartBrotherEvent(PlanEditFragment.newInstance(Constant.MODE_VALUE.ADD, null)));
     }
 
 }

@@ -1,26 +1,22 @@
 package win.yulongsun.talents.ui.stu;
 
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
-import org.byteam.superadapter.OnItemClickListener;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
+import win.yulongsun.framework.adapter.OnItemClickListener;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.adapter.StuIndexRVAdapter;
 import win.yulongsun.talents.base.BaseRootFragment;
 import win.yulongsun.talents.entity.ItemIndex;
 import win.yulongsun.talents.event.StartBrotherEvent;
-import win.yulongsun.talents.ui.stu.plan.StuPlanListFragment;
+import win.yulongsun.talents.ui.referrer.plan.PlanListFragment;
 
 /**
  * @author sunyulong on 2016/12/15.
@@ -79,7 +75,7 @@ public class StuIndexFragment extends BaseRootFragment {
                     case 0:
                         break;
                     case 1:
-                        EventBus.getDefault().post(new StartBrotherEvent(StuPlanListFragment.newInstance()));
+                        EventBus.getDefault().post(new StartBrotherEvent(PlanListFragment.newInstance()));
                         break;
                     case 2:
                         break;
@@ -122,17 +118,4 @@ public class StuIndexFragment extends BaseRootFragment {
 //        ImageLoadManager.getInstance().with(_mActivity).load(R.mipmap.img_zhaoping1).into(imageView);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
 }

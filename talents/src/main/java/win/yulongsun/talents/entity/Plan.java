@@ -1,7 +1,24 @@
 package win.yulongsun.talents.entity;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * @author sunyulong on 2016/12/19.
  */
-public class Plan {
+public class Plan implements Serializable {
+
+    public Integer     plan_id;
+    public String      plan_desc;
+    public String      plan_content;
+    public String      plan_name;
+    public String      plan_img;
+    public String      plan_hour;
+    public String      plan_score;
+    public String      job_template_id;
+    public Integer     create_by;
+    public String      create_at;
+    public String      update_at;
+    public List<Clazz> clazz;
+
 }

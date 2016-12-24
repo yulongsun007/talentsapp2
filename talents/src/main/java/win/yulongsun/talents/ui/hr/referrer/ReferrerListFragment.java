@@ -2,8 +2,7 @@ package win.yulongsun.talents.ui.hr.referrer;
 
 import android.view.View;
 
-import org.byteam.superadapter.SuperAdapter;
-
+import win.yulongsun.framework.adapter.SuperAdapter;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.adapter.ReferrerListRVAdapter;
 import win.yulongsun.talents.base.CommonListFragment;

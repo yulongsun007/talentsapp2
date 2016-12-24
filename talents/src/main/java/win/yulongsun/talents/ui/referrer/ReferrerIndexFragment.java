@@ -16,12 +16,13 @@ import me.yokeyword.fragmentation.SupportFragment;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.adapter.CommonIndexFragmentAdapter;
 import win.yulongsun.talents.base.BaseRootFragment;
+import win.yulongsun.talents.common.Constant;
 import win.yulongsun.talents.event.StartBrotherEvent;
 import win.yulongsun.talents.ui.hr.job.JobTempListFragment;
 import win.yulongsun.talents.ui.hr.job.lib.JobTempLibListFragment;
-import win.yulongsun.talents.ui.referrer.clazz.ClazzAddFragment;
+import win.yulongsun.talents.ui.referrer.plan.PlanEditFragment;
+import win.yulongsun.talents.ui.referrer.plan.PlanListFragment;
 import win.yulongsun.talents.ui.referrer.stu.ReferrerStuListFragment;
-import win.yulongsun.talents.ui.stu.plan.StuPlanListFragment;
 
 /**
  * @author sunyulong on 2016/12/15.
@@ -79,13 +80,13 @@ public class ReferrerIndexFragment extends BaseRootFragment {
         mTab.addTab(mTab.newTab());
         mTab.addTab(mTab.newTab());
         //Title
-        mTitle = new String[]{"招聘", "学生", "培养计划", "课程"};
+        mTitle = new String[]{"招聘", "学生", "培养计划"};
         //Fragment
         mFragmentList = new ArrayList<SupportFragment>();
         mFragmentList.add(JobTempListFragment.newInstance());
         mFragmentList.add(ReferrerStuListFragment.newInstance());
-        mFragmentList.add(StuPlanListFragment.newInstance());
-        mFragmentList.add(ClazzAddFragment.newInstance());
+        mFragmentList.add(PlanListFragment.newInstance());
+//        mFragmentList.add(ClazzAddFragment.newInstance());
 
 
         mViewPager.setAdapter(new CommonIndexFragmentAdapter(mTitle, mFragmentList, getChildFragmentManager()));
@@ -127,11 +128,11 @@ public class ReferrerIndexFragment extends BaseRootFragment {
                 MenuItem mActionSearch = mMenu.findItem(R.id.action_search);
                 MenuItem mActionAdd = mMenu.findItem(R.id.action_add);
                 MenuItem mActionJobTempLib = mMenu.findItem(R.id.action_job_temp_lib);
-//                if (POSITION_SCORE == position || POSITION_TALENT == position) {
-//                    mActionAdd.setVisible(false);
-//                } else {
-//                    mActionAdd.setVisible(true);
-//                }
+                if (POSITION_PLAN == position) {
+                    mActionAdd.setVisible(false);
+                } else {
+                    mActionAdd.setVisible(true);
+                }
 //                if (POSITION_SCORE == position) {
 //                    mActionSearch.setVisible(false);
 //                } else {
@@ -176,10 +177,10 @@ public class ReferrerIndexFragment extends BaseRootFragment {
     //添加
     private void toAdd() {
         SupportFragment targetFragment = null;
-//        switch (mPosition) {
-//            case POSITION_TALENT:
-//                targetFragment = TalentSearchFragment.newInstance();
-//                break;
+        switch (mPosition) {
+            case POSITION_PLAN:
+                targetFragment = PlanEditFragment.newInstance(Constant.MODE_VALUE.ADD, null);
+                break;
 //            case POSITION_JOB:
 //                targetFragment = JobTempAddFragment.newInstance();
 //                break;
@@ -189,7 +190,7 @@ public class ReferrerIndexFragment extends BaseRootFragment {
 //            case POSITION_SCORE:
 //                //none
 //                break;
-//        }
+        }
         EventBus.getDefault().post(new StartBrotherEvent(targetFragment));
     }
 }

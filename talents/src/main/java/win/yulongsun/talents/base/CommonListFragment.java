@@ -15,13 +15,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.raizlabs.android.dbflow.sql.language.Select;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.PostFormBuilder;
 import com.zhy.http.okhttp.callback.StringCallback;
-
-import org.byteam.superadapter.OnItemClickListener;
-import org.byteam.superadapter.SuperAdapter;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -31,6 +29,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportFragment;
 import okhttp3.Call;
+import win.yulongsun.framework.adapter.OnItemClickListener;
+import win.yulongsun.framework.adapter.SuperAdapter;
 import win.yulongsun.framework.util.JsonUtil;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.common.Constant;
@@ -170,6 +170,7 @@ public abstract class CommonListFragment extends SupportFragment implements Swip
                     @Override
                     public void onResponse(String response, int id) {
                         _mSrfCommonList.setRefreshing(false);
+                        Logger.json(response);
                         loadServerDataResult(response, respClazz);
                     }
                 });

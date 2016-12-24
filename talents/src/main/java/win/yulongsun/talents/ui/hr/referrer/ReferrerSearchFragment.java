@@ -1,8 +1,8 @@
 package win.yulongsun.talents.ui.hr.referrer;
 
-import org.byteam.superadapter.SuperAdapter;
 
 import me.yokeyword.fragmentation.SupportFragment;
+import win.yulongsun.framework.adapter.SuperAdapter;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.adapter.ReferrerListRVAdapter;
 import win.yulongsun.talents.base.CommonSearchFragment;

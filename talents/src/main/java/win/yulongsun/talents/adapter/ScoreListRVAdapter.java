@@ -3,11 +3,11 @@ package win.yulongsun.talents.adapter;
 import android.content.Context;
 import android.view.View;
 
-import org.byteam.superadapter.SuperAdapter;
-import org.byteam.superadapter.SuperViewHolder;
-
 import java.util.List;
 
+import win.yulongsun.framework.adapter.SuperAdapter;
+import win.yulongsun.framework.adapter.SuperViewHolder;
+import win.yulongsun.framework.adapter.animation.BaseAnimation;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.entity.User;
 
@@ -41,6 +41,11 @@ public class ScoreListRVAdapter extends SuperAdapter<User> {
         holder.setText(R.id.tv_score_user_name, item.user_name);
         //user_score
         holder.setText(R.id.tv_score_user_score, String.valueOf(item.user_score));
+
+    }
+
+    @Override
+    public void enableLoadAnimation(long duration, BaseAnimation animation) {
 
     }
 }

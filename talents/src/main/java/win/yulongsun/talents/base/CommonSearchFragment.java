@@ -21,8 +21,6 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.PostFormBuilder;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import org.byteam.superadapter.SuperAdapter;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +29,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 import okhttp3.Call;
+import win.yulongsun.framework.adapter.SuperAdapter;
 import win.yulongsun.framework.util.JsonUtil;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.common.Constant;
@@ -44,19 +43,19 @@ import win.yulongsun.talents.http.resp.ResponseList;
 public abstract class CommonSearchFragment extends SwipeBackFragment implements SwipeRefreshLayout.OnRefreshListener, TextView.OnEditorActionListener {
     protected User _mUser;
     protected List _mDatas = new ArrayList<>();
-    protected SuperAdapter       _mAdapter;
+    protected SuperAdapter _mAdapter;
     @Bind(R.id.et_common_search_key)
-    protected EditText           _mEtCommonSearchKey;
+    protected EditText     _mEtCommonSearchKey;
     @Bind(R.id.toolbar)
-    protected Toolbar            _mToolbar;
+    protected Toolbar      _mToolbar;
     @Bind(R.id.ll_common_no_data)
-    protected LinearLayout       _mLlCommonNoData;
+    protected LinearLayout _mLlCommonNoData;
     @Bind(R.id.iv_common_no_data_img)
-    protected ImageView          _mIvCommonNoDataImg;
+    protected ImageView    _mIvCommonNoDataImg;
     @Bind(R.id.tv_common_no_data_tip)
-    protected TextView           _mTvCommonNoDataTip;
+    protected TextView     _mTvCommonNoDataTip;
     @Bind(R.id.recy_common_search_list)
-    protected RecyclerView       _mRecyCommonSearchList;
+    protected RecyclerView _mRecyCommonSearchList;
     @Bind(R.id.srf_common_search_list)
     protected SwipeRefreshLayout _mSrfCommonSearchList;
 

@@ -5,6 +5,7 @@
               android:orientation="horizontal">
 
     <win.yulongsun.framework.widget.ImageView.CharacterView
+        android:id="@+id/cv_plan_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cv_background_color="@color/color_primary_dark"
@@ -21,6 +22,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/tv_plan_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Androi工程师培养计划"
@@ -28,6 +30,7 @@
                 android:textSize="16sp"/>
 
             <TextView
+                android:id="@+id/tv_plan_update_at"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -38,6 +41,7 @@
 
 
         <TextView
+            android:id="@+id/tv_plan_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -62,6 +66,7 @@
                     android:textSize="12sp"/>
 
                 <TextView
+                    android:id="@+id/tv_plan_hour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -83,6 +88,7 @@
                     android:textSize="12sp"/>
 
                 <TextView
+                    android:id="@+id/tv_plan_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -103,6 +109,7 @@
 
 
         <TextView
+            android:id="@+id/tv_plan_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="1.Java经典指南\n2.XML基础\n3.Android动画\n4.Android Studio使用"

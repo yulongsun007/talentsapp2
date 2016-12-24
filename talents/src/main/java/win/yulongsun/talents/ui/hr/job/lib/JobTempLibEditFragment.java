@@ -81,10 +81,6 @@ public class JobTempLibEditFragment extends BaseChildFragment {
     public static final String  JOB_TEMP_LIB_EDIT_KEY = "job_temp_lib_edit_key";
     private             Integer tmpId                 = 0;
 
-    public static JobTempLibEditFragment newInstance() {
-        return new JobTempLibEditFragment();
-    }
-
 
     public static JobTempLibEditFragment newInstance(int mode, JobTemplate jobTemplate) {
         JobTempLibEditFragment mFragment = new JobTempLibEditFragment();

@@ -3,11 +3,11 @@ package win.yulongsun.talents.adapter;
 import android.content.Context;
 import android.view.View;
 
-import org.byteam.superadapter.SuperAdapter;
-import org.byteam.superadapter.SuperViewHolder;
-
 import java.util.List;
 
+import win.yulongsun.framework.adapter.SuperAdapter;
+import win.yulongsun.framework.adapter.SuperViewHolder;
+import win.yulongsun.framework.adapter.animation.BaseAnimation;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.entity.User;
 
@@ -31,5 +31,10 @@ public class ReferrerListRVAdapter extends SuperAdapter<User> {
 
             }
         });
+    }
+
+    @Override
+    public void enableLoadAnimation(long duration, BaseAnimation animation) {
+
     }
 }

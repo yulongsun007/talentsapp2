@@ -3,10 +3,9 @@ package win.yulongsun.talents.ui.hr.job.lib;
 import android.view.MenuItem;
 import android.view.View;
 
-import org.byteam.superadapter.SuperAdapter;
-
 import java.util.List;
 
+import win.yulongsun.framework.adapter.SuperAdapter;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.adapter.JobTempLibListRVAdapter;
 import win.yulongsun.talents.base.CommonListFragment;

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="14dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="课程名:"
+            android:textColor="@color/color_text_black"/>
+
+        <EditText
+            android:id="@+id/et_dialog_clazz_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_ll"
+            android:padding="12dp"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="课程优先级(1-10):"
+            android:textColor="@color/color_text_black"/>
+
+        <EditText
+            android:id="@+id/et_dialog_clazz_priority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_ll"
+            android:inputType="number"
+            android:maxLength="2"
+            android:padding="12dp"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="课时:"
+            android:textColor="@color/color_text_black"/>
+
+        <EditText
+            android:id="@+id/et_dialog_clazz_hour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_ll"
+            android:inputType="number"
+            android:maxLength="5"
+            android:padding="12dp"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="学分:"
+            android:textColor="@color/color_text_black"/>
+
+        <EditText
+            android:id="@+id/et_dialog_clazz_score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_ll"
+            android:inputType="number"
+            android:maxLength="5"
+            android:padding="12dp"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="推荐书籍:"
+            android:textColor="@color/color_text_black"/>
+
+        <EditText
+            android:id="@+id/et_dialog_clazz_books"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_ll"
+            android:gravity="left"
+            android:lines="4"
+            android:padding="12dp"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+
+</LinearLayout>

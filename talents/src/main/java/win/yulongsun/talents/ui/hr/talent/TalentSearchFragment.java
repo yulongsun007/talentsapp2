@@ -1,7 +1,7 @@
 package win.yulongsun.talents.ui.hr.talent;
 
-import org.byteam.superadapter.SuperAdapter;
 
+import win.yulongsun.framework.adapter.SuperAdapter;
 import win.yulongsun.talents.base.CommonSearchFragment;
 
 /**

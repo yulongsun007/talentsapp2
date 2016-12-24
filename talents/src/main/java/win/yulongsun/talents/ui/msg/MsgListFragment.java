@@ -5,10 +5,10 @@ import android.view.View;
 import com.orhanobut.logger.Logger;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
-import org.byteam.superadapter.SuperAdapter;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import win.yulongsun.framework.adapter.SuperAdapter;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.adapter.MsgListAdapter;
 import win.yulongsun.talents.base.CommonListFragment;
