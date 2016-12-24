@@ -39,7 +39,7 @@ dependencies {
     /*log*/
     compile 'com.orhanobut:logger:1.15'
     /*通用adapter*/
-    compile 'org.byteam.superadapter:superadapter:3.6.5'
+//    compile 'org.byteam.superadapter:superadapter:3.6.5'
     /*http*/
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'

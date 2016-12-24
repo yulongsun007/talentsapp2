@@ -1,10 +1,10 @@
-package win.yulongsun.framework.adapter;
-
-import java.util.List;
+package win.yulongsun.framework.adapter2;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.BaseAdapter;
+
+import java.util.List;
 
 //ListView Adapter基类
 public abstract class CommonAdapter extends BaseAdapter {
