@@ -38,7 +38,7 @@ public class TalentListFragment extends CommonListFragment {
     @Override
     protected void initData() {
         super.initData();
-
+        _mToolbar.setVisibility(View.GONE);
     }
 
     @Override
