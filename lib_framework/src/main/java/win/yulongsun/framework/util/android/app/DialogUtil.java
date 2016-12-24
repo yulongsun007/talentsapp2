@@ -124,7 +124,7 @@ public class DialogUtil {
      * @param message 提示的消息
      */
     public static AlertDialog showPrompt(Context context, String message) {
-        return showAlert(context, null, message, "OK", null, null, null, null, null, null, true, null, null);
+        return showAlert(context, null, message, "确定", null, null, null, null, null, null, true, null, null);
     }
 
     /**

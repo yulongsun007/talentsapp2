@@ -22,10 +22,10 @@ public class CharacterView extends View {
     private static final int DEFAULT_BORDER_WIDTH = 0;
     private static final int DEFAULT_BORDER_COLOR = Color.BLACK;
     private static final int DEFAULT_VIEW_SIZE = 96;
-    private static final int DEFAULT_LETTER_COUNT= 1;
+    private static final int DEFAULT_LETTER_COUNT= 10;
     private static final float DEFAULT_TITLE_SIZE = 25f;
     private static final String DEFAULT_TITLE = "A";
-    private static final int LETTER_MAX_COUNT = 3;
+    private static final int LETTER_MAX_COUNT = 10;
 
     private int mTitleColor = DEFAULT_TITLE_COLOR;
     private int mBackgroundColor = DEFAULT_BACKGROUND_COLOR;
@@ -190,15 +190,16 @@ public class CharacterView extends View {
      * @param title The example string attribute value to use.
      */
     public void setTitleText(String title) {
-//        mTitleText = title;
+        mTitleText = title;
 
-        if (title.length() < mLetterCount){
-            mTitleText = title.substring(0, title.length() - 1);
-        } else if (mLetterCount > LETTER_MAX_COUNT){
-            mTitleText = title.substring(0, LETTER_MAX_COUNT);
-        } else {
-            mTitleText = title.substring(0, mLetterCount);
-        }
+        // TODO: 2016/12/24 暂时注释
+//        if (title.length() < mLetterCount){
+//            mTitleText = title.substring(0, title.length() - 1);
+//        } else if (mLetterCount > LETTER_MAX_COUNT){
+//            mTitleText = title.substring(0, LETTER_MAX_COUNT);
+//        } else {
+//            mTitleText = title.substring(0, mLetterCount);
+//        }
 
         Log.d("Debug", "mTitleText " + mTitleText + " " + mLetterCount);
         invalidate();
