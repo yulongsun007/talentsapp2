@@ -17,10 +17,25 @@ public interface Constant {
 
     String isLogin = "is_login";//是否已经登录
 
-    /*模式*/
+    interface LEARN_PROGRESS {
+        int UN_START   = 0;
+        int PROGESSING = 1;
+        int COMMPLATE  = 2;
+    }
+
+
+    //角色
+    interface ROLE {
+        int HR       = 1;
+        int REFERRER = 2;
+        int STU      = 3;
+    }
+
+    //模式
     interface MODE_VALUE {
-        int EDIT = 0;
-        int ADD  = 1;
+        int EDIT  = 0;//编辑
+        int ADD   = 1;//添加
+        int QUERY = 2;//查看
     }
 
     //http返回状态码

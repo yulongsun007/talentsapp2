@@ -34,9 +34,11 @@ import win.yulongsun.talents.common.Constant;
 import win.yulongsun.talents.entity.Clazz;
 import win.yulongsun.talents.entity.JobTemplate;
 import win.yulongsun.talents.entity.Plan;
+import win.yulongsun.talents.http.resp.ResponseList;
 import win.yulongsun.talents.http.resp.biz.ClazzResponse;
 import win.yulongsun.talents.http.resp.biz.PlanResponse;
 
+import static win.yulongsun.framework.util.JsonUtil.fromJson;
 import static win.yulongsun.framework.widget.RecyView.DividerItemDecoration.VERTICAL_LIST;
 
 /**
@@ -57,6 +59,8 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
     RecyclerView mRecyPlanEditClazz;
     @Bind(R.id.btn_plan_edit_add_clazz)
     Button       mBtnPlanEditAddClazz;
+    @Bind(R.id.btn_plan_edit_learn_plan)
+    Button       mBtnPlanEditLearnPlan;
     private int mMode = Constant.MODE_VALUE.EDIT;
     private Plan               mPlan;
     private PlanClazzRVAdapter mAdapter;
@@ -91,7 +95,7 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
         PlanEditFragment fragment = new PlanEditFragment();
         Bundle args = new Bundle();
         args.putInt(Constant.MODE_NAME, mode);
-        if (mode == Constant.MODE_VALUE.EDIT) {
+        if (mode == Constant.MODE_VALUE.EDIT || mode == Constant.MODE_VALUE.QUERY) {
             args.putSerializable(PLAN_LIST_EDIT_KEY, plan);
         }
         if (mode == Constant.MODE_VALUE.ADD) {
@@ -103,7 +107,11 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
 
     @Override
     protected int getMenuResId() {
-        return R.menu.menu_plan_save;
+        if (mMode == Constant.MODE_VALUE.QUERY) {
+            return 0;
+        }else {
+            return R.menu.menu_plan_save;
+        }
     }
 
     @Override
@@ -121,16 +129,33 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
         super.initView();
         if (mMode == Constant.MODE_VALUE.EDIT) {
             mPlan = (Plan) bundle.getSerializable(PLAN_LIST_EDIT_KEY);
-        } else {
-            //add
-            mJobTemplate = (JobTemplate) bundle.getSerializable(PLAN_LIST_EDIT_KEY);
-        }
-
-        if (mPlan != null && mMode == Constant.MODE_VALUE.EDIT) {
+            //传递数据，初始化页面数据
             mEtPlanEditName.setText(mPlan.plan_name);
             mEtPlanEditDesc.setText(mPlan.plan_desc);
             mEtPlanEditContent.setText(mPlan.plan_content);
             mDatas = mPlan.clazz;
+            mBtnPlanEditAddClazz.setVisibility(View.VISIBLE);
+            mBtnPlanEditLearnPlan.setVisibility(View.GONE);
+        } else if (mMode == Constant.MODE_VALUE.ADD) {
+            mJobTemplate = (JobTemplate) bundle.getSerializable(PLAN_LIST_EDIT_KEY);
+            //显示"添加课程"按钮
+            mBtnPlanEditAddClazz.setVisibility(View.GONE);
+            mBtnPlanEditLearnPlan.setVisibility(View.GONE);
+        } else if (mMode == Constant.MODE_VALUE.QUERY) {
+            mPlan = (Plan) bundle.getSerializable(PLAN_LIST_EDIT_KEY);
+            //隐藏"添加课程"按钮、显示"学习计划"按钮
+            mEtPlanEditName.setText(mPlan.plan_name);
+            mEtPlanEditName.setEnabled(false);
+            mEtPlanEditName.setFocusable(false);
+            mEtPlanEditDesc.setText(mPlan.plan_desc);
+            mEtPlanEditDesc.setEnabled(false);
+            mEtPlanEditDesc.setFocusable(false);
+            mEtPlanEditContent.setText(mPlan.plan_content);
+            mEtPlanEditContent.setEnabled(false);
+            mEtPlanEditContent.setFocusable(false);
+            mDatas = mPlan.clazz;
+            mBtnPlanEditAddClazz.setVisibility(View.GONE);
+            mBtnPlanEditLearnPlan.setVisibility(View.VISIBLE);
         }
         //adapter
         mAdapter = new PlanClazzRVAdapter(_mActivity, mDatas, R.layout.item_plan_clazz_list);
@@ -138,16 +163,50 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
         mRecyPlanEditClazz.addItemDecoration(new DividerItemDecoration(_mActivity, VERTICAL_LIST));
         mRecyPlanEditClazz.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
-        //hide button
-        if (mMode == Constant.MODE_VALUE.ADD) {
-            mBtnPlanEditAddClazz.setVisibility(View.GONE);
-        }
 
     }
 
 
-    @OnClick(R.id.btn_plan_edit_add_clazz)
-    public void onClick() {
+    @OnClick({R.id.btn_plan_edit_add_clazz, R.id.btn_plan_edit_learn_plan})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_plan_edit_add_clazz:
+                toAddClazz();
+                break;
+            case R.id.btn_plan_edit_learn_plan:
+                toLearnClazz();
+                break;
+        }
+    }
+
+    //学习此培养计划
+    private void toLearnClazz() {
+        OkHttpUtils.post()
+                .url(Constant.URL + "user_plan_r/add")
+                .addParams("user_id", String.valueOf(_User.user_id))
+                .addParams("plan_id", String.valueOf(mPlan.plan_id))
+                .addParams("apply_status", String.valueOf(Constant.LEARN_PROGRESS.PROGESSING))
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        ResponseList resp = (ResponseList) JsonUtil.fromJson(response, ResponseList.class);
+                        ToastUtils.toastL(_mActivity, resp.msg);
+                        if (resp.code == Constant.CODE.SUCCESS) {
+                            pop();
+                        }
+                    }
+                });
+
+    }
+
+    //添加培养计划
+    private void toAddClazz() {
         View view = LayoutInflater.from(_mActivity).inflate(R.layout.dialog_clazz_add, null);
         final EditText mEtDialogClazzName = (EditText) view.findViewById(R.id.et_dialog_clazz_name);
         final EditText mEtDialogClazzPriority = (EditText) view.findViewById(R.id.et_dialog_clazz_priority);
@@ -204,7 +263,7 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
 
                                     @Override
                                     public void onResponse(String response, int id) {
-                                        ClazzResponse resp = (ClazzResponse) JsonUtil.fromJson(response, ClazzResponse.class);
+                                        ClazzResponse resp = (ClazzResponse) fromJson(response, ClazzResponse.class);
                                         ToastUtils.toastL(_mActivity, resp.msg);
                                         if (resp.code == Constant.CODE.SUCCESS) {
                                             //success
@@ -220,7 +279,6 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
                 .setCancelable(false)
                 .setNegativeButton("取消", null)
                 .show();
-
     }
 
 
@@ -258,7 +316,7 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
 
                         @Override
                         public void onResponse(String response, int id) {
-                            PlanResponse resp = (PlanResponse) JsonUtil.fromJson(response, PlanResponse.class);
+                            PlanResponse resp = (PlanResponse) fromJson(response, PlanResponse.class);
                             ToastUtils.toastL(_mActivity, resp.msg);
                             if (resp.code == Constant.CODE.SUCCESS) {
                                 pop();
@@ -283,7 +341,7 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
 
                         @Override
                         public void onResponse(String response, int id) {
-                            PlanResponse resp = (PlanResponse) JsonUtil.fromJson(response, PlanResponse.class);
+                            PlanResponse resp = (PlanResponse) fromJson(response, PlanResponse.class);
                             ToastUtils.toastL(_mActivity, resp.msg);
                             if (resp.code == Constant.CODE.SUCCESS) {
                                 //更新mPlan
@@ -301,6 +359,9 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
 
     @Override
     public void onItemClick(View itemView, int viewType, final int position) {
+        if (mMode == Constant.MODE_VALUE.QUERY) {
+            return;
+        }
         new AlertDialog.Builder(_mActivity)
                 .setTitle("删除提示")
                 .setMessage("您确定删除" + mDatas.get(position).clazz_name + "吗?")
@@ -320,7 +381,7 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
 
                                     @Override
                                     public void onResponse(String response, int id) {
-                                        ClazzResponse resp = (ClazzResponse) JsonUtil.fromJson(response, ClazzResponse.class);
+                                        ClazzResponse resp = (ClazzResponse) fromJson(response, ClazzResponse.class);
                                         ToastUtils.toastL(_mActivity, resp.msg);
                                         if (resp.code == Constant.CODE.SUCCESS) {
                                             Logger.json(response);

@@ -17,6 +17,7 @@ import win.yulongsun.talents.common.Constant;
 import win.yulongsun.talents.entity.JobTemplate;
 import win.yulongsun.talents.event.StartBrotherEvent;
 import win.yulongsun.talents.ui.referrer.plan.PlanEditFragment;
+import win.yulongsun.talents.ui.referrer.plan.PlanListFragment;
 
 /**
  * @author sunyulong on 2016/12/16.
@@ -49,6 +50,8 @@ public class JobTempDetailFragment extends BaseSwipeBackFragment {
     TextView  mTvJobTempDetailHrCompanyName;
     @Bind(R.id.tv_job_temp_detail_job_num)
     TextView  mTvJobTempDetailJobNum;
+    @Bind(R.id.btn_job_temp_look_plan)
+    Button    mBtnJobTempLookPlan;
     private JobTemplate jobTemplate;
 
     @Override
@@ -80,8 +83,15 @@ public class JobTempDetailFragment extends BaseSwipeBackFragment {
     protected void initData() {
         super.initData();
         jobTemplate = (JobTemplate) getArguments().getSerializable(JOB_TEMP_DETAIL_KEY);
-        if (_User.user_role_id == 1) {
+        if (_User.user_role_id == Constant.ROLE.HR) {
             mBtnJobTempAddPlan.setVisibility(View.GONE);
+            mBtnJobTempLookPlan.setVisibility(View.GONE);
+        } else if (_User.user_role_id == Constant.ROLE.STU) {
+            mBtnJobTempAddPlan.setVisibility(View.GONE);
+            mBtnJobTempLookPlan.setVisibility(View.VISIBLE);
+        } else if (_User.user_role_id == Constant.ROLE.REFERRER) {
+            mBtnJobTempAddPlan.setVisibility(View.VISIBLE);
+            mBtnJobTempLookPlan.setVisibility(View.GONE);
         }
         if (jobTemplate == null) {
             return;
@@ -103,9 +113,16 @@ public class JobTempDetailFragment extends BaseSwipeBackFragment {
         mTvJobTempDetailHrCompanyName.setText(_User.company_name);
     }
 
-    @OnClick(R.id.btn_job_temp_add_plan)
-    public void onClick() {
-        EventBus.getDefault().post(new StartBrotherEvent(PlanEditFragment.newInstance(Constant.MODE_VALUE.ADD, null,jobTemplate)));
-    }
 
+    @OnClick({R.id.btn_job_temp_add_plan, R.id.btn_job_temp_look_plan})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_job_temp_add_plan:
+                EventBus.getDefault().post(new StartBrotherEvent(PlanEditFragment.newInstance(Constant.MODE_VALUE.ADD, null, jobTemplate)));
+                break;
+            case R.id.btn_job_temp_look_plan:
+                EventBus.getDefault().post(new StartBrotherEvent(PlanListFragment.newInstance(jobTemplate)));
+                break;
+        }
+    }
 }

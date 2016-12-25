@@ -1,0 +1,403 @@
+package win.yulongsun.talents.ui.stu.resume;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
+import com.orhanobut.logger.Logger;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.sw926.imagefileselector.ErrorResult;
+import com.sw926.imagefileselector.ImageFileSelector;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.Bind;
+import butterknife.OnClick;
+import okhttp3.Call;
+import win.yulongsun.framework.adapter.OnItemClickListener;
+import win.yulongsun.framework.image.ImageLoadManager;
+import win.yulongsun.framework.util.JsonUtil;
+import win.yulongsun.framework.util.android.app.DialogUtil;
+import win.yulongsun.framework.util.android.widget.ToastUtils;
+import win.yulongsun.framework.util.java.lang.StringUtils;
+import win.yulongsun.talents.R;
+import win.yulongsun.talents.adapter.ResumeExperListRVAdapter;
+import win.yulongsun.talents.base.BaseSwipeBackFragment;
+import win.yulongsun.talents.common.Constant;
+import win.yulongsun.talents.entity.Exper;
+import win.yulongsun.talents.entity.Resume;
+import win.yulongsun.talents.http.resp.biz.ClazzResponse;
+import win.yulongsun.talents.http.resp.biz.ResumeResponse;
+
+import static win.yulongsun.framework.util.JsonUtil.fromJson;
+
+/**
+ * @author sunyulong on 2016/12/25.
+ */
+public class ResumeEditFragment extends BaseSwipeBackFragment implements OnItemClickListener {
+
+    public static final  String RESUME_DETAIL_KEY = "resume_detail_key";
+    private static final int    REQ_CODE          = 0x001;
+    @Bind(R.id.tv_resume_detail_img)
+    ImageView    mIvResumeDetailImg;
+    @Bind(R.id.et_resume_detail_name)
+    EditText     mEtResumeDetailName;
+    @Bind(R.id.et_resume_detail_gender)
+    EditText     mEtResumeDetailGender;
+    @Bind(R.id.et_resume_detail_is_study)
+    EditText     mEtResumeDetailIsStudy;
+    @Bind(R.id.et_resume_detail_academy)
+    EditText     mEtResumeDetailAcademy;
+    @Bind(R.id.et_resume_detail_graduate_at)
+    EditText     mEtResumeDetailGraduateAt;
+    @Bind(R.id.et_resume_detail_mobile)
+    EditText     mEtResumeDetailMobile;
+    @Bind(R.id.et_resume_detail_email)
+    EditText     mEtResumeDetailEmail;
+    @Bind(R.id.et_resume_detail_desc)
+    EditText     mEtResumeDetailDesc;
+    @Bind(R.id.btn_resume_detail_add_exper)
+    Button       mBtnResumeDetailAddExper;
+    @Bind(R.id.recy_resume_exper)
+    RecyclerView mRecyResumeExper;
+    @Bind(R.id.toolbar)
+    Toolbar      mToolbar;
+    @Bind(R.id.ll_resume_container)
+    LinearLayout mLlResumeContainer;
+    @Bind(R.id.et_resume_detail_major)
+    EditText     mEtResumeDetailMajor;
+
+    private Resume mResume;
+    private int    mMode;
+    private List<Exper> mExperList = new ArrayList<>();
+    private ResumeExperListRVAdapter mAdapter;
+    private ImageFileSelector        mImageFileSelector;
+    private String                   resume_img;
+    private String                   resume_name;
+    private String                   resume_gender;
+    private String                   resume_desc;
+    private String                   resume_email;
+    private String                   resume_is_study;
+    private String                   resume_major;
+    private String                   resume_academy;
+    private String                   resume_graduate_at;
+    private String                   resume_mobile;
+
+
+    public static ResumeEditFragment newInstance(int mode, Resume resume) {
+        ResumeEditFragment fragment = new ResumeEditFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constant.MODE_NAME, mode);
+        if (mode == Constant.MODE_VALUE.EDIT) {
+            bundle.putSerializable(RESUME_DETAIL_KEY, resume);
+        }
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.fragment_resume_edit;
+    }
+
+    @Override
+    protected Toolbar getToolbar() {
+        return mToolbar;
+    }
+
+    @Override
+    protected String getToolbarTitle() {
+        return "简历详情";
+    }
+
+    @Override
+    protected void initView() {
+        super.initView();
+        //adapter
+        mAdapter = new ResumeExperListRVAdapter(_mActivity, mExperList, R.layout.item_resume_exper_list);
+        mRecyResumeExper.setLayoutManager(new LinearLayoutManager(_mActivity));
+        mRecyResumeExper.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(this);
+        //pick
+        mImageFileSelector = new ImageFileSelector(_mActivity);
+        mImageFileSelector.setOutPutImageSize(600, 600);
+        mImageFileSelector.setCallback(new ImageFileSelector.Callback() {
+            @Override
+            public void onError(@NotNull ErrorResult errorResult) {
+                Logger.e(errorResult.toString());
+                switch (errorResult) {
+                    case permissionDenied:
+                        break;
+                    case canceled:
+                        break;
+                    case error:
+                        break;
+                }
+            }
+
+            @Override
+            public void onSuccess(@NotNull String file) {
+                resume_img = file;
+                Logger.d("onSuccess: " + file);
+                ImageLoadManager.getInstance().load(file).into(mIvResumeDetailImg);
+            }
+        });
+    }
+
+    @Override
+    protected void initData() {
+        Bundle bundle = getArguments();
+        mMode = bundle.getInt(Constant.MODE_NAME);
+        super.initData();
+        //edit
+        if (mMode == Constant.MODE_VALUE.EDIT) {
+            mResume = (Resume) bundle.getSerializable(RESUME_DETAIL_KEY);
+            ImageLoadManager.getInstance().load(mResume.resume_img).into(mIvResumeDetailImg);
+            mEtResumeDetailName.setText(mResume.resume_name);
+            mEtResumeDetailGender.setText(mResume.resume_gender);
+            mEtResumeDetailIsStudy.setText(mResume.resume_is_study);
+            mEtResumeDetailAcademy.setText(mResume.resume_academy);
+            mEtResumeDetailMajor.setText(mResume.resume_major);
+            mEtResumeDetailGraduateAt.setText(mResume.resume_graduate_at);
+            mEtResumeDetailMobile.setText(mResume.resume_mobile);
+            mEtResumeDetailEmail.setText(mResume.resume_email);
+            mEtResumeDetailDesc.setText(mResume.resume_desc);
+            mAdapter.replaceAll(mResume.experList);
+        } else if (mMode == Constant.MODE_VALUE.ADD) {
+            mBtnResumeDetailAddExper.setVisibility(View.GONE);
+        }
+
+    }
+
+    @Override
+    protected int getMenuResId() {
+        return R.menu.menu_common_save;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_common_save) {
+            if (mMode == Constant.MODE_VALUE.ADD) {
+                toSaveResume();
+            } else if (mMode == Constant.MODE_VALUE.EDIT) {
+                toUpdateResume();
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    //保存简历
+    private void toSaveResume() {
+        if (!checkParam()) {
+            return;
+        }
+        DialogUtil.showLoading(_mActivity, "保存中...");
+        OkHttpUtils.post()
+                .url(Constant.URL + "resume/add")
+                .addFile("resume_img", String.valueOf(_User.user_id) + ".jpg", new File(resume_img))
+                .addParams("resume_name", resume_name)
+                .addParams("resume_gender", resume_gender)
+                .addParams("resume_is_study", resume_is_study)
+                .addParams("resume_major", resume_major)
+                .addParams("resume_academy", resume_academy)
+                .addParams("resume_graduate_at", resume_graduate_at)
+                .addParams("resume_mobile", resume_mobile)
+                .addParams("resume_email", resume_email)
+                .addParams("resume_desc", resume_desc)
+                .addParams("create_by", String.valueOf(_User.user_id))
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        DialogUtil.dismissLoading();
+                        ResumeResponse resp = (ResumeResponse) JsonUtil.fromJson(response, ResumeResponse.class);
+                        ToastUtils.toastL(_mActivity, resp.msg);
+                        if (resp.code == Constant.CODE.SUCCESS) {
+                            mBtnResumeDetailAddExper.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
+
+    }
+
+    private boolean checkParam() {
+        if (StringUtils.isEmpty(resume_img)) {
+            ToastUtils.toastL(_mActivity, "请选择头像");
+            return false;
+        }
+        resume_name = mEtResumeDetailName.getText().toString();
+        if (StringUtils.isEmpty(resume_name)) {
+            ToastUtils.toastL(_mActivity, "请填写姓名");
+            return false;
+        }
+        resume_gender = mEtResumeDetailGender.getText().toString();
+        if (StringUtils.isEmpty(resume_gender)) {
+            ToastUtils.toastL(_mActivity, "请填写性别");
+            return false;
+        }
+        resume_is_study = mEtResumeDetailIsStudy.getText().toString();
+        if (StringUtils.isEmpty(resume_is_study)) {
+            ToastUtils.toastL(_mActivity, "请填写学历");
+            return false;
+        }
+        resume_major = mEtResumeDetailMajor.getText().toString();
+        if (StringUtils.isEmpty(resume_major)) {
+            ToastUtils.toastL(_mActivity, "请填写专业");
+            return false;
+        }
+        resume_academy = mEtResumeDetailAcademy.getText().toString();
+        if (StringUtils.isEmpty(resume_academy)) {
+            ToastUtils.toastL(_mActivity, "请填写毕业院校");
+            return false;
+        }
+        resume_graduate_at = mEtResumeDetailGraduateAt.getText().toString();
+        if (StringUtils.isEmpty(resume_graduate_at)) {
+            ToastUtils.toastL(_mActivity, "请填写毕业时间");
+            return false;
+        }
+        resume_mobile = mEtResumeDetailMobile.getText().toString();
+        if (StringUtils.isEmpty(resume_mobile)) {
+            ToastUtils.toastL(_mActivity, "请填写联系电话");
+            return false;
+        }
+        resume_email = mEtResumeDetailEmail.getText().toString();
+        if (StringUtils.isEmpty(resume_gender)) {
+            ToastUtils.toastL(_mActivity, "请填写联系邮箱");
+            return false;
+        }
+        resume_desc = mEtResumeDetailDesc.getText().toString();
+        if (StringUtils.isEmpty(resume_gender)) {
+            ToastUtils.toastL(_mActivity, "请填写自我介绍");
+            return false;
+        }
+        return true;
+    }
+
+    private void toUpdateResume() {
+        if (!checkParam()) {
+            return;
+        }
+        DialogUtil.showLoading(_mActivity, "更新中...");
+        OkHttpUtils.post()
+                .url(Constant.URL + "resume/update")
+                .addParams("resume_id", String.valueOf(mResume.resume_id))
+                .addFile("resume_img", String.valueOf(_User.user_id)+".jpg", new File(resume_img))
+                .addParams("resume_name", resume_name)
+                .addParams("resume_gender", resume_gender)
+                .addParams("resume_is_study", resume_is_study)
+                .addParams("resume_major", resume_major)
+                .addParams("resume_academy", resume_academy)
+                .addParams("resume_graduate_at", resume_graduate_at)
+                .addParams("resume_mobile", resume_mobile)
+                .addParams("resume_email", resume_email)
+                .addParams("resume_desc", resume_desc)
+                .addParams("create_by", String.valueOf(_User.user_id))
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        DialogUtil.dismissLoading();
+                        ResumeResponse resp = (ResumeResponse) JsonUtil.fromJson(response, ResumeResponse.class);
+                        ToastUtils.toastL(_mActivity, resp.msg);
+                        if (resp.code == Constant.CODE.SUCCESS) {
+                            pop();
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void onItemClick(View itemView, int viewType, int position) {
+        new AlertDialog.Builder(_mActivity)
+                .setTitle("删除提示")
+                .setMessage("您确定删除" + mExperList.get(position).exper_name + "吗?")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        OkHttpUtils.post()
+                                .url(Constant.URL + "clazz/delete")
+                                .build()
+                                .execute(new StringCallback() {
+                                    @Override
+                                    public void onError(Call call, Exception e, int id) {
+
+                                    }
+
+                                    @Override
+                                    public void onResponse(String response, int id) {
+                                        ClazzResponse resp = (ClazzResponse) fromJson(response, ClazzResponse.class);
+                                        ToastUtils.toastL(_mActivity, resp.msg);
+                                        if (resp.code == Constant.CODE.SUCCESS) {
+                                            Logger.json(response);
+                                        }
+                                    }
+                                });
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("取消", null)
+                .show();
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mImageFileSelector.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mImageFileSelector.onSaveInstanceState(outState);
+    }
+
+//    @Override
+//    public void onRestoreInstanceState(Bundle savedInstanceState) {
+//        super.onRestoreInstanceState(savedInstanceState);
+//        mImageFileSelector.onRestoreInstanceState(savedInstanceState);
+//    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        mImageFileSelector.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+
+    @OnClick({R.id.tv_resume_detail_img, R.id.btn_resume_detail_add_exper})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_resume_detail_img:
+                // 从文件选取
+                mImageFileSelector.selectImage(this, REQ_CODE);
+                break;
+            case R.id.btn_resume_detail_add_exper:
+                break;
+        }
+    }
+}

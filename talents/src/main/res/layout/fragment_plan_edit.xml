@@ -90,9 +90,18 @@
         android:id="@+id/btn_plan_edit_add_clazz"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_margin="5dp"
         android:background="@color/color_primary"
         android:text="添加课程"
+        android:textColor="@color/color_text_white"/>
+    <Button
+        android:id="@+id/btn_plan_edit_learn_plan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/color_primary"
+        android:text="学习计划"
+        android:visibility="gone"
         android:textColor="@color/color_text_white"/>
 
 

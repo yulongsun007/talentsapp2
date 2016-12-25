@@ -31,7 +31,7 @@ public class JobTempLibListFragment extends CommonListFragment {
 
     @Override
     protected SuperAdapter getAdapter() {
-        return new JobTempLibListRVAdapter(_mActivity, (List<JobTemplate>) _mDatas, R.layout.item_job_temp_lib);
+        return new JobTempLibListRVAdapter(_mActivity, (List<JobTemplate>) _mDatas, R.layout.item_job_temp_lib_list);
     }
 
     @Override

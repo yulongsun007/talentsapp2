@@ -44,6 +44,8 @@ public class JobTemplate extends BaseModel implements Serializable {
     @Column
     public Integer create_by;                   //创建者
 
+
+
     /////////////////////////////////////////////////////////
     @Column
     public Integer _id;                         //发布ID

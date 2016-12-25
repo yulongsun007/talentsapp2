@@ -15,7 +15,7 @@ public class Plan implements Serializable {
     public String      plan_img;
     public String      plan_hour;
     public String      plan_score;
-    public String      job_template_id;
+    public Integer     job_template_id;
     public Integer     create_by;
     public String      create_at;
     public String      update_at;

@@ -1,5 +1,6 @@
 package win.yulongsun.framework.adapter;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.ColorFilter;
@@ -19,6 +20,9 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import win.yulongsun.framework.image.ImageLoadManager;
 import win.yulongsun.framework.widget.ImageView.CharacterView;
 
 /**
@@ -96,6 +100,39 @@ public class SuperViewHolder extends RecyclerView.ViewHolder implements ChainSet
     public SuperViewHolder setMovementMethod(int viewId, MovementMethod method) {
         TextView textView = findViewById(viewId);
         textView.setMovementMethod(method);
+        return this;
+    }
+
+    @Override
+    public SuperViewHolder setImageResource(Context context, int viewId, int imgResId) {
+        ImageView view = findViewById(viewId);
+//        view.setImageResource(imgResId);
+        ImageLoadManager.getInstance().with(context).load(imgResId).into(view);
+        return this;
+    }
+
+    @Override
+    public SuperViewHolder setImageDrawable(Context context, int viewId, Drawable drawable) {
+        ImageView view = findViewById(viewId);
+//        view.setImageDrawable(drawable);
+        Glide.with(context).load(drawable).into(view);
+        return this;
+    }
+
+    @Override
+    public SuperViewHolder setImageBitmap(Context context, int viewId, Bitmap bitmap) {
+        ImageView view = findViewById(viewId);
+//        view.setImageBitmap(bitmap);
+        Glide.with(context).load(bitmap).into(view);
+        return this;
+    }
+
+    @Override
+    public SuperViewHolder setImageUri(Context context, int viewId, Uri imageUri) {
+        ImageView view = findViewById(viewId);
+//        view.setImageURI(imageUri);
+        if (imageUri != null)
+            ImageLoadManager.getInstance().with(context).load(imageUri).into(view);
         return this;
     }
 

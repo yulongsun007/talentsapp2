@@ -4,117 +4,131 @@
               style="@style/LinearLayout.CommonBackGround"
               android:orientation="horizontal">
 
-    <win.yulongsun.framework.widget.ImageView.CharacterView
-        android:id="@+id/cv_plan_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cv_background_color="@color/color_primary_dark"
-        app:cv_title_text="Android"/>
 
-    <LinearLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tv_plan_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Androi工程师培养计划"
-                android:textColor="@color/color_text_black"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:id="@+id/tv_plan_update_at"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="刚刚"
-                android:textColor="@color/color_text_grey"
-                android:textSize="10sp"/>
-        </RelativeLayout>
-
-
-        <TextView
-            android:id="@+id/tv_plan_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="android带你进入移动世界"
-            android:textSize="12sp"/>
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:orientation="horizontal"
+            android:padding="14dp">
+
+
+            <win.yulongsun.framework.widget.ImageView.CharacterView
+                android:id="@+id/cv_plan_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cv_background_color="@color/color_primary_dark"
+                app:cv_title_text="Android"/>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_plan_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Androi工程师培养计划"
+                        android:textColor="@color/color_text_black"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_plan_update_at"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="刚刚"
+                        android:textColor="@color/color_text_grey"
+                        android:textSize="10sp"/>
+                </RelativeLayout>
+
 
                 <TextView
+                    android:id="@+id/tv_plan_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="课  时:"
-                    android:textColor="@color/color_text_orange"
+                    android:layout_marginTop="10dp"
+                    android:text="android带你进入移动世界"
                     android:textSize="12sp"/>
 
-                <TextView
-                    android:id="@+id/tv_plan_hour"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="60小时"
-                    android:textColor="@color/color_text_black"
+                    android:layout_marginTop="10dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="课  时:"
+                            android:textColor="@color/color_text_orange"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_plan_hour"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="60小时"
+                            android:textColor="@color/color_text_black"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="学  分:"
+                            android:textColor="@color/color_text_orange"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_plan_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="20分"
+                            android:textColor="@color/color_text_black"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <View
+                    style="@style/CommonDividerView"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"/>
+
+
+                <TextView
+                    android:id="@+id/tv_plan_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1.Java经典指南\n2.XML基础\n3.Android动画\n4.Android Studio使用"
                     android:textSize="12sp"/>
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="学  分:"
-                    android:textColor="@color/color_text_orange"
-                    android:textSize="12sp"/>
-
-                <TextView
-                    android:id="@+id/tv_plan_score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="20分"
-                    android:textColor="@color/color_text_black"
-                    android:textSize="12sp"/>
-            </LinearLayout>
-
-
         </LinearLayout>
 
-        <View
-            style="@style/CommonDividerView"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="10dp"/>
-
-
-        <TextView
-            android:id="@+id/tv_plan_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="1.Java经典指南\n2.XML基础\n3.Android动画\n4.Android Studio使用"
-            android:textSize="12sp"/>
-    </LinearLayout>
-
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

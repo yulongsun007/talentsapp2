@@ -23,7 +23,7 @@ public class JobTempSearchFragment extends CommonSearchFragment {
 
     @Override
     protected SuperAdapter getAdapter() {
-        return new JobTempLibListRVAdapter(_mActivity, _mDatas, R.layout.item_job_temp_lib);
+        return new JobTempLibListRVAdapter(_mActivity, _mDatas, R.layout.item_job_temp_lib_list);
     }
 
     @Override

@@ -17,6 +17,9 @@ import win.yulongsun.talents.base.BaseRootFragment;
 import win.yulongsun.talents.entity.ItemIndex;
 import win.yulongsun.talents.event.StartBrotherEvent;
 import win.yulongsun.talents.ui.referrer.plan.PlanListFragment;
+import win.yulongsun.talents.ui.stu.feedback.FeedbackListFragment;
+import win.yulongsun.talents.ui.stu.job.StuJobTempListFragment;
+import win.yulongsun.talents.ui.stu.resume.ResumeListFragment;
 
 /**
  * @author sunyulong on 2016/12/15.
@@ -62,7 +65,7 @@ public class StuIndexFragment extends BaseRootFragment {
 //        _mDatas.add(new ItemIndex(R.mipmap.ic_index_career_talk, "宣讲会邀约"));
 //        _mDatas.add(new ItemIndex(R.mipmap.ic_index_talent_pool, "人才库邀约"));
 //        _mDatas.add(new ItemIndex(R.mipmap.ic_index_faq, "校招邀约"));
-        mDatas.add(new ItemIndex(R.mipmap.ic_index_other, "其他"));
+        mDatas.add(new ItemIndex(R.mipmap.ic_index_other, "我的简历"));
 
         StuIndexRVAdapter mAdapter = new StuIndexRVAdapter(_mActivity, mDatas, R.layout.item_stu_index);
         mRecyStuIndex.setAdapter(mAdapter);
@@ -73,6 +76,7 @@ public class StuIndexFragment extends BaseRootFragment {
             public void onItemClick(View itemView, int viewType, int position) {
                 switch (position) {
                     case 0:
+                        EventBus.getDefault().post(new StartBrotherEvent(StuJobTempListFragment.newInstance()));
                         break;
                     case 1:
                         EventBus.getDefault().post(new StartBrotherEvent(PlanListFragment.newInstance()));
@@ -80,6 +84,10 @@ public class StuIndexFragment extends BaseRootFragment {
                     case 2:
                         break;
                     case 3:
+                        EventBus.getDefault().post(new StartBrotherEvent(FeedbackListFragment.newInstance()));
+                        break;
+                    case 4:
+                        EventBus.getDefault().post(new StartBrotherEvent(ResumeListFragment.newInstance()));
                         break;
                 }
             }

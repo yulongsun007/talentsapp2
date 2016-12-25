@@ -1,5 +1,6 @@
 package win.yulongsun.framework.adapter;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.ColorFilter;
@@ -26,6 +27,14 @@ interface ChainSetter<VH> {
     VH setTextColor(int viewId, ColorStateList colorStateList);
 
     VH setMovementMethod(int viewId, MovementMethod method);
+
+    VH setImageResource(Context context, int viewId, int imgResId);
+
+    VH setImageDrawable(Context context, int viewId, Drawable drawable);
+
+    VH setImageBitmap(Context context, int viewId, Bitmap bitmap);
+
+    VH setImageUri(Context context, int viewId, Uri imageUri);
 
     VH setImageResource(int viewId, int imgResId);
 
