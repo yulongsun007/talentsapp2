@@ -16,7 +16,6 @@ import win.yulongsun.talents.adapter.StuIndexRVAdapter;
 import win.yulongsun.talents.base.BaseRootFragment;
 import win.yulongsun.talents.entity.ItemIndex;
 import win.yulongsun.talents.event.StartBrotherEvent;
-import win.yulongsun.talents.ui.referrer.plan.PlanListFragment;
 import win.yulongsun.talents.ui.stu.feedback.FeedbackListFragment;
 import win.yulongsun.talents.ui.stu.job.StuJobTempListFragment;
 import win.yulongsun.talents.ui.stu.plan.MyPlanListFragment;
@@ -79,16 +78,16 @@ public class StuIndexFragment extends BaseRootFragment {
                     case 0:
                         EventBus.getDefault().post(new StartBrotherEvent(StuJobTempListFragment.newInstance()));
                         break;
+//                    case 1:
+//                        EventBus.getDefault().post(new StartBrotherEvent(PlanListFragment.newInstance()));
+//                        break;
                     case 1:
-                        EventBus.getDefault().post(new StartBrotherEvent(PlanListFragment.newInstance()));
-                        break;
-                    case 2:
                         EventBus.getDefault().post(new StartBrotherEvent(MyPlanListFragment.newInstance()));
                         break;
-                    case 3:
+                    case 2:
                         EventBus.getDefault().post(new StartBrotherEvent(FeedbackListFragment.newInstance()));
                         break;
-                    case 4:
+                    case 3:
                         EventBus.getDefault().post(new StartBrotherEvent(ResumeListFragment.newInstance()));
                         break;
                 }
