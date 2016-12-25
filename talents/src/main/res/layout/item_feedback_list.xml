@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/iv_feedback_company_logo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/logo"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_feedback_resume_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="简历# 1001"
+                    android:textColor="@color/color_text_orange"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/tv_feedback_job_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Android工程师"
+                    android:textColor="@color/color_text_black"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/tv_feedback_company_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="上海卓骥信息科技有限公司"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_feedback_update_at"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="2015-1-1"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_feedback_apply_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|bottom"
+                    android:layout_marginTop="4dp"
+                    android:text="推荐人处理中"
+                    android:textColor="@color/color_primary"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_feedback_apply_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|bottom"
+                    android:text="理由：学分不够"
+                    android:textColor="@color/color_primary"
+                    android:textSize="12sp"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
