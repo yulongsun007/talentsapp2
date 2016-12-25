@@ -18,8 +18,8 @@
 
             <win.yulongsun.framework.widget.ImageView.CharacterView
                 android:id="@+id/cv_plan_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 app:cv_background_color="@color/color_primary_dark"
                 app:cv_title_text="Android"/>
 
@@ -111,13 +111,14 @@
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/ll_plan_already"
-                    android:visibility="gone"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="0dp"

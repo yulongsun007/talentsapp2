@@ -101,6 +101,7 @@ public class ResumeEditFragment extends BaseSwipeBackFragment implements OnItemC
     private String                   resume_academy;
     private String                   resume_graduate_at;
     private String                   resume_mobile;
+    private Bundle                   mBundle;
 
 
     public static ResumeEditFragment newInstance(int mode, Resume resume) {
@@ -131,6 +132,8 @@ public class ResumeEditFragment extends BaseSwipeBackFragment implements OnItemC
 
     @Override
     protected void initView() {
+        mBundle = getArguments();
+        mMode = mBundle.getInt(Constant.MODE_NAME);
         super.initView();
         //adapter
         mAdapter = new ResumeExperListRVAdapter(_mActivity, mExperList, R.layout.item_resume_exper_list);
@@ -166,12 +169,10 @@ public class ResumeEditFragment extends BaseSwipeBackFragment implements OnItemC
 
     @Override
     protected void initData() {
-        Bundle bundle = getArguments();
-        mMode = bundle.getInt(Constant.MODE_NAME);
         super.initData();
         //edit
         if (mMode == Constant.MODE_VALUE.EDIT) {
-            mResume = (Resume) bundle.getSerializable(RESUME_DETAIL_KEY);
+            mResume = (Resume) mBundle.getSerializable(RESUME_DETAIL_KEY);
             ImageLoadManager.getInstance().load(mResume.resume_img).into(mIvResumeDetailImg);
             mEtResumeDetailName.setText(mResume.resume_name);
             mEtResumeDetailGender.setText(mResume.resume_gender);
@@ -303,12 +304,12 @@ public class ResumeEditFragment extends BaseSwipeBackFragment implements OnItemC
             return;
         }
         DialogUtil.showLoading(_mActivity, "更新中...");
-        PostFormBuilder builder = OkHttpUtils.post().url(Constant.URL + "resume/update");
+        PostFormBuilder builder = OkHttpUtils.post();
         if (StringUtils.isNotEmpty(resume_img)) {
+            builder.url(Constant.URL + "resume/updateImg");
             builder.addFile("resume_img", String.valueOf(_User.user_id) + ".jpg", new File(resume_img));
-            builder.addParams("has_img", "1");
         } else {
-            builder.addParams("has_img", "0");
+            builder.url(Constant.URL + "resume/update");
         }
         builder.addParams("resume_id", String.valueOf(mResume.resume_id))
                 .addParams("resume_name", resume_name)
