@@ -21,7 +21,8 @@ public class ResumeExperListRVAdapter extends SuperAdapter<Exper> {
     public void onBind(SuperViewHolder holder, int viewType, int layoutPosition, Exper item) {
         holder.setText(R.id.tv_item_resume_exper_time, "#" + (layoutPosition + 1) + "." + item.exper_time);
         holder.setText(R.id.tv_item_resume_exper_name, "【项目名称】" + item.exper_name);
-        holder.setText(R.id.tv_item_resume_exper_job, "【项目职责】" + item.exper_job);
-        holder.setText(R.id.tv_item_resume_exper_desc, "简述：" + item.exper_job_desc);
+        holder.setText(R.id.tv_item_resume_exper_job, "【项目岗位】" + item.exper_job);
+        holder.setText(R.id.tv_item_resume_exper_desc, "项目简述：" + item.exper_desc);
+        holder.setText(R.id.tv_item_resume_exper_job_desc, "职责简述：" + item.exper_job_desc);
     }
 }

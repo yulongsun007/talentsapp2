@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +20,10 @@ import com.raizlabs.android.dbflow.annotation.NotNull;
 import com.sw926.imagefileselector.ErrorResult;
 import com.sw926.imagefileselector.ImageFileSelector;
 import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.builder.PostFormBuilder;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,7 +44,8 @@ import win.yulongsun.talents.base.BaseSwipeBackFragment;
 import win.yulongsun.talents.common.Constant;
 import win.yulongsun.talents.entity.Exper;
 import win.yulongsun.talents.entity.Resume;
-import win.yulongsun.talents.http.resp.biz.ClazzResponse;
+import win.yulongsun.talents.event.ActionEvent;
+import win.yulongsun.talents.http.resp.biz.ExperResponse;
 import win.yulongsun.talents.http.resp.biz.ResumeResponse;
 
 import static win.yulongsun.framework.util.JsonUtil.fromJson;
@@ -145,6 +150,7 @@ public class ResumeEditFragment extends BaseSwipeBackFragment implements OnItemC
                     case canceled:
                         break;
                     case error:
+                        ToastUtils.toastL(_mActivity, "获取图片失败");
                         break;
                 }
             }
@@ -205,6 +211,10 @@ public class ResumeEditFragment extends BaseSwipeBackFragment implements OnItemC
         if (!checkParam()) {
             return;
         }
+        if (StringUtils.isEmpty(resume_img)) {
+            ToastUtils.toastL(_mActivity, "请选择头像");
+            return;
+        }
         DialogUtil.showLoading(_mActivity, "保存中...");
         OkHttpUtils.post()
                 .url(Constant.URL + "resume/add")
@@ -240,10 +250,6 @@ public class ResumeEditFragment extends BaseSwipeBackFragment implements OnItemC
     }
 
     private boolean checkParam() {
-        if (StringUtils.isEmpty(resume_img)) {
-            ToastUtils.toastL(_mActivity, "请选择头像");
-            return false;
-        }
         resume_name = mEtResumeDetailName.getText().toString();
         if (StringUtils.isEmpty(resume_name)) {
             ToastUtils.toastL(_mActivity, "请填写姓名");
@@ -297,10 +303,14 @@ public class ResumeEditFragment extends BaseSwipeBackFragment implements OnItemC
             return;
         }
         DialogUtil.showLoading(_mActivity, "更新中...");
-        OkHttpUtils.post()
-                .url(Constant.URL + "resume/update")
-                .addParams("resume_id", String.valueOf(mResume.resume_id))
-                .addFile("resume_img", String.valueOf(_User.user_id)+".jpg", new File(resume_img))
+        PostFormBuilder builder = OkHttpUtils.post().url(Constant.URL + "resume/update");
+        if (StringUtils.isNotEmpty(resume_img)) {
+            builder.addFile("resume_img", String.valueOf(_User.user_id) + ".jpg", new File(resume_img));
+            builder.addParams("has_img", "1");
+        } else {
+            builder.addParams("has_img", "0");
+        }
+        builder.addParams("resume_id", String.valueOf(mResume.resume_id))
                 .addParams("resume_name", resume_name)
                 .addParams("resume_gender", resume_gender)
                 .addParams("resume_is_study", resume_is_study)
@@ -324,6 +334,7 @@ public class ResumeEditFragment extends BaseSwipeBackFragment implements OnItemC
                         ResumeResponse resp = (ResumeResponse) JsonUtil.fromJson(response, ResumeResponse.class);
                         ToastUtils.toastL(_mActivity, resp.msg);
                         if (resp.code == Constant.CODE.SUCCESS) {
+                            EventBus.getDefault().post(new ActionEvent(ActionEvent.UPDATE));
                             pop();
                         }
                     }
@@ -332,14 +343,19 @@ public class ResumeEditFragment extends BaseSwipeBackFragment implements OnItemC
 
     @Override
     public void onItemClick(View itemView, int viewType, int position) {
+        final Exper exper = mExperList.get(position);
+        DialogUtil.showLoading(_mActivity, "删除中...");
         new AlertDialog.Builder(_mActivity)
                 .setTitle("删除提示")
-                .setMessage("您确定删除" + mExperList.get(position).exper_name + "吗?")
+                .setMessage("您确定删除" + exper.exper_name + "吗?")
+                .setCancelable(false)
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         OkHttpUtils.post()
-                                .url(Constant.URL + "clazz/delete")
+                                .url(Constant.URL + "resume_exper/delete")
+                                .addParams("exper_id", String.valueOf(exper.exper_id))
+                                .addParams("resume_id", String.valueOf(exper.resume_id))
                                 .build()
                                 .execute(new StringCallback() {
                                     @Override
@@ -349,17 +365,26 @@ public class ResumeEditFragment extends BaseSwipeBackFragment implements OnItemC
 
                                     @Override
                                     public void onResponse(String response, int id) {
-                                        ClazzResponse resp = (ClazzResponse) fromJson(response, ClazzResponse.class);
+                                        DialogUtil.dismissLoading();
+                                        ExperResponse resp = (ExperResponse) fromJson(response, ExperResponse.class);
                                         ToastUtils.toastL(_mActivity, resp.msg);
                                         if (resp.code == Constant.CODE.SUCCESS) {
                                             Logger.json(response);
+                                            mExperList = resp.data;
+                                            mAdapter.replaceAll(mExperList);
                                         }
                                     }
                                 });
                         dialog.dismiss();
                     }
                 })
-                .setNegativeButton("取消", null)
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DialogUtil.dismissLoading();
+                        dialog.dismiss();
+                    }
+                })
                 .show();
     }
 
@@ -397,7 +422,89 @@ public class ResumeEditFragment extends BaseSwipeBackFragment implements OnItemC
                 mImageFileSelector.selectImage(this, REQ_CODE);
                 break;
             case R.id.btn_resume_detail_add_exper:
+                View dialogView = LayoutInflater.from(_mActivity).inflate(R.layout.dialog_resume_exper_add, null);
+
+                final EditText exper_time = (EditText) dialogView.findViewById(R.id.et_dialog_exper_time);
+                final EditText exper_name = (EditText) dialogView.findViewById(R.id.et_dialog_exper_name);
+                final EditText exper_job = (EditText) dialogView.findViewById(R.id.et_dialog_exper_job);
+                final EditText exper_job_desc = (EditText) dialogView.findViewById(R.id.et_dialog_exper_job_desc);
+                final EditText exper_desc = (EditText) dialogView.findViewById(R.id.et_dialog_exper_desc);
+
+                new AlertDialog.Builder(_mActivity)
+                        .setCancelable(false)
+                        .setTitle("添加项目经验")
+                        .setView(dialogView)
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(final DialogInterface dialog, int which) {
+                                String experTime = exper_time.getText().toString();
+                                if (StringUtils.isEmpty(experTime)) {
+                                    ToastUtils.toastL(_mActivity, "请填写项目时间");
+                                    return;
+                                }
+                                String experName = exper_name.getText().toString();
+                                if (StringUtils.isEmpty(experName)) {
+                                    ToastUtils.toastL(_mActivity, "请填写项目名称");
+                                    return;
+                                }
+                                String experJob = exper_job.getText().toString();
+                                if (StringUtils.isEmpty(experJob)) {
+                                    ToastUtils.toastL(_mActivity, "请填写项目岗位");
+                                    return;
+                                }
+                                String experJobDesc = exper_job_desc.getText().toString();
+                                if (StringUtils.isEmpty(experJobDesc)) {
+                                    ToastUtils.toastL(_mActivity, "请填写职责简述");
+                                    return;
+                                }
+                                String experDesc = exper_desc.getText().toString();
+                                if (StringUtils.isEmpty(experDesc)) {
+                                    ToastUtils.toastL(_mActivity, "请填写项目简述");
+                                    return;
+                                }
+                                DialogUtil.showLoading(_mActivity, "添加中...");
+                                OkHttpUtils.post()
+                                        .url(Constant.URL + "resume_exper/add")
+                                        .addParams("exper_time", experTime)
+                                        .addParams("exper_name", experName)
+                                        .addParams("exper_job", experJob)
+                                        .addParams("exper_job_desc", experJobDesc)
+                                        .addParams("exper_desc", experDesc)
+                                        .addParams("resume_id", String.valueOf(mResume.resume_id))
+                                        .build()
+                                        .execute(new StringCallback() {
+                                            @Override
+                                            public void onError(Call call, Exception e, int id) {
+
+                                            }
+
+                                            @Override
+                                            public void onResponse(String response, int id) {
+                                                DialogUtil.dismissLoading();
+                                                ExperResponse resp = (ExperResponse) JsonUtil.fromJson(response, ExperResponse.class);
+                                                ToastUtils.toastL(_mActivity, resp.msg);
+                                                if (resp.code == Constant.CODE.SUCCESS) {
+                                                    mExperList = resp.data;
+                                                    mAdapter.replaceAll(mExperList);
+                                                    dialog.dismiss();
+                                                }
+                                            }
+                                        });
+
+
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                DialogUtil.dismissLoading();
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
                 break;
         }
     }
+
+
 }

@@ -30,6 +30,7 @@ import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportFragment;
 import okhttp3.Call;
 import win.yulongsun.framework.adapter.OnItemClickListener;
+import win.yulongsun.framework.adapter.OnItemLongClickListener;
 import win.yulongsun.framework.adapter.SuperAdapter;
 import win.yulongsun.framework.util.JsonUtil;
 import win.yulongsun.talents.R;
@@ -41,7 +42,7 @@ import win.yulongsun.talents.http.resp.ResponseList;
  * @author sunyulong on 2016/12/3.
  *         通用的带RecyclerView的布局
  */
-public abstract class CommonListFragment extends SupportFragment implements SwipeRefreshLayout.OnRefreshListener, OnItemClickListener {
+public abstract class CommonListFragment extends SupportFragment implements SwipeRefreshLayout.OnRefreshListener, OnItemClickListener, OnItemLongClickListener {
     protected User _mUser;
     protected List _mDatas = new ArrayList<>();
     protected SuperAdapter       _mAdapter;
@@ -112,6 +113,7 @@ public abstract class CommonListFragment extends SupportFragment implements Swip
             _mRecyCommonList.setLayoutManager(new LinearLayoutManager(_mActivity));
             _mRecyCommonList.setAdapter(_mAdapter);
             _mAdapter.setOnItemClickListener(this);
+            _mAdapter.setOnItemLongClickListener(this);
         }
 
     }
@@ -195,6 +197,11 @@ public abstract class CommonListFragment extends SupportFragment implements Swip
 
     @Override
     public void onItemClick(View itemView, int viewType, int position) {
+
+    }
+
+    @Override
+    public void onItemLongClick(View itemView, int viewType, int position) {
 
     }
 }

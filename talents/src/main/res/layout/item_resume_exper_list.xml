@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="wrap_content"
               android:background="@color/color_bg_white"
               android:orientation="vertical"
               android:padding="14dp"
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="【项目职责】Android开发"
+        android:text="【项目岗位】Android开发"
         android:textColor="@color/color_text_black"
         android:textSize="14sp"/>
 
@@ -40,7 +40,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="简述：利用反向，，，，，"
+        android:text="项目简述：利用反向，，，，，"
+        android:textSize="12sp"/>
+    <TextView
+        android:id="@+id/tv_item_resume_exper_job_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="职责简述：利用反向，，，，，"
         android:textSize="12sp"/>
 
 </LinearLayout>

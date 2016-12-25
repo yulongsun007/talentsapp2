@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author sunyulong on 2016/12/25.
  */
 public class Exper implements Serializable{
-    public Integer _id;
+    public Integer exper_id;
     public Integer resume_id;
     public String  exper_name;
     public String  exper_desc;
