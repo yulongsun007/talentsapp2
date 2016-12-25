@@ -22,6 +22,7 @@ public class Plan implements Serializable {
     public List<Clazz> clazz;
 
     ///////////////
+    public Integer _id;
     public Integer plan_already_hour;
     public Integer plan_already_score;
 

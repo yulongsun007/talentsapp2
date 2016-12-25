@@ -28,6 +28,6 @@ public class ResumeListRVAdapter extends SuperAdapter<Resume> {
         holder.setText(R.id.tv_item_resume_is_study, item.resume_is_study);
         holder.setText(R.id.tv_item_resume_academy, item.resume_academy);
         holder.setText(R.id.tv_item_resume_update_at, item.update_at);
-        holder.setText(R.id.tv_item_resume_id, "#" + (layoutPosition + 1));
+        holder.setText(R.id.tv_item_resume_id, "#" + item.resume_id);
     }
 }
