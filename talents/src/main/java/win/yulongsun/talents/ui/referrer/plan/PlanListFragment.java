@@ -84,7 +84,7 @@ public class PlanListFragment extends CommonListFragment {
         if (user_role_id == Constant.ROLE.REFERRER) {
             EventBus.getDefault().post(new StartBrotherEvent(PlanEditFragment.newInstance(Constant.MODE_VALUE.EDIT, (Plan) _mDatas.get(position), null)));
         }else if (user_role_id == Constant.ROLE.STU) {
-            EventBus.getDefault().post(new StartBrotherEvent(PlanEditFragment.newInstance(Constant.MODE_VALUE.QUERY, (Plan) _mDatas.get(position), null)));
+            EventBus.getDefault().post(new StartBrotherEvent(PlanEditFragment.newInstance(Constant.MODE_VALUE.SELECT, (Plan) _mDatas.get(position), null)));
         }
     }
 }

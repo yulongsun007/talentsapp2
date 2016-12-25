@@ -21,4 +21,8 @@ public class Plan implements Serializable {
     public String      update_at;
     public List<Clazz> clazz;
 
+    ///////////////
+    public Integer plan_already_hour;
+    public Integer plan_already_score;
+
 }

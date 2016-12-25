@@ -19,6 +19,7 @@ import win.yulongsun.talents.event.StartBrotherEvent;
 import win.yulongsun.talents.ui.referrer.plan.PlanListFragment;
 import win.yulongsun.talents.ui.stu.feedback.FeedbackListFragment;
 import win.yulongsun.talents.ui.stu.job.StuJobTempListFragment;
+import win.yulongsun.talents.ui.stu.plan.MyPlanListFragment;
 import win.yulongsun.talents.ui.stu.resume.ResumeListFragment;
 
 /**
@@ -58,7 +59,7 @@ public class StuIndexFragment extends BaseRootFragment {
 
         ArrayList<ItemIndex> mDatas = new ArrayList<>();
         mDatas.add(new ItemIndex(R.mipmap.ic_index_class, "招聘信息"));
-        mDatas.add(new ItemIndex(R.mipmap.ic_index_plan, "培养计划"));
+//        mDatas.add(new ItemIndex(R.mipmap.ic_index_plan, "培养计划"));
         mDatas.add(new ItemIndex(R.mipmap.ic_index_internship, "我的计划"));
         mDatas.add(new ItemIndex(R.mipmap.ic_index_feedback, "投递反馈"));
 //        _mDatas.add(new ItemIndex(R.mipmap.ic_index_hr, "HR邀约"));
@@ -82,6 +83,7 @@ public class StuIndexFragment extends BaseRootFragment {
                         EventBus.getDefault().post(new StartBrotherEvent(PlanListFragment.newInstance()));
                         break;
                     case 2:
+                        EventBus.getDefault().post(new StartBrotherEvent(MyPlanListFragment.newInstance()));
                         break;
                     case 3:
                         EventBus.getDefault().post(new StartBrotherEvent(FeedbackListFragment.newInstance()));

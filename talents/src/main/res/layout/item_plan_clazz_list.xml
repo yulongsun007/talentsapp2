@@ -6,13 +6,32 @@
               android:orientation="vertical"
               android:padding="14dp">
 
-    <TextView
-        android:id="@+id/tv_item_clazz_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1.Android应用程序开发[10]"
-        android:textColor="@color/color_text_black"
-        android:textSize="14sp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_item_clazz_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="1.Android应用程序开发[10]"
+            android:textColor="@color/color_text_black"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_item_clazz_grade_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="right"
+            android:text="状态：已完成\n成绩：60分"
+            android:textColor="@color/color_primary"
+            android:textSize="10sp"/>
+    </RelativeLayout>
+
 
     <TextView
         android:id="@+id/tv_item_clazz_score_hour"

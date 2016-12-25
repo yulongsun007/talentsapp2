@@ -33,9 +33,10 @@ public interface Constant {
 
     //模式
     interface MODE_VALUE {
-        int EDIT  = 0;//编辑
-        int ADD   = 1;//添加
-        int QUERY = 2;//查看
+        int EDIT   = 0;//编辑
+        int ADD    = 1;//添加
+        int SELECT = 2;//选择学习计划
+        int LEARN  = 3;//学习此计划
     }
 
     //http返回状态码

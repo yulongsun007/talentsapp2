@@ -111,6 +111,60 @@
 
 
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_plan_already"
+                    android:visibility="gone"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="已修课时:"
+                            android:textColor="@color/color_text_orange"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_plan_hour_already"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="60小时"
+                            android:textColor="@color/color_text_black"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="已修学分:"
+                            android:textColor="@color/color_text_orange"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_plan_score_already"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="20分"
+                            android:textColor="@color/color_text_black"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
 
                 <View
                     style="@style/CommonDividerView"

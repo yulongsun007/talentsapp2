@@ -15,4 +15,8 @@ public class Clazz {
     public String  update_at;
     public String  create_at;
 
+    public Integer _id;
+    public Integer clazz_grade;
+    public String  clazz_status;
+
 }
