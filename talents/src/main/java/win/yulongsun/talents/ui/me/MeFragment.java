@@ -1,5 +1,7 @@
 package win.yulongsun.talents.ui.me;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -8,17 +10,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.zxing.WriterException;
+import com.igexin.sdk.PushManager;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.OnClick;
+import win.yulongsun.framework.util.android.app.DialogUtil;
 import win.yulongsun.framework.util.android.app.QrCodeUtils;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.base.BaseRootFragment;
+import win.yulongsun.talents.entity.Msg;
 import win.yulongsun.talents.entity.User;
 import win.yulongsun.talents.event.StartBrotherEvent;
+import win.yulongsun.talents.ui.login.LoginActivity;
 
 /**
  * Create By: yulongsun
@@ -42,13 +50,15 @@ public class MeFragment extends BaseRootFragment {
     TextView mTvMeCompanyAddr;
 
     Integer userCompanyId;
+    @Bind(R.id.tv_me_user_score)
+    TextView mTvMeUserScore;
 
     public static MeFragment newInstance() {
         return new MeFragment();
     }
 
 
-    @OnClick({R.id.ll_me_card, R.id.ll_me_info, R.id.ll_me_wallet, R.id.ll_me_setting})
+    @OnClick({R.id.ll_me_card, R.id.ll_me_info, R.id.ll_me_wallet, R.id.ll_me_setting, R.id.ll_me_logout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_me_card:
@@ -71,6 +81,25 @@ public class MeFragment extends BaseRootFragment {
                 break;
             case R.id.ll_me_setting:
                 EventBus.getDefault().post(new StartBrotherEvent(SettingFragment.newInstance()));
+                break;
+            case R.id.ll_me_logout:
+                DialogUtil.showAlert(_mActivity, "注销", "您确定注销当前账户吗", "确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        User user = new Select().from(User.class).querySingle();
+                        if (user != null) {
+                            PushManager.getInstance().unBindAlias(_mActivity, String.valueOf(user.user_id), false);
+                            user.delete();
+                            List<Msg> msgList = new Select().from(Msg.class).queryList();
+                            for (Msg msg : msgList) {
+                                msg.delete();
+                            }
+                        }
+                        Intent intent = new Intent(_mActivity, LoginActivity.class);
+                        startActivity(intent);
+                        _mActivity.finish();
+                    }
+                }, "取消", null);
                 break;
         }
     }
@@ -98,12 +127,12 @@ public class MeFragment extends BaseRootFragment {
                 .querySingle();
         if (null != user) {
             userCompanyId = user.user_company_id;
-
             mTvMeUserName.setText(user.user_name);
             mTvMeCompanyName.setText(user.company_name);
             mTvMeUserMobile.setText(user.user_mobile);
             mTvMeCompanyAddr.setText(user.company_addr);
-            mTvMeCompanyId.setText("公司编号：" + userCompanyId);
+            mTvMeCompanyId.setText("公司编号#" + userCompanyId);
+            mTvMeUserScore.setText(user.user_score + "分");
         }
 
     }

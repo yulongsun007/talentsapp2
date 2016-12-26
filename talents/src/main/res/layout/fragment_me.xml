@@ -138,7 +138,8 @@
 
             <LinearLayout
                 android:id="@+id/ll_me_card"
-                style="@style/MineItemLinearLayout">
+                style="@style/MineItemLinearLayout"
+                android:visibility="gone">
 
                 <ImageView
                     style="@style/MineLeftIconImageView"
@@ -166,14 +167,19 @@
                     android:layout_marginLeft="10dp"
                     android:text="积分"/>
 
+                <TextView
+                    android:id="@+id/tv_me_user_score"
+                    style="@style/CommonRightArrowImageView"
+                    />
+
                 <ImageView
                     style="@style/CommonRightArrowImageView"/>
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="gone"
                 android:id="@+id/ll_me_wallet"
-                style="@style/MineItemLinearLayout">
+                style="@style/MineItemLinearLayout"
+                android:visibility="gone">
 
                 <ImageView
                     style="@style/MineLeftIconImageView"
@@ -200,6 +206,22 @@
                     style="@style/MineLabelTextView"
                     android:layout_marginLeft="10dp"
                     android:text="设置"/>
+
+                <ImageView
+                    style="@style/CommonRightArrowImageView"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_me_logout"
+                style="@style/MineItemLinearLayout">
+
+                <ImageView
+                    style="@style/MineLeftIconImageView"
+                    android:src="@mipmap/ic_logout"/>
+
+                <TextView
+                    style="@style/MineLabelTextView"
+                    android:layout_marginLeft="10dp"
+                    android:text="注销"/>
 
                 <ImageView
                     style="@style/CommonRightArrowImageView"/>

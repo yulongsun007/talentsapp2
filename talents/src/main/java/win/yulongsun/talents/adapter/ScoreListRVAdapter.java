@@ -37,6 +37,7 @@ public class ScoreListRVAdapter extends SuperAdapter<User> {
                 holder.setVisibility(R.id.iv_score_award, View.INVISIBLE);
                 break;
         }
+        holder.setTitleText(R.id.iv_score_user_img, item.user_name.substring(0, 1), 50);
         //user_name
         holder.setText(R.id.tv_score_user_name, item.user_name);
         //user_score

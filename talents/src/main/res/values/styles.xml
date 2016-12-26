@@ -200,8 +200,6 @@
     </style>
 
 
-
-
     <!--登陆页-->
     <style name="LoginLinearLayout">
         <item name="android:layout_width">wrap_content</item>

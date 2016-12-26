@@ -138,12 +138,12 @@ public class HRIndexFragment extends BaseRootFragment {
                 MenuItem mActionAdd = mMenu.findItem(R.id.action_add);
                 MenuItem mActionJobTempLib = mMenu.findItem(R.id.action_job_temp_lib);
                 MenuItem mActionTalentHistory = mMenu.findItem(R.id.action_talent_history);
-                if(POSITION_TALENT == position){
+                if (POSITION_TALENT == position) {
                     mActionTalentHistory.setVisible(true);
-                }else {
+                } else {
                     mActionTalentHistory.setVisible(false);
                 }
-                if (POSITION_SCORE == position || POSITION_TALENT == position) {
+                if (POSITION_SCORE == position || POSITION_TALENT == position || POSITION_REFERRER == position) {
                     mActionAdd.setVisible(false);
                 } else {
                     mActionAdd.setVisible(true);

@@ -74,6 +74,7 @@
     <LinearLayout
         android:id="@+id/ll_setting_logout"
         style="@style/SettingItemLinearLayout"
+        android:visibility="gone"
         android:orientation="horizontal">
 
         <TextView

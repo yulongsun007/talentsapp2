@@ -8,11 +8,14 @@ import android.widget.LinearLayout;
 import com.igexin.sdk.PushManager;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.OnClick;
 import win.yulongsun.framework.util.android.app.DialogUtil;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.base.BaseSwipeBackFragment;
+import win.yulongsun.talents.entity.Msg;
 import win.yulongsun.talents.entity.User;
 import win.yulongsun.talents.ui.login.LoginActivity;
 
@@ -55,6 +58,10 @@ public class SettingFragment extends BaseSwipeBackFragment {
                 if (user != null) {
                     PushManager.getInstance().unBindAlias(_mActivity, String.valueOf(user.user_id), false);
                     user.delete();
+                    List<Msg> msgList = new Select().from(Msg.class).queryList();
+                    for (Msg msg : msgList) {
+                        msg.delete();
+                    }
                 }
                 Intent intent = new Intent(_mActivity, LoginActivity.class);
                 startActivity(intent);

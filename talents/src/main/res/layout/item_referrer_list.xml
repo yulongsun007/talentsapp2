@@ -19,11 +19,12 @@
         android:padding="16dp">
 
 
-        <ImageView
+        <win.yulongsun.framework.widget.ImageView.CharacterView
             android:id="@+id/iv_referrer_img"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@mipmap/logo"/>
+            app:cv_background_color="@color/color_primary_dark"
+            app:cv_title_text="Android"/>
 
 
         <LinearLayout
@@ -31,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="8dp"
+            android:gravity="center_vertical"
             android:layout_toRightOf="@id/iv_referrer_img"
             android:orientation="vertical">
 
@@ -40,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:text="张三"
                 android:textColor="@color/color_text_black"
-                android:textSize="14sp"/>
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/tv_referrer_depart_career"

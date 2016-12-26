@@ -29,6 +29,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 import okhttp3.Call;
+import win.yulongsun.framework.adapter.OnItemClickListener;
+import win.yulongsun.framework.adapter.OnItemLongClickListener;
 import win.yulongsun.framework.adapter.SuperAdapter;
 import win.yulongsun.framework.util.JsonUtil;
 import win.yulongsun.talents.R;
@@ -40,7 +42,7 @@ import win.yulongsun.talents.http.resp.ResponseList;
  * @author sunyulong on 2016/12/24.
  *         通用的SearchViewFragment
  */
-public abstract class CommonSearchFragment extends SwipeBackFragment implements SwipeRefreshLayout.OnRefreshListener, TextView.OnEditorActionListener {
+public abstract class CommonSearchFragment extends SwipeBackFragment implements SwipeRefreshLayout.OnRefreshListener, TextView.OnEditorActionListener, OnItemClickListener, OnItemLongClickListener {
     protected User _mUser;
     protected List _mDatas = new ArrayList<>();
     protected SuperAdapter _mAdapter;
@@ -108,8 +110,8 @@ public abstract class CommonSearchFragment extends SwipeBackFragment implements 
         _mSrfCommonSearchList.setOnRefreshListener(this);
         _mAdapter = getAdapter();
         if (_mAdapter != null) {
-//            _mAdapter.setOnItemClickListener(this);
-//            _mAdapter.setOnItemLongClickListener(this);
+            _mAdapter.setOnItemClickListener(this);
+            _mAdapter.setOnItemLongClickListener(this);
             _mRecyCommonSearchList.setLayoutManager(new LinearLayoutManager(_mActivity));
             _mRecyCommonSearchList.setAdapter(_mAdapter);
         }
@@ -198,4 +200,13 @@ public abstract class CommonSearchFragment extends SwipeBackFragment implements 
         toSearch();
     }
 
+    @Override
+    public void onItemClick(View itemView, int viewType, int position) {
+
+    }
+
+    @Override
+    public void onItemLongClick(View itemView, int viewType, int position) {
+
+    }
 }

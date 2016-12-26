@@ -11,6 +11,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import win.yulongsun.framework.image.ImageLoadManager;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.base.BaseSwipeBackFragment;
 import win.yulongsun.talents.common.Constant;
@@ -104,13 +105,15 @@ public class JobTempDetailFragment extends BaseSwipeBackFragment {
         mTvJobTempDetailJobEduReq.setText(jobTemplate.tmp_job_edu_require + "");
         mTvJobTempDetailJobNum.setText(jobTemplate.tmp_job_num + "人");
         String desc = "";
-        desc += "行业方向：" + jobTemplate.tmp_job_biz_direct + "\n";
-        desc += "技能要求：" + jobTemplate.tmp_job_skill_require + "\n";
-        desc += "职位描述：" + jobTemplate.tmp_job_desc;
+        desc += "行业方向：" + jobTemplate.tmp_job_biz_direct + "\n\n";
+        desc += "技能要求：\n" + jobTemplate.tmp_job_skill_require + "\n\n";
+        desc += "职位描述：\n" + jobTemplate.tmp_job_desc;
         mTvJobTempDetailJobDesc.setText(desc);
         mTvJobTempDetailJobAddr.setText(jobTemplate.tmp_job_addr);
         mTvJobTempDetailHrName.setText(_User.user_name);
         mTvJobTempDetailHrCompanyName.setText(_User.company_name);
+        ImageLoadManager.getInstance().with(_mActivity).load(_User.company_logo).into(mTvJobTempDetailHrCompanyLogo);
+
     }
 
 

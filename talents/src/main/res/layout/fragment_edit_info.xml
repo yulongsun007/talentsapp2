@@ -31,7 +31,6 @@
         <TextView
             android:id="@+id/tv_info_user_name"
             style="@style/InfoEditValue"
-            android:text="孙宇龙"
             />
 
         <ImageView
@@ -49,7 +48,6 @@
         <TextView
             android:id="@+id/tv_info_user_gender"
             style="@style/InfoEditValue"
-            android:text="男"
             />
 
         <ImageView
@@ -65,7 +63,6 @@
         <TextView
             android:id="@+id/tv_info_company_name"
             style="@style/InfoEditValue"
-            android:text="上海卓冀有限公司"
             />
 
         <ImageView
@@ -80,7 +77,6 @@
         <TextView
             android:id="@+id/tv_info_company_addr"
             style="@style/InfoEditValue"
-            android:text="上海"
             />
 
         <ImageView
@@ -96,7 +92,6 @@
         <TextView
             android:id="@+id/tv_info_user_role"
             style="@style/InfoEditValue"
-            android:text="HR"
             />
 
         <ImageView
@@ -110,8 +105,8 @@
             android:text="邮箱"/>
 
         <TextView
+            android:id="@+id/tv_info_user_email"
             style="@style/InfoEditValue"
-            android:text="yulongsun0425@gmail.com"
             />
 
         <ImageView

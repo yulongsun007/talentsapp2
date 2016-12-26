@@ -20,11 +20,11 @@
         android:padding="16dp">
 
 
-        <ImageView
+        <win.yulongsun.framework.widget.ImageView.CharacterView
             android:id="@+id/iv_score_user_img"
             android:layout_width="@dimen/score_avatar_size"
             android:layout_height="@dimen/score_avatar_size"
-            android:src="@mipmap/logo"/>
+            app:cv_background_color="@color/color_primary_dark"/>
 
 
         <TextView
@@ -39,7 +39,6 @@
             android:textSize="14sp"/>
 
 
-
         <ImageView
             android:id="@+id/iv_score_award"
             android:layout_width="@dimen/score_medal"
@@ -52,13 +51,13 @@
 
         <TextView
             android:id="@+id/tv_score_user_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@id/iv_score_award"
             android:text="100"
-            android:textSize="12sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:textSize="12sp"/>
 
     </RelativeLayout>
 

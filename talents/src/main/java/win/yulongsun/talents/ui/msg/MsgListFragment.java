@@ -49,6 +49,7 @@ public class MsgListFragment extends CommonListFragment {
     @Override
     protected void initView() {
         super.initView();
+        _mTvCommonNoDataTip.setText("没有消息");
         _mToolbar.setNavigationIcon(null);
     }
 
@@ -65,6 +66,11 @@ public class MsgListFragment extends CommonListFragment {
         List<Msg> msgList = new Select().from(Msg.class).orderBy(Msg_Table.msg_id, false).queryList();
         _mDatas = msgList;
         _mAdapter.replaceAll(_mDatas);
+        if (_mDatas.isEmpty()) {
+            _mLlCommonNoData.setVisibility(View.VISIBLE);
+        } else {
+            _mLlCommonNoData.setVisibility(View.GONE);
+        }
     }
 
     @Subscribe

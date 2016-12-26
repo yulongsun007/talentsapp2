@@ -32,6 +32,8 @@ public class EditInfoFragment extends BaseSwipeBackFragment {
     TextView  mTvInfoCompanyAddr;
     @Bind(R.id.tv_info_user_role)
     TextView  mTvInfoUserRole;
+    @Bind(R.id.tv_info_user_email)
+    TextView  mTvInfoUserEmail;
 
     @Override
     protected int getLayoutResId() {
@@ -78,8 +80,8 @@ public class EditInfoFragment extends BaseSwipeBackFragment {
         mTvInfoUserGender.setText(user.user_gender);
         mTvInfoCompanyName.setText(user.company_name);
         mTvInfoCompanyAddr.setText(user.company_addr);
-        mTvInfoUserRole.setText(user.user_role_id + "");
-
+        mTvInfoUserRole.setText(user.user_company_career);
+        mTvInfoUserEmail.setText(user.user_email);
     }
 
 }
