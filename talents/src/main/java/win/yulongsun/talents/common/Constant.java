@@ -38,6 +38,8 @@ public interface Constant {
         int SELECT = 2;//选择学习计划
         int LEARN  = 3;//学习此计划
         int CHECK  = 4;//审查通过
+        int SEND   = 5;//发送
+        int RE      =6;//回复
     }
 
     //http返回状态码

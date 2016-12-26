@@ -6,6 +6,7 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import win.yulongsun.talents.config.DBConfig;
@@ -13,7 +14,7 @@ import win.yulongsun.talents.config.DBConfig;
 //推送消息
 @ModelContainer
 @Table(database = DBConfig.class)
-public class Msg extends BaseModel {
+public class Msg extends BaseModel implements Serializable{
     @PrimaryKey
     public Integer msg_id;
     @Column

@@ -1,9 +1,11 @@
 package win.yulongsun.talents.entity;
 
+import java.io.Serializable;
+
 /**
  * @author sunyulong on 2016/12/14.
  */
-public class Clazz {
+public class Clazz implements Serializable{
     public Integer clazz_id;
     public Integer clazz_priority;
     public String  clazz_name;

@@ -28,8 +28,8 @@ public abstract class BaseSwipeBackFragment extends SwipeBackFragment {
 
 
     protected Toolbar _Toolbar;
-    protected ACache _Cache;
-    protected User _User;
+    protected ACache  _Cache;
+    protected User    _User;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ public abstract class BaseSwipeBackFragment extends SwipeBackFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        _Cache=ACache.get(_mActivity);
+        _Cache = ACache.get(_mActivity);
         _User = new Select().from(User.class).querySingle();
         initView();
         initData();
@@ -92,8 +92,8 @@ public abstract class BaseSwipeBackFragment extends SwipeBackFragment {
     protected void initData() {
     }
 
-    /** 从服务器加载数据*/
-    protected void loadDataFromServer(){
+    /** 从服务器加载数据 */
+    protected void loadDataFromServer() {
 
     }
 

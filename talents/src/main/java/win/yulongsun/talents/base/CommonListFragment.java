@@ -194,6 +194,7 @@ public abstract class CommonListFragment extends SupportFragment implements Swip
     @Override
     public void onRefresh() {
         initData();
+        _mSrfCommonList.setRefreshing(false);
     }
 
     @Override

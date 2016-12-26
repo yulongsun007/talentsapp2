@@ -35,7 +35,7 @@ abstract class RecyclerSupportAdapter<T> extends RecyclerView.Adapter<SuperViewH
     int mLayoutResId;
     IMulItemViewType<T> mMulItemViewType;
 
-    private OnItemClickListener mOnItemClickListener;
+    protected OnItemClickListener mOnItemClickListener;
     private OnItemLongClickListener mOnItemLongClickListener;
 
     RecyclerView mRecyclerView;

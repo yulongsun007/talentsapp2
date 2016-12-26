@@ -2,17 +2,19 @@ package win.yulongsun.talents.ui.msg;
 
 import android.view.View;
 
-import com.orhanobut.logger.Logger;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.List;
 
 import win.yulongsun.framework.adapter.SuperAdapter;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.adapter.MsgListAdapter;
 import win.yulongsun.talents.base.CommonListFragment;
 import win.yulongsun.talents.entity.Msg;
+import win.yulongsun.talents.entity.Msg_Table;
 import win.yulongsun.talents.event.MsgEvent;
 import win.yulongsun.talents.event.StartBrotherEvent;
 
@@ -23,10 +25,7 @@ import win.yulongsun.talents.event.StartBrotherEvent;
  */
 public class MsgListFragment extends CommonListFragment {
 
-    public static MsgListFragment newInstance() {
-        return new MsgListFragment();
-    }
-
+    private Msg mMsg;
 
     @Override
     protected String getToolbarTitle() {
@@ -43,43 +42,33 @@ public class MsgListFragment extends CommonListFragment {
         return MsgListFragment.class.getSimpleName();
     }
 
-    @Override
-    public void onItemClick(View itemView, int viewType, int position) {
-        super.onItemClick(itemView, viewType, position);
-        EventBus.getDefault().post(new StartBrotherEvent(MsgDetailFragment.newInstance()));
+    public static MsgListFragment newInstance() {
+        return new MsgListFragment();
     }
 
     @Override
     protected void initView() {
         super.initView();
         _mToolbar.setNavigationIcon(null);
-        _mToolbar.setNavigationOnClickListener(null);
+    }
+
+    @Override
+    public void onItemClick(View itemView, int viewType, int position) {
+        super.onItemClick(itemView, viewType, position);
+        mMsg = (Msg) _mDatas.get(position);
+        EventBus.getDefault().post(new StartBrotherEvent(MsgDetailFragment.newInstance(mMsg)));
     }
 
     @Override
     protected void initData() {
         super.initData();
-        _mDatas = new Select().from(Msg.class).queryList();
-        msgIsNull();
-    }
-
-    private void msgIsNull() {
-        if (_mDatas.isEmpty()) {
-            _mLlCommonNoData.setVisibility(View.VISIBLE);
-        } else {
-            _mLlCommonNoData.setVisibility(View.GONE);
-        }
-        _mSrfCommonList.setRefreshing(false);
+        List<Msg> msgList = new Select().from(Msg.class).orderBy(Msg_Table.msg_id, false).queryList();
+        _mDatas = msgList;
+        _mAdapter.replaceAll(_mDatas);
     }
 
     @Subscribe
-    public void onMsgEvent(MsgEvent msgEvent) {
-        Logger.d(msgEvent.getMsgEntity().toString());
-        Msg msg = msgEvent.getMsgEntity();
-        msg.save();
-        _mAdapter.add(0, msg);
-        msgIsNull();
+    public void onMsgEvent(MsgEvent event) {
+        initData();
     }
-
-
 }

@@ -22,13 +22,13 @@ public class ReferrerListRVAdapter extends SuperAdapter<User> {
     }
 
     @Override
-    public void onBind(SuperViewHolder holder, int viewType, int layoutPosition, User item) {
-        holder.setText(R.id.tv_referrer_name, item.user_name);
+    public void onBind(SuperViewHolder holder, final int viewType, final int layoutPosition, User item) {
+        holder.setText(R.id.tv_referrer_name, "#" + item.user_id + "." + item.user_name);
         holder.setText(R.id.tv_referrer_depart_career, item.user_company_depart + "-" + item.user_company_career);
         holder.setOnClickListener(R.id.btn_referrer_contact, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                mOnItemClickListener.onItemClick(v,viewType,layoutPosition);
             }
         });
     }

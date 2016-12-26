@@ -108,6 +108,8 @@ public abstract class CommonSearchFragment extends SwipeBackFragment implements 
         _mSrfCommonSearchList.setOnRefreshListener(this);
         _mAdapter = getAdapter();
         if (_mAdapter != null) {
+//            _mAdapter.setOnItemClickListener(this);
+//            _mAdapter.setOnItemLongClickListener(this);
             _mRecyCommonSearchList.setLayoutManager(new LinearLayoutManager(_mActivity));
             _mRecyCommonSearchList.setAdapter(_mAdapter);
         }

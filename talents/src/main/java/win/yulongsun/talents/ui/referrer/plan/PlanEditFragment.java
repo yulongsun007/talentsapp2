@@ -42,7 +42,7 @@ import win.yulongsun.talents.entity.Plan;
 import win.yulongsun.talents.http.resp.ResponseList;
 import win.yulongsun.talents.http.resp.biz.ClazzResponse;
 import win.yulongsun.talents.http.resp.biz.PlanResponse;
-import win.yulongsun.talents.ui.msg.MsgDetailFragment;
+import win.yulongsun.talents.ui.msg.MsgDetailSendFragment;
 
 import static win.yulongsun.framework.util.JsonUtil.fromJson;
 import static win.yulongsun.framework.widget.RecyView.DividerItemDecoration.VERTICAL_LIST;
@@ -149,7 +149,7 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
             toSavePlan();
         }
         if (item.getItemId() == R.id.action_contact_referrer) {
-            start(MsgDetailFragment.newInstance());
+            start(MsgDetailSendFragment.newInstance());
         }
         if (item.getItemId() == R.id.action_plan_stu) {
             start(ReferrerStuListFragment.newInstance(mPlan));

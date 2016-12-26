@@ -7,6 +7,8 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import java.io.Serializable;
+
 import win.yulongsun.talents.config.DBConfig;
 
 /**
@@ -14,7 +16,7 @@ import win.yulongsun.talents.config.DBConfig;
  */
 @ModelContainer
 @Table(database = DBConfig.class)
-public class User extends BaseModel {
+public class User extends BaseModel implements Serializable{
     @PrimaryKey
     public Integer user_id;         //用户编号
     @Column

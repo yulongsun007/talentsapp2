@@ -18,6 +18,7 @@
         android:id="@+id/action_search"
         android:icon="@drawable/ic_menu_search"
         android:title="搜索"
+        android:visible="false"
         app:showAsAction="always"
         />
     <item
