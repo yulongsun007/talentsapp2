@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * @author sunyulong on 2016/12/19.
  */
-public class PlanResume implements Serializable {
+public class UserPlanR implements Serializable {
 
     public Integer     plan_id;
     public String      plan_desc;
@@ -32,6 +32,8 @@ public class PlanResume implements Serializable {
     public Integer     resume_id;
     public JobTemplate job;
     public Company     company;
+
+    public Resume       resume;
 
 
 }

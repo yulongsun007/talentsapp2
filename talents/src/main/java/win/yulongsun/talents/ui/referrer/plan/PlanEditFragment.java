@@ -138,7 +138,7 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
             start(MsgDetailFragment.newInstance());
         }
         if (item.getItemId() == R.id.action_plan_stu) {
-            start(ReferrerStuListFragment.newInstance(mPlan.plan_id));
+            start(ReferrerStuListFragment.newInstance(mPlan));
         }
         return super.onOptionsItemSelected(item);
     }

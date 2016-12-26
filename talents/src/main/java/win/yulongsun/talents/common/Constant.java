@@ -37,6 +37,7 @@ public interface Constant {
         int ADD    = 1;//添加
         int SELECT = 2;//选择学习计划
         int LEARN  = 3;//学习此计划
+        int CHECK  = 4;//审查通过
     }
 
     //http返回状态码

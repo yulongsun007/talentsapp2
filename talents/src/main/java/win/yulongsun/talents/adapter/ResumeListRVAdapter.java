@@ -24,10 +24,11 @@ public class ResumeListRVAdapter extends SuperAdapter<Resume> {
     @Override
     public void onBind(SuperViewHolder holder, int viewType, int layoutPosition, Resume item) {
         holder.setImageUri(context, R.id.iv_item_resume_img, Uri.parse(item.resume_img));
-        holder.setText(R.id.tv_item_resume_name, item.resume_name);
+        holder.setText(R.id.tv_item_resume_name, "简历#" + item.resume_id + "." + item.resume_name);
         holder.setText(R.id.tv_item_resume_is_study, item.resume_is_study);
         holder.setText(R.id.tv_item_resume_academy, item.resume_academy);
         holder.setText(R.id.tv_item_resume_update_at, item.update_at);
-        holder.setText(R.id.tv_item_resume_id, "#" + item.resume_id);
+
+
     }
 }

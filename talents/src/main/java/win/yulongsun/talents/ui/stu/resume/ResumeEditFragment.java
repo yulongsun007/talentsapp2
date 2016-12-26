@@ -108,7 +108,7 @@ public class ResumeEditFragment extends BaseSwipeBackFragment implements OnItemC
         ResumeEditFragment fragment = new ResumeEditFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(Constant.MODE_NAME, mode);
-        if (mode == Constant.MODE_VALUE.EDIT) {
+        if (mode == Constant.MODE_VALUE.EDIT || mode == Constant.MODE_VALUE.CHECK) {
             bundle.putSerializable(RESUME_DETAIL_KEY, resume);
         }
         fragment.setArguments(bundle);
@@ -186,13 +186,44 @@ public class ResumeEditFragment extends BaseSwipeBackFragment implements OnItemC
             mAdapter.replaceAll(mResume.experList);
         } else if (mMode == Constant.MODE_VALUE.ADD) {
             mBtnResumeDetailAddExper.setVisibility(View.GONE);
+        } else if (mMode == Constant.MODE_VALUE.CHECK) {
+            mResume = (Resume) mBundle.getSerializable(RESUME_DETAIL_KEY);
+            ImageLoadManager.getInstance().load(mResume.resume_img).into(mIvResumeDetailImg);
+            mEtResumeDetailName.setText(mResume.resume_name);
+            mEtResumeDetailGender.setText(mResume.resume_gender);
+            mEtResumeDetailIsStudy.setText(mResume.resume_is_study);
+            mEtResumeDetailAcademy.setText(mResume.resume_academy);
+            mEtResumeDetailMajor.setText(mResume.resume_major);
+            mEtResumeDetailGraduateAt.setText(mResume.resume_graduate_at);
+            mEtResumeDetailMobile.setText(mResume.resume_mobile);
+            mEtResumeDetailEmail.setText(mResume.resume_email);
+            mEtResumeDetailDesc.setText(mResume.resume_desc);
+            mAdapter.replaceAll(mResume.experList);
+            //disable
+            mEtResumeDetailName.setEnabled(false);
+            mIvResumeDetailImg.setEnabled(false);
+            mEtResumeDetailGender.setEnabled(false);
+            mEtResumeDetailIsStudy.setEnabled(false);
+            mEtResumeDetailAcademy.setEnabled(false);
+            mEtResumeDetailMajor.setEnabled(false);
+            mEtResumeDetailGraduateAt.setEnabled(false);
+            mEtResumeDetailMobile.setEnabled(false);
+            mEtResumeDetailEmail.setEnabled(false);
+            mEtResumeDetailDesc.setEnabled(false);
+            mAdapter.setOnItemLongClickListener(null);
+            mBtnResumeDetailAddExper.setVisibility(View.GONE);
         }
 
     }
 
     @Override
     protected int getMenuResId() {
-        return R.menu.menu_common_save;
+        if (mMode == Constant.MODE_VALUE.ADD || mMode == Constant.MODE_VALUE.EDIT) {
+            return R.menu.menu_common_save;
+        } else {
+            return 0;
+        }
+
     }
 
     @Override

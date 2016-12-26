@@ -135,6 +135,13 @@ public class SuperViewHolder extends RecyclerView.ViewHolder implements ChainSet
             ImageLoadManager.getInstance().with(context).load(imageUri).into(view);
         return this;
     }
+    public SuperViewHolder setImage(Context context, int viewId, String  imagePath) {
+        ImageView view = findViewById(viewId);
+//        view.setImageURI(imageUri);
+        if (imagePath != null)
+            ImageLoadManager.getInstance().with(context).load(imagePath).into(view);
+        return this;
+    }
 
     @Override
     public SuperViewHolder setImageResource(int viewId, int imgResId) {

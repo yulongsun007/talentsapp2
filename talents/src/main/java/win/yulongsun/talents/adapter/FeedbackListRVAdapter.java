@@ -10,21 +10,21 @@ import win.yulongsun.framework.adapter.SuperAdapter;
 import win.yulongsun.framework.adapter.SuperViewHolder;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.common.Constant;
-import win.yulongsun.talents.entity.PlanResume;
+import win.yulongsun.talents.entity.UserPlanR;
 
 /**
  * @author sunyulong on 2016/12/26.
  */
-public class FeedbackListRVAdapter extends SuperAdapter<PlanResume> {
+public class FeedbackListRVAdapter extends SuperAdapter<UserPlanR> {
     private final Context context;
 
-    public FeedbackListRVAdapter(Context context, List<PlanResume> items, int layoutResId) {
+    public FeedbackListRVAdapter(Context context, List<UserPlanR> items, int layoutResId) {
         super(context, items, layoutResId);
         this.context = context;
     }
 
     @Override
-    public void onBind(SuperViewHolder holder, int viewType, int layoutPosition, PlanResume item) {
+    public void onBind(SuperViewHolder holder, int viewType, int layoutPosition, UserPlanR item) {
         holder.setImageUri(context, R.id.iv_feedback_company_logo, Uri.parse(item.company.company_logo));
         holder.setText(R.id.tv_feedback_job_name, item.job.tmp_job_name);
         holder.setText(R.id.tv_feedback_company_name, item.company.company_name);
