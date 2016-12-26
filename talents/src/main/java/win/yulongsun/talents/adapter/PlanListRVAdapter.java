@@ -32,7 +32,7 @@ public class PlanListRVAdapter extends SuperAdapter<Plan> {
             holder.setText(R.id.tv_plan_hour_already, item.plan_already_hour + "小时");
             holder.setText(R.id.tv_plan_score_already, item.plan_already_score + "分");
         }
-        holder.setText(R.id.tv_plan_name, "#" + (layoutPosition + 1) + "." + item.plan_name);
+        holder.setText(R.id.tv_plan_name, "[计划]#" + (layoutPosition + 1) + "." + item.plan_name);
         holder.setTitleText(R.id.cv_plan_img, item.plan_img);
         holder.setText(R.id.tv_plan_desc, item.plan_desc);
         holder.setText(R.id.tv_plan_hour, item.plan_hour + "小时");

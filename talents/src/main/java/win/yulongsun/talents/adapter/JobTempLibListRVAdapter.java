@@ -32,7 +32,7 @@ public class JobTempLibListRVAdapter extends SuperAdapter<JobTemplate> {
 //            }
 //        }
         holder.setText(R.id.tv_job_temp_lib_job_time, item.deploy_at);
-        holder.setText(R.id.tv_job_temp_lib_job_name, "招聘#" + item.tmp_id + "." + item.tmp_job_name);
+        holder.setText(R.id.tv_job_temp_lib_job_name, "[招聘]#" + item.tmp_id + "." + item.tmp_job_name);
         holder.setText(R.id.tv_job_temp_lib_job_salary, item.tmp_job_salary);
         holder.setText(R.id.tv_job_temp_lib_biz_direct, item.tmp_job_biz_direct);
 

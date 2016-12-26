@@ -89,6 +89,7 @@
                         android:textSize="12sp"/>
                 </LinearLayout>
                 <TextView
+                    android:visibility="gone"
                     android:gravity="bottom"
                     android:id="@+id/tv_job_temp_lib_job_id"
                     android:layout_width="wrap_content"
