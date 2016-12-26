@@ -66,6 +66,10 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
     Button       mBtnPlanEditAddClazz;
     @Bind(R.id.btn_plan_edit_learn_plan)
     Button       mBtnPlanEditLearnPlan;
+    @Bind(R.id.et_plan_tmp_id)
+    EditText     mEtPlanTmpId;
+    @Bind(R.id.et_plan_edit_log)
+    EditText     mEtPlanLog;
     private int mMode = Constant.MODE_VALUE.EDIT;
     private Plan               mPlan;
     private PlanClazzRVAdapter mAdapter;
@@ -133,6 +137,9 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
         if (item.getItemId() == R.id.action_contact_referrer) {
             start(MsgDetailFragment.newInstance());
         }
+        if (item.getItemId() == R.id.action_plan_stu) {
+            start(ReferrerStuListFragment.newInstance(mPlan.plan_id));
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -144,7 +151,9 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
         if (mMode == Constant.MODE_VALUE.EDIT) {
             mPlan = (Plan) bundle.getSerializable(PLAN_LIST_EDIT_KEY);
             //传递数据，初始化页面数据
+            mEtPlanTmpId.setText(mPlan.job_template_id + "");
             mEtPlanEditName.setText(mPlan.plan_name);
+            mEtPlanLog.setText(mPlan.plan_img);
             mEtPlanEditDesc.setText(mPlan.plan_desc);
             mEtPlanEditContent.setText(mPlan.plan_content);
             mClazzList = mPlan.clazz;
@@ -158,13 +167,17 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
         } else if (mMode == Constant.MODE_VALUE.SELECT) {
             mPlan = (Plan) bundle.getSerializable(PLAN_LIST_EDIT_KEY);
             //隐藏"添加课程"按钮、显示"学习计划"按钮
+            mEtPlanTmpId.setText(mPlan.job_template_id + "");
+            mEtPlanLog.setText(mPlan.plan_img);
             mEtPlanEditName.setText(mPlan.plan_name);
-            mEtPlanEditName.setEnabled(false);
-            mEtPlanEditName.setFocusable(false);
             mEtPlanEditDesc.setText(mPlan.plan_desc);
+            mEtPlanEditContent.setText(mPlan.plan_content);
+            mEtPlanTmpId.setEnabled(false);
+            mEtPlanTmpId.setFocusable(false);
+            mEtPlanLog.setEnabled(false);
+            mEtPlanLog.setFocusable(false);
             mEtPlanEditDesc.setEnabled(false);
             mEtPlanEditDesc.setFocusable(false);
-            mEtPlanEditContent.setText(mPlan.plan_content);
             mEtPlanEditContent.setEnabled(false);
             mEtPlanEditContent.setFocusable(false);
             mClazzList = mPlan.clazz;
@@ -173,13 +186,17 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
         } else if (mMode == Constant.MODE_VALUE.LEARN) {
             mPlan = (Plan) bundle.getSerializable(PLAN_LIST_EDIT_KEY);
             //隐藏"添加课程"按钮、隐藏"学习计划"按钮
+            mEtPlanTmpId.setText(mPlan.job_template_id + "");
+            mEtPlanLog.setText(mPlan.plan_img);
             mEtPlanEditName.setText(mPlan.plan_name);
-            mEtPlanEditName.setEnabled(false);
-            mEtPlanEditName.setFocusable(false);
             mEtPlanEditDesc.setText(mPlan.plan_desc);
+            mEtPlanEditContent.setText(mPlan.plan_content);
+            mEtPlanTmpId.setEnabled(false);
+            mEtPlanTmpId.setFocusable(false);
+            mEtPlanLog.setEnabled(false);
+            mEtPlanLog.setFocusable(false);
             mEtPlanEditDesc.setEnabled(false);
             mEtPlanEditDesc.setFocusable(false);
-            mEtPlanEditContent.setText(mPlan.plan_content);
             mEtPlanEditContent.setEnabled(false);
             mEtPlanEditContent.setFocusable(false);
             mClazzList = mPlan.clazz;
@@ -291,8 +308,13 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
         String plan_name = mEtPlanEditName.getText().toString();
         String plan_desc = mEtPlanEditDesc.getText().toString();
         String plan_content = mEtPlanEditContent.getText().toString();
+        String plan_img = mEtPlanLog.getText().toString();
         if (StringUtils.isEmpty(plan_name)) {
             ToastUtils.toastL(_mActivity, "培养计划名称不能为空");
+            return;
+        }
+        if (StringUtils.isEmpty(plan_img)) {
+            ToastUtils.toastL(_mActivity, "培养计划标签不能为空");
             return;
         }
         if (StringUtils.isEmpty(plan_desc)) {
@@ -309,6 +331,7 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
                     .url(Constant.URL + "plan/update")
                     .addParams("plan_id", String.valueOf(mPlan.plan_id))
                     .addParams("plan_name", plan_name)
+                    .addParams("plan_img", plan_img)
                     .addParams("plan_desc", plan_desc)
                     .addParams("plan_content", plan_content)
                     .build()

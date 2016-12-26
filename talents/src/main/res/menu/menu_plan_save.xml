@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_plan_stu"
+        android:title="已选学生"
+        app:showAsAction="always"/>
+    <item
         android:id="@+id/action_plan_save"
         android:title="保存计划"
         app:showAsAction="always"/>

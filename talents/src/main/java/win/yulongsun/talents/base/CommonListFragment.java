@@ -111,6 +111,7 @@ public abstract class CommonListFragment extends SupportFragment implements Swip
         _mAdapter = getAdapter();
         if (_mAdapter != null) {
             _mRecyCommonList.setLayoutManager(new LinearLayoutManager(_mActivity));
+//            _mRecyCommonList.addItemDecoration(new DividerItemDecoration(_mActivity,DividerItemDecoration.VERTICAL_LIST));
             _mRecyCommonList.setAdapter(_mAdapter);
             _mAdapter.setOnItemClickListener(this);
             _mAdapter.setOnItemLongClickListener(this);

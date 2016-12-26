@@ -20,7 +20,6 @@ import win.yulongsun.talents.event.StartBrotherEvent;
 import win.yulongsun.talents.ui.hr.job.JobTempListFragment;
 import win.yulongsun.talents.ui.hr.job.lib.JobTempLibListFragment;
 import win.yulongsun.talents.ui.referrer.plan.PlanListFragment;
-import win.yulongsun.talents.ui.referrer.stu.ReferrerStuListFragment;
 
 /**
  * @author sunyulong on 2016/12/15.
@@ -78,11 +77,11 @@ public class ReferrerIndexFragment extends BaseRootFragment {
         mTab.addTab(mTab.newTab());
         mTab.addTab(mTab.newTab());
         //Title
-        mTitle = new String[]{"招聘", "学生", "培养计划"};
+        mTitle = new String[]{"招聘", "培养计划"};
         //Fragment
         mFragmentList = new ArrayList<SupportFragment>();
         mFragmentList.add(JobTempListFragment.newInstance());
-        mFragmentList.add(ReferrerStuListFragment.newInstance());
+//        mFragmentList.add(ReferrerStuListFragment.newInstance());
         mFragmentList.add(PlanListFragment.newInstance());
 //        mFragmentList.add(ClazzAddFragment.newInstance());
 

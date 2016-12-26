@@ -52,10 +52,6 @@ public class PlanListFragment extends CommonListFragment {
         return fragment;
     }
 
-    @Override
-    protected void initView() {
-        super.initView();
-    }
 
     @Override
     protected void initData() {
