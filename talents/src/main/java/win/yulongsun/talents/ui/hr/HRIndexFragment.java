@@ -25,6 +25,7 @@ import win.yulongsun.talents.ui.hr.referrer.ReferrerAddFragment;
 import win.yulongsun.talents.ui.hr.referrer.ReferrerListFragment;
 import win.yulongsun.talents.ui.hr.referrer.ReferrerSearchFragment;
 import win.yulongsun.talents.ui.hr.score.ScoreListFragment;
+import win.yulongsun.talents.ui.hr.talent.TalentHistoryListFragment;
 import win.yulongsun.talents.ui.hr.talent.TalentListFragment;
 import win.yulongsun.talents.ui.hr.talent.TalentSearchFragment;
 
@@ -85,7 +86,7 @@ public class HRIndexFragment extends BaseRootFragment {
         mTab.addTab(mTab.newTab());
         mTab.addTab(mTab.newTab());
         //Title
-        mTitle = new String[]{"人才库", "招聘", "推荐人", "积分排名"};
+        mTitle = new String[]{"简历库", "招聘", "推荐人", "积分排名"};
         //Fragment
         mFragmentList = new ArrayList<SupportFragment>();
         mFragmentList.add(TalentListFragment.newInstance());
@@ -102,6 +103,9 @@ public class HRIndexFragment extends BaseRootFragment {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
+                    case R.id.action_talent_history:
+                        EventBus.getDefault().post(new StartBrotherEvent(TalentHistoryListFragment.newInstance()));
+                        break;
                     case R.id.action_add:
                         toAdd();
                         break;
@@ -133,12 +137,18 @@ public class HRIndexFragment extends BaseRootFragment {
                 MenuItem mActionSearch = mMenu.findItem(R.id.action_search);
                 MenuItem mActionAdd = mMenu.findItem(R.id.action_add);
                 MenuItem mActionJobTempLib = mMenu.findItem(R.id.action_job_temp_lib);
+                MenuItem mActionTalentHistory = mMenu.findItem(R.id.action_talent_history);
+                if(POSITION_TALENT == position){
+                    mActionTalentHistory.setVisible(true);
+                }else {
+                    mActionTalentHistory.setVisible(false);
+                }
                 if (POSITION_SCORE == position || POSITION_TALENT == position) {
                     mActionAdd.setVisible(false);
                 } else {
                     mActionAdd.setVisible(true);
                 }
-                if (POSITION_SCORE == position) {
+                if (POSITION_SCORE == position || POSITION_TALENT == position) {
                     mActionSearch.setVisible(false);
                 } else {
                     mActionSearch.setVisible(true);
