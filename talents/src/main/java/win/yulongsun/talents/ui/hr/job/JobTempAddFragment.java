@@ -74,7 +74,7 @@ public class JobTempAddFragment extends BaseChildFragment {
         //2.从服务器加载数据
         JobTemplate jobTemplate = new JobTemplate();
         jobTemplate.create_by = _mUser.user_id;
-        loadDataFromServer("job_temp/list", jobTemplate, JobTemplate.class, JobTemplateResponse.class);
+        loadDataFromServer("job_temp/hrListUnDeploy", jobTemplate, JobTemplate.class, JobTemplateResponse.class);
 
     }
 
