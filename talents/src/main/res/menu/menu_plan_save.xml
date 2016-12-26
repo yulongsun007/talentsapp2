@@ -4,6 +4,7 @@
     <item
         android:id="@+id/action_plan_stu"
         android:title="已选学生"
+        android:visible="false"
         app:showAsAction="always"/>
     <item
         android:id="@+id/action_plan_save"

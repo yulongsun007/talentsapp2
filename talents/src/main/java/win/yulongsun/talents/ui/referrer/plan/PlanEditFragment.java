@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -124,8 +126,20 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
             return 0;
         } else if (mMode == Constant.MODE_VALUE.LEARN) {
             return R.menu.menu_stu_contact;
-        } else {
+        } else if (mMode == Constant.MODE_VALUE.EDIT) {
             return R.menu.menu_plan_save;
+        }
+        return 0;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        if (mMode == Constant.MODE_VALUE.EDIT && menu != null) {
+            MenuItem item = menu.findItem(R.id.action_plan_stu);
+            if (item != null) {
+                item.setVisible(true);
+            }
         }
     }
 
