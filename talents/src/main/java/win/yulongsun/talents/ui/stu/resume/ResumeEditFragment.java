@@ -210,7 +210,7 @@ public class ResumeEditFragment extends BaseSwipeBackFragment implements OnItemC
             mEtResumeDetailMobile.setEnabled(false);
             mEtResumeDetailEmail.setEnabled(false);
             mEtResumeDetailDesc.setEnabled(false);
-            mAdapter.setOnItemLongClickListener(null);
+            mAdapter.setOnItemClickListener(null);
             mBtnResumeDetailAddExper.setVisibility(View.GONE);
         }
 

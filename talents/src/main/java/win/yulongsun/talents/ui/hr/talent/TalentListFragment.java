@@ -6,7 +6,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import win.yulongsun.framework.adapter.SuperAdapter;
 import win.yulongsun.talents.R;
-import win.yulongsun.talents.adapter.TalentRVAdapter;
+import win.yulongsun.talents.adapter.ReferrerListRVAdapter;
 import win.yulongsun.talents.base.CommonListFragment;
 import win.yulongsun.talents.event.StartBrotherEvent;
 
@@ -27,7 +27,7 @@ public class TalentListFragment extends CommonListFragment {
 
     @Override
     protected SuperAdapter getAdapter() {
-        return new TalentRVAdapter(_mActivity, _mDatas, R.layout.item_fragment_list);
+        return new ReferrerListRVAdapter(_mActivity, _mDatas, R.layout.item_fragment_list);
     }
 
     @Override
