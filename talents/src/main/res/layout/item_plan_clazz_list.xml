@@ -17,10 +17,9 @@
             android:layout_centerVertical="true"
             android:text="1.Android应用程序开发[10]"
             android:textColor="@color/color_text_black"
-            android:textSize="14sp"/>
+            android:textSize="16sp"/>
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/tv_item_clazz_grade_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +28,8 @@
             android:gravity="right"
             android:text="状态：已完成\n成绩：60分"
             android:textColor="@color/color_primary"
-            android:textSize="10sp"/>
+            android:textSize="10sp"
+            android:visibility="gone"/>
     </RelativeLayout>
 
 
@@ -37,8 +37,7 @@
         android:id="@+id/tv_item_clazz_score_hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="5dp"
+        android:layout_margin="8dp"
         android:text="64课时/5学分"
         android:textSize="12sp"/>
 
@@ -46,7 +45,7 @@
         android:id="@+id/tv_item_clazz_score_books"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginLeft="8dp"
         android:text="推荐书籍：《疯狂Android讲义》"
         android:textSize="12sp"/>
 

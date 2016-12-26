@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -39,6 +40,7 @@ import win.yulongsun.talents.common.Constant;
 import win.yulongsun.talents.entity.Clazz;
 import win.yulongsun.talents.entity.JobTemplate;
 import win.yulongsun.talents.entity.Plan;
+import win.yulongsun.talents.entity.User;
 import win.yulongsun.talents.http.resp.ResponseList;
 import win.yulongsun.talents.http.resp.biz.ClazzResponse;
 import win.yulongsun.talents.http.resp.biz.PlanResponse;
@@ -70,6 +72,8 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
     Button       mBtnPlanEditLearnPlan;
     @Bind(R.id.et_plan_tmp_id)
     EditText     mEtPlanTmpId;
+    @Bind(R.id.tv_plan_tmp_id)
+    TextView     mTvPlanTmpId;
     @Bind(R.id.et_plan_edit_log)
     EditText     mEtPlanLog;
     private int mMode = Constant.MODE_VALUE.EDIT;
@@ -129,17 +133,21 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
         } else if (mMode == Constant.MODE_VALUE.EDIT) {
             return R.menu.menu_plan_save;
         }
-        return 0;
+        return R.menu.menu_plan_save;
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        if (mMode == Constant.MODE_VALUE.EDIT && menu != null) {
-            MenuItem item = menu.findItem(R.id.action_plan_stu);
-            if (item != null) {
-                item.setVisible(true);
-            }
+        MenuItem action_contact_referrer = menu.findItem(R.id.action_contact_referrer);
+        MenuItem action_plan_stu = menu.findItem(R.id.action_plan_stu);
+        MenuItem action_plan_save = menu.findItem(R.id.action_plan_save);
+        if (mMode == Constant.MODE_VALUE.EDIT) {
+            action_plan_stu.setVisible(true);
+            action_plan_save.setVisible(true);
+            action_contact_referrer.setVisible(true);
+        } else if (mMode == Constant.MODE_VALUE.LEARN) {
+            action_contact_referrer.setVisible(true);
         }
     }
 
@@ -149,7 +157,13 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
             toSavePlan();
         }
         if (item.getItemId() == R.id.action_contact_referrer) {
-            start(MsgDetailSendFragment.newInstance());
+            User user = new User();
+            if (mMode == Constant.MODE_VALUE.LEARN) {
+                user.user_id = mPlan.create_by;
+            } else if (mMode == Constant.MODE_VALUE.EDIT) {
+                user.user_id = mPlan.hr_id;
+            }
+            start(MsgDetailSendFragment.newInstance(Constant.MODE_VALUE.SEND, user));
         }
         if (item.getItemId() == R.id.action_plan_stu) {
             start(ReferrerStuListFragment.newInstance(mPlan));
@@ -175,6 +189,8 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
             mBtnPlanEditLearnPlan.setVisibility(View.GONE);
         } else if (mMode == Constant.MODE_VALUE.ADD) {
             mJobTemplate = (JobTemplate) bundle.getSerializable(PLAN_LIST_EDIT_KEY);
+            mTvPlanTmpId.setVisibility(View.GONE);
+            mEtPlanTmpId.setVisibility(View.GONE);
             //显示"添加课程"按钮
             mBtnPlanEditAddClazz.setVisibility(View.GONE);
             mBtnPlanEditLearnPlan.setVisibility(View.GONE);
@@ -207,6 +223,8 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
             mEtPlanEditContent.setText(mPlan.plan_content);
             mEtPlanTmpId.setEnabled(false);
             mEtPlanTmpId.setFocusable(false);
+            mEtPlanEditName.setEnabled(false);
+            mEtPlanEditName.setFocusable(false);
             mEtPlanLog.setEnabled(false);
             mEtPlanLog.setFocusable(false);
             mEtPlanEditDesc.setEnabled(false);
@@ -218,7 +236,7 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
             mBtnPlanEditLearnPlan.setVisibility(View.GONE);
         }
         //adapter
-        mAdapter = new PlanClazzRVAdapter(_mActivity, mClazzList, R.layout.item_plan_clazz_list);
+        mAdapter = new PlanClazzRVAdapter(_mActivity, mClazzList, R.layout.item_plan_clazz_list, mMode);
         mRecyPlanEditClazz.setLayoutManager(new LinearLayoutManager(_mActivity));
         mRecyPlanEditClazz.addItemDecoration(new DividerItemDecoration(_mActivity, VERTICAL_LIST));
         mRecyPlanEditClazz.setAdapter(mAdapter);
@@ -534,7 +552,7 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
                 .url(Constant.URL + "user_plan_r/add")
                 .addParams("user_id", String.valueOf(_User.user_id))
                 .addParams("plan_id", String.valueOf(mPlan.plan_id))
-                .addParams("apply_status", String.valueOf(Constant.LEARN_PROGRESS.PROGESSING))
+                .addParams("apply_status", String.valueOf(Constant.APPLY_STATUS.UN_COMMIT))
                 .build()
                 .execute(new StringCallback() {
                     @Override

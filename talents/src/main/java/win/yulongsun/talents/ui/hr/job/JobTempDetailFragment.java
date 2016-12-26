@@ -124,7 +124,7 @@ public class JobTempDetailFragment extends BaseSwipeBackFragment {
                 EventBus.getDefault().post(new StartBrotherEvent(PlanEditFragment.newInstance(Constant.MODE_VALUE.ADD, null, jobTemplate)));
                 break;
             case R.id.btn_job_temp_look_plan:
-                EventBus.getDefault().post(new StartBrotherEvent(PlanListFragment.newInstance(jobTemplate)));
+                EventBus.getDefault().post(new StartBrotherEvent(PlanListFragment.newInstance(Constant.MODE_VALUE.SELECT,jobTemplate)));
                 break;
         }
     }

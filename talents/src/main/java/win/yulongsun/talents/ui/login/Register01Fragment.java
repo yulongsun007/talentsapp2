@@ -95,12 +95,12 @@ public class Register01Fragment extends BaseSwipeBackFragment {
 
     @Override
     protected int getMenuResId() {
-        return R.menu.menu_common_next;
+        return R.menu.menu_register;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (R.id.action_common_next == item.getItemId()) {
+        if (R.id.action_register == item.getItemId()) {
             boolean isNewCompany;
             String companyId = mEtCompanyId.getText().toString().trim();
             if (StringUtils.isEmpty(companyId)) {
@@ -116,7 +116,7 @@ public class Register01Fragment extends BaseSwipeBackFragment {
                 ToastUtils.toastL(_mActivity, "请填写验证码");
                 return false;
             }
-            if (!code.equals(returnCode)) {
+            if (Integer.parseInt(code) != returnCode) {
                 ToastUtils.toastL(_mActivity, "验证码不正确");
                 return false;
             }
@@ -146,7 +146,7 @@ public class Register01Fragment extends BaseSwipeBackFragment {
                     .addParams("user_mobile", user_mobile)
                     .addParams("user_token", user_token)
                     .addParams("user_role_id", user_role_id)
-                    .addParams("user_company_id", company_id)
+                    .addParams("company_id", company_id)
                     .build()
                     .execute(new StringCallback() {
                         @Override

@@ -34,6 +34,7 @@ public class DemoIntentService extends GTIntentService {
     public void onReceiveMessageData(Context context, GTTransmitMessage msg) {
         Logger.d("onReceiveMessageData -> " + "msg = " + new String(msg.getPayload()));
         String msgJson = new String(msg.getPayload());
+        Logger.json(msgJson);
         Msg msgEntity = JSON.parseObject(msgJson, Msg.class);
         msgEntity.save();
         EventBus.getDefault().post(new MsgEvent(msgEntity));

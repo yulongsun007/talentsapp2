@@ -8,14 +8,15 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="10dp"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:layout_margin="8dp"
+            android:padding="8dp">
 
 
             <win.yulongsun.framework.widget.ImageView.CharacterView
@@ -40,7 +41,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Androi工程师培养计划"
-                        android:textColor="@color/color_text_black"
+                        android:textColor="@color/color_text_orange"
                         android:textSize="16sp"/>
 
                     <TextView
@@ -53,12 +54,15 @@
                         android:textSize="10sp"/>
                 </RelativeLayout>
 
+                <View
+                    style="@style/CommonDividerView"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="10dp"/>
 
                 <TextView
                     android:id="@+id/tv_plan_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:text="android带你进入移动世界"
                     android:textSize="12sp"/>
 
@@ -169,18 +173,12 @@
 
                 </LinearLayout>
 
-                <View
-                    style="@style/CommonDividerView"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="10dp"/>
-
 
                 <TextView
                     android:id="@+id/tv_plan_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:text="1.Java经典指南\n2.XML基础\n3.Android动画\n4.Android Studio使用"
                     android:textSize="12sp"/>
             </LinearLayout>

@@ -22,7 +22,7 @@ public class MsgListAdapter extends SuperAdapter<Msg> {
 
     @Override
     public void onBind(SuperViewHolder holder, int viewType, int layoutPosition, Msg item) {
-        holder.setTitleText(R.id.cv_msg_type,  item.msg_type.substring(0, 2));
+        holder.setTitleText(R.id.cv_msg_type, item.msg_type.substring(0, 2), 30);
         holder.setText(R.id.tv_msg_title, item.msg_title);
         holder.setText(R.id.tv_msg_content, item.msg_content);
         holder.setText(R.id.tv_msg_create_at, item.create_at.getHours() + ":" + item.create_at.getMinutes());

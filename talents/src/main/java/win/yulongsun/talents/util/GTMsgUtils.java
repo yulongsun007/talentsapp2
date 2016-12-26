@@ -9,7 +9,8 @@ import com.gexin.rp.sdk.base.impl.SingleMessage;
 import com.gexin.rp.sdk.base.impl.Target;
 import com.gexin.rp.sdk.exceptions.RequestException;
 import com.gexin.rp.sdk.http.IGtPush;
-import com.gexin.rp.sdk.template.TransmissionTemplate;
+import com.gexin.rp.sdk.template.NotificationTemplate;
+import com.gexin.rp.sdk.template.style.Style1;
 
 import win.yulongsun.talents.entity.Msg;
 
@@ -36,20 +37,20 @@ public class GTMsgUtils {
             public void run() {
                 IGtPush push = new IGtPush(host, appKey, masterSecret);
                 //tmp
-        TransmissionTemplate tmp = new TransmissionTemplate();
-        tmp.setAppId(appId);
-        tmp.setAppkey(appKey);
-        tmp.setTransmissionType(2);
-        tmp.setTransmissionContent(JSON.toJSONString(msgEntity));
-//                NotificationTemplate tmp = new NotificationTemplate();
-//                tmp.setTransmissionContent(JSON.toJSONString(msgEntity));
-//                tmp.setTransmissionType(2);
-//                tmp.setAppId(appId);
-//                tmp.setAppkey(appKey);
-//                Style1 style1 = new Style1();
-//                style1.setTitle(msgEntity.msg_title);
-//                style1.setText(msgEntity.msg_type);
-//                tmp.setStyle(style1);
+//        TransmissionTemplate tmp = new TransmissionTemplate();
+//        tmp.setAppId(appId);
+//        tmp.setAppkey(appKey);
+//        tmp.setTransmissionType(2);
+//        tmp.setTransmissionContent(JSON.toJSONString(msgEntity));
+                NotificationTemplate tmp = new NotificationTemplate();
+                tmp.setTransmissionContent(JSON.toJSONString(msgEntity));
+                tmp.setTransmissionType(2);
+                tmp.setAppId(appId);
+                tmp.setAppkey(appKey);
+                Style1 style1 = new Style1();
+                style1.setTitle(msgEntity.msg_title);
+                style1.setText(msgEntity.msg_type);
+                tmp.setStyle(style1);
 
                 //msg
                 SingleMessage msg = new SingleMessage();

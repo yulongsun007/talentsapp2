@@ -45,7 +45,7 @@ public class MyPlanListFragment extends CommonListFragment {
 
     @Override
     protected SuperAdapter getAdapter() {
-        return new PlanListRVAdapter(_mActivity, _mDatas, R.layout.item_plan_list);
+        return new PlanListRVAdapter(_mActivity, _mDatas, R.layout.item_plan_list,Constant.MODE_VALUE.LEARN);
     }
 
     @Override

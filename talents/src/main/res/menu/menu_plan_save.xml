@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_contact_referrer"
+        android:title="联系HR"
+        android:visible="false"
+        app:showAsAction="always"/>
+    <item
         android:id="@+id/action_plan_stu"
         android:title="已选学生"
         android:visible="false"
@@ -9,6 +14,7 @@
     <item
         android:id="@+id/action_plan_save"
         android:title="保存计划"
+        android:visible="false"
         app:showAsAction="always"/>
 
 </menu>

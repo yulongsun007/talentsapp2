@@ -56,6 +56,7 @@ public class ReferrerStuListFragment extends CommonListFragment {
     @Override
     protected void initView() {
         super.initView();
+        _mTvCommonNoDataTip.setText("没有选课学生");
         mPlan = (Plan) getArguments().getSerializable(KEY);
     }
 

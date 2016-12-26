@@ -17,12 +17,6 @@ public interface Constant {
 
     String isLogin = "is_login";//是否已经登录
 
-    interface LEARN_PROGRESS {
-        int UN_START   = 0;
-        int PROGESSING = 1;
-        int COMMPLATE  = 2;
-    }
-
 
     //角色
     interface ROLE {
@@ -33,13 +27,14 @@ public interface Constant {
 
     //模式
     interface MODE_VALUE {
-        int EDIT   = 0;//编辑
-        int ADD    = 1;//添加
-        int SELECT = 2;//选择学习计划
-        int LEARN  = 3;//学习此计划
-        int CHECK  = 4;//审查通过
-        int SEND   = 5;//发送
-        int RE      =6;//回复
+        int EDIT     = 0;//编辑
+        int ADD      = 1;//添加
+        int SELECT   = 2;//选择学习计划
+        int LEARN    = 3;//学习此计划
+        int CHECK    = 4;//审查通过
+        int SEND     = 5;//发送
+        int RE       = 6;//回复
+        int FEEDBACK = 7;
     }
 
     //http返回状态码

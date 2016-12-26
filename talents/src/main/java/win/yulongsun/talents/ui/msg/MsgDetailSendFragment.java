@@ -85,9 +85,9 @@ public class MsgDetailSendFragment extends BaseSwipeBackFragment {
         super.initData();
         mTvMsgSendCreateAt.setText(DateTimeUtils.getCurrentTime());
         if (mMode == Constant.MODE_VALUE.RE) {
-            mEtMsgSendTitle.setText("回复：来着" + _User.user_name + "的消息");
+            mEtMsgSendTitle.setText("回复：来自" + _User.user_name + "的消息");
         } else {
-            mEtMsgSendTitle.setText("来着" + _User.user_name + "的消息");
+            mEtMsgSendTitle.setText("来自" + _User.user_name + "的消息");
         }
     }
 

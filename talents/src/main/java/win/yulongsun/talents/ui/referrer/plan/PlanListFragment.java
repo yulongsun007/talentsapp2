@@ -21,9 +21,10 @@ import win.yulongsun.talents.http.resp.biz.PlanResponse;
  */
 public class PlanListFragment extends CommonListFragment {
 
-    public static final String PLAN_LIST_KEY = "plan_list_key";
+    public static final  String PLAN_LIST_KEY      = "plan_list_key";
+    private static final String PLAN_LIST_KEY_MODE = "plan_list_key_mode";
 
-    public Integer user_role_id;
+    public  Integer user_role_id;
 
     @Override
     protected String getToolbarTitle() {
@@ -44,9 +45,10 @@ public class PlanListFragment extends CommonListFragment {
         return new PlanListFragment();
     }
 
-    public static PlanListFragment newInstance(JobTemplate jobTemplate) {
+    public static PlanListFragment newInstance(Integer mode, JobTemplate jobTemplate) {
         PlanListFragment fragment = new PlanListFragment();
         Bundle bundle = new Bundle();
+        bundle.putInt(PLAN_LIST_KEY_MODE, mode);
         bundle.putSerializable(PLAN_LIST_KEY, jobTemplate);
         fragment.setArguments(bundle);
         return fragment;
@@ -64,7 +66,7 @@ public class PlanListFragment extends CommonListFragment {
             plan.create_by = _mUser.user_id;
         } else if (user_role_id == Constant.ROLE.STU) {
             _mToolbar.setVisibility(View.VISIBLE);
-            //根据招聘，查询对应的所有培养加护
+            //根据招聘，查询对应的所有培养计划
             JobTemplate jobTemplate = (JobTemplate) getArguments().getSerializable(PLAN_LIST_KEY);
             if (jobTemplate == null) {
                 return;
@@ -79,7 +81,7 @@ public class PlanListFragment extends CommonListFragment {
         super.onItemClick(itemView, viewType, position);
         if (user_role_id == Constant.ROLE.REFERRER) {
             EventBus.getDefault().post(new StartBrotherEvent(PlanEditFragment.newInstance(Constant.MODE_VALUE.EDIT, (Plan) _mDatas.get(position), null)));
-        }else if (user_role_id == Constant.ROLE.STU) {
+        } else if (user_role_id == Constant.ROLE.STU) {
             EventBus.getDefault().post(new StartBrotherEvent(PlanEditFragment.newInstance(Constant.MODE_VALUE.SELECT, (Plan) _mDatas.get(position), null)));
         }
     }
