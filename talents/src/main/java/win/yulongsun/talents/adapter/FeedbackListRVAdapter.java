@@ -29,7 +29,7 @@ public class FeedbackListRVAdapter extends SuperAdapter<UserPlanR> {
         holder.setText(R.id.tv_feedback_job_name, item.job.tmp_job_name);
         holder.setText(R.id.tv_feedback_company_name, item.company.company_name);
         holder.setText(R.id.tv_feedback_update_at, item.update_at);
-        holder.setText(R.id.tv_feedback_resume_id, "简历# " + item.resume_id);
+        holder.setText(R.id.tv_feedback_resume_id, "[简历]# " + item.resume_id);
 
         String status = null;
         switch (item.apply_status) {
@@ -39,7 +39,7 @@ public class FeedbackListRVAdapter extends SuperAdapter<UserPlanR> {
             case Constant.APPLY_STATUS.REFERRER_REJECT:
                 status = "推荐人已拒绝";
                 holder.setVisibility(R.id.tv_feedback_apply_msg, View.VISIBLE);
-                holder.setText(R.id.tv_feedback_apply_msg, item.apply_msg);
+                holder.setText(R.id.tv_feedback_apply_msg, "理由：" + item.apply_msg);
                 break;
             case Constant.APPLY_STATUS.REFERRER_PASS:
                 status = "推荐人已推荐";
@@ -47,12 +47,12 @@ public class FeedbackListRVAdapter extends SuperAdapter<UserPlanR> {
             case Constant.APPLY_STATUS.HR_REJECT:
                 status = "HR已拒绝";
                 holder.setVisibility(R.id.tv_feedback_apply_msg, View.VISIBLE);
-                holder.setText(R.id.tv_feedback_apply_msg, item.apply_msg);
+                holder.setText(R.id.tv_feedback_apply_msg, "理由：" + item.apply_msg);
                 break;
             case Constant.APPLY_STATUS.HR_PASS:
                 status = "HR已通过";
                 holder.setVisibility(R.id.tv_feedback_apply_msg, View.VISIBLE);
-                holder.setText(R.id.tv_feedback_apply_msg, item.apply_msg);
+                holder.setText(R.id.tv_feedback_apply_msg, "理由：" + item.apply_msg);
                 break;
         }
         holder.setText(R.id.tv_feedback_apply_status, status);
