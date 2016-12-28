@@ -11,6 +11,7 @@ import com.gexin.rp.sdk.exceptions.RequestException;
 import com.gexin.rp.sdk.http.IGtPush;
 import com.gexin.rp.sdk.template.NotificationTemplate;
 import com.gexin.rp.sdk.template.style.Style1;
+import com.orhanobut.logger.Logger;
 
 import win.yulongsun.talents.entity.Msg;
 
@@ -70,6 +71,7 @@ public class GTMsgUtils {
                     e.printStackTrace();
                     ret = push.pushMessageToSingle(msg, target, e.getRequestId());
                 }
+                Logger.d(ret.getResponse());
                 Message message = new Message();
                 message.obj = ret;
                 handler.sendMessage(message);

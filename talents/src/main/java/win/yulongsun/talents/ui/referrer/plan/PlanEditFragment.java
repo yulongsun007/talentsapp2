@@ -148,6 +148,8 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
             action_contact_referrer.setVisible(true);
         } else if (mMode == Constant.MODE_VALUE.LEARN) {
             action_contact_referrer.setVisible(true);
+        }else if(mMode == Constant.MODE_VALUE.ADD){
+            action_plan_save.setVisible(true);
         }
     }
 
@@ -204,6 +206,8 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
             mEtPlanEditContent.setText(mPlan.plan_content);
             mEtPlanTmpId.setEnabled(false);
             mEtPlanTmpId.setFocusable(false);
+            mEtPlanEditName.setEnabled(false);
+            mEtPlanEditName.setFocusable(false);
             mEtPlanLog.setEnabled(false);
             mEtPlanLog.setFocusable(false);
             mEtPlanEditDesc.setEnabled(false);
@@ -388,6 +392,7 @@ public class PlanEditFragment extends BaseSwipeBackFragment implements OnItemCli
                     .url(Constant.URL + "plan/add")
                     .addParams("plan_name", plan_name)
                     .addParams("plan_desc", plan_desc)
+                    .addParams("plan_img", plan_img)
                     .addParams("plan_content", plan_content)
                     .addParams("job_template_id", String.valueOf(mJobTemplate.tmp_id))
                     .addParams("create_by", String.valueOf(_User.user_id))

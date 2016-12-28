@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.zxing.WriterException;
@@ -23,6 +24,7 @@ import win.yulongsun.framework.util.android.app.DialogUtil;
 import win.yulongsun.framework.util.android.app.QrCodeUtils;
 import win.yulongsun.talents.R;
 import win.yulongsun.talents.base.BaseRootFragment;
+import win.yulongsun.talents.common.Constant;
 import win.yulongsun.talents.entity.Msg;
 import win.yulongsun.talents.entity.User;
 import win.yulongsun.talents.event.StartBrotherEvent;
@@ -51,7 +53,9 @@ public class MeFragment extends BaseRootFragment {
 
     Integer userCompanyId;
     @Bind(R.id.tv_me_user_score)
-    TextView mTvMeUserScore;
+    TextView     mTvMeUserScore;
+    @Bind(R.id.ll_me_score)
+    LinearLayout mLlMeScore;
 
     public static MeFragment newInstance() {
         return new MeFragment();
@@ -133,7 +137,11 @@ public class MeFragment extends BaseRootFragment {
             mTvMeCompanyAddr.setText(user.company_addr);
             mTvMeCompanyId.setText("公司编号#" + userCompanyId);
             mTvMeUserScore.setText(user.user_score + "分");
+            if (user.user_role_id != Constant.ROLE.REFERRER) {
+                mLlMeScore.setVisibility(View.GONE);
+            }
         }
+
 
     }
 }

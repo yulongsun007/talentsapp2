@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.igexin.sdk.PushManager;
+import com.orhanobut.logger.Logger;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -124,6 +125,7 @@ public class LoginFragment extends BaseRootFragment {
                                 user.save();
                                 ACache mCache = ACache.get(_mActivity);
                                 mCache.put(Constant.isLogin, "1");
+                                Logger.json(response);
                                 //绑定别名
                                 PushManager.getInstance().bindAlias(_mActivity, String.valueOf(user.user_id));
                                 //toMain

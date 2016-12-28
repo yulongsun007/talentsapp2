@@ -71,6 +71,7 @@ public abstract class CommonListFragment extends SupportFragment implements Swip
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.common_layout_list, container, false);
         ButterKnife.bind(this, view);
+//        EventBus.getDefault().register(this);
         initView();
         initData();
         return view;
@@ -132,6 +133,7 @@ public abstract class CommonListFragment extends SupportFragment implements Swip
     public void onDestroyView() {
         OkHttpUtils.getInstance().cancelTag(getSubTag());
         ButterKnife.unbind(this);
+//        EventBus.getDefault().unregister(this);
         super.onDestroyView();
     }
 
@@ -206,4 +208,11 @@ public abstract class CommonListFragment extends SupportFragment implements Swip
     public void onItemLongClick(View itemView, int viewType, int position) {
 
     }
+
+//    @Subscribe
+//    public void actionEvent(ActionEvent event) {
+//        if (event.actionType == ActionEvent.UPDATE) {
+//            onRefresh();
+//        }
+//    }
 }

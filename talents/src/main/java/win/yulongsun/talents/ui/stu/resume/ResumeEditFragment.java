@@ -275,6 +275,7 @@ public class ResumeEditFragment extends BaseSwipeBackFragment implements OnItemC
                         ToastUtils.toastL(_mActivity, resp.msg);
                         if (resp.code == Constant.CODE.SUCCESS) {
                             mBtnResumeDetailAddExper.setVisibility(View.VISIBLE);
+                            pop();
                         }
                     }
                 });

@@ -30,6 +30,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
         style="@style/LinearLayout.CommonBackGround"
         android:orientation="horizontal">
 

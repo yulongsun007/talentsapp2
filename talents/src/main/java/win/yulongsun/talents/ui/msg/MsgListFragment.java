@@ -77,4 +77,5 @@ public class MsgListFragment extends CommonListFragment {
     public void onMsgEvent(MsgEvent event) {
         initData();
     }
+
 }
