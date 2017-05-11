@@ -2,7 +2,7 @@ package win.yulongsun.talents.service;
 
 import android.content.Context;
 
-import com.gexin.fastjson.JSON;
+import com.alibaba.fastjson.JSON;
 import com.igexin.sdk.GTIntentService;
 import com.igexin.sdk.message.GTCmdMessage;
 import com.igexin.sdk.message.GTTransmitMessage;

@@ -89,7 +89,7 @@ public class MyPlanListFragment extends CommonListFragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Logger.d("onClick: " + which);
-                                toCommitResume(resumeList.get(which), (Plan) _mDatas.get(which-1));
+                                toCommitResume(resumeList.get(which), (Plan) _mDatas.get(which));
                                 dialog.dismiss();
                             }
                         })

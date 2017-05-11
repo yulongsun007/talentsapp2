@@ -1,9 +1,13 @@
 package win.yulongsun.talents.ui.login;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +17,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 import win.yulongsun.framework.cache.ACache;
@@ -51,6 +56,8 @@ public class LoginFragment extends BaseRootFragment {
     ImageView           mIvLoginQq;
     @Bind(R.id.iv_login_wechat)
     ImageView           mIvLoginWechat;
+    @Bind(R.id.et_host)
+    EditText            mEtHost;
 
 
     public static LoginFragment newInstance() {
@@ -144,5 +151,19 @@ public class LoginFragment extends BaseRootFragment {
                 });
 
 
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }

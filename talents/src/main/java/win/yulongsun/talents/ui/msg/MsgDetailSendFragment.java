@@ -6,11 +6,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
 import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 import me.yokeyword.fragmentation.SupportFragment;
+import okhttp3.Call;
 import win.yulongsun.framework.util.android.widget.ToastUtils;
 import win.yulongsun.framework.util.java.lang.StringUtils;
 import win.yulongsun.framework.util.java.util.DateTimeUtils;
@@ -19,7 +23,6 @@ import win.yulongsun.talents.base.BaseSwipeBackFragment;
 import win.yulongsun.talents.common.Constant;
 import win.yulongsun.talents.entity.Msg;
 import win.yulongsun.talents.entity.User;
-import win.yulongsun.talents.util.GTMsgUtils;
 
 /**
  * @author sunyulong on 2016/12/18.
@@ -113,28 +116,28 @@ public class MsgDetailSendFragment extends BaseSwipeBackFragment {
         msg.msg_type = "聊天消息";
         msg.create_at = new Date();
 
-        GTMsgUtils.pushMsgToSingle(msg);
+//        GTMsgUtils.pushMsgToSingle(msg);
+
+
+        OkHttpUtils.post().url(Constant.URL+"msg/pushMsgSingle")
+                .addParams("msg_from_id",msg.msg_from_id+"")
+                .addParams("msg_to_id",msg.msg_to_id+"")
+                .addParams("msg_title",msg.msg_title)
+                .addParams("msg_content",msg.msg_content)
+                .addParams("msg_type",msg.msg_type)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+
+                    }
+                });
         pop();
-
-//        OkHttpUtils.post().url(Constant.URL+"msg/pushMsgSingle")
-//                .addParams("msg_from_id","1")
-//                .addParams("msg_to_id","2")
-//                .addParams("msg_title","来自sunylong的消息")
-//                .addParams("msg_content","透传消息")
-//                .addParams("msg_type","系统消息")
-//                .build()
-//                .execute(new StringCallback() {
-//                    @Override
-//                    public void onError(Call call, Exception e, int id) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onResponse(String response, int id) {
-//
-//                    }
-//                });
-
     }
 
 

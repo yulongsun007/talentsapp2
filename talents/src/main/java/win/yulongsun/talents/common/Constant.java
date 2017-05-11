@@ -5,29 +5,30 @@ package win.yulongsun.talents.common;
  * Date at: 2016/9/1
  * Desc :
  */
-public interface Constant {
+public class Constant {
 
-//    String URL = "http://192.168.1.105:8081/talents/";
-    String URL = "http://172.70.10.7:8081/talents/";
+    //    String URL = "http://192.168.1.105:8081/talents/";
+    public static String URL = "http://118.190.173.67:8080/jfinal_talents/";
+//    public static String URL = "http://192.168.1.102:8081/talents/";
 //    String URL = "http://192.168.1.133:8081/talents/";
 
     //闪屏时间
-    Integer SPLASH_TIME = 2000;
+    public static Integer SPLASH_TIME = 2000;
 
-    String MODE_NAME = "mode_name";
+    public static String MODE_NAME = "mode_name";
 
-    String isLogin = "is_login";//是否已经登录
+    public static String isLogin = "is_login";//是否已经登录
 
 
     //角色
-    interface ROLE {
+    public interface ROLE {
         int HR       = 1;
         int REFERRER = 2;
         int STU      = 3;
     }
 
     //模式
-    interface MODE_VALUE {
+    public interface MODE_VALUE {
         int EDIT     = 0;//编辑
         int ADD      = 1;//添加
         int SELECT   = 2;//选择学习计划
@@ -39,16 +40,16 @@ public interface Constant {
     }
 
     //http返回状态码
-    interface CODE {
+    public interface CODE {
         Integer SUCCESS = 200;
         Integer ERROR   = 400;
     }
 
-    interface TOAST_MSG {
+    public interface TOAST_MSG {
         String CONNECT_ERROR = "连接服务器失败";
     }
 
-    interface APPLY_STATUS {
+    public interface APPLY_STATUS {
         int UN_COMMIT       = 0;//未投递
         int COMMIT          = 1;//已提交
         int REFERRER_REJECT = 2;//推荐人拒绝
